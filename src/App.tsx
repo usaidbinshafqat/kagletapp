@@ -1,31 +1,28 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, RouteComponentProps } from "react-router-dom";
-import routes from "./config/route";
+import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Login } from "./components/Login";
+import { SignUpForm } from "./components/SignUpForm";
+import { SplashScreen } from "./components/SplashScreen";
+import { StudySesh } from "./components/StudySesh";
 
-const App: React.FunctionComponent<{}> = props => {
-  return(
-    <div>
-      <BrowserRouter>
+
+export default function App() {
+  return (
+    <Router>
       <Switch>
-        {routes.map((route, index) => {
-          return (
-            <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            render={( props: RouteComponentProps<any>) => (
-              <route.component
-              name={route.name}
-              {...props}
-              {...route.props}
-              />
-            )}
-            />
-          );
-        })}  
-      </Switch></BrowserRouter>
-    </div>
+        <Route exact path="/"><SplashScreen /> </Route>
+        <Route exact path="/signup"><SignUpForm /></Route>
+        <Route exact path="/login"><Login /></Route>
+      </Switch>
+    </Router>
+    // <Router>
+    //   <Switch>
+    //     <Route path="/" exact component={SplashScreen} />
+    //     <Route path="/SignUp" exact component={SignUpForm} />
+    //     {/* <Route path="/About" component={About} />
+    //     <Route path="/Contact" component={Contact} />
+    //   <Route path="/Products" component={Products} /> */}
+    //   </Switch>
+    // </Router>
   );
-}
-
-export default App;
+  }

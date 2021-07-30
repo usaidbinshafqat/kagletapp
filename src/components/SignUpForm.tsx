@@ -5,8 +5,6 @@ import { Toolbar } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-interface Props {}
-
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -38,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export const SignUpForm: React.FC<Props>= ({}) => {
+ export const SignUpForm  = () => {
     const classes = useStyles();
     
     return (
@@ -94,5 +92,3 @@ export const SignUpForm: React.FC<Props>= ({}) => {
     </Container>
     </div>
 )}
-
-export default SignUpForm;
