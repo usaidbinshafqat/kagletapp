@@ -1,10 +1,13 @@
 import React, { useReducer, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import { Typography, Card, AppBar } from "@material-ui/core";
+import { Typography, Card, AppBar, Grid } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { TextField, Toolbar } from '@material-ui/core';
-import CardContent from '@material-ui/core/CardContent';
+import logo from "../logos/logo.png";
+import { useHistory } from "react-router-dom";
+import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,8 +15,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-      marginTop: theme.spacing(20),
+      marginTop: theme.spacing(10),
       background: '#ff6500',
+    },
+  logo: {
+      height: 250,
+      width: 250,
+      alignContent: "center",
+      justify: "center",
+      alignItems: "flex-start",
     },
   toolbar: {
     minHeight: 128,
@@ -150,26 +160,30 @@ export const Login = () => {
       });
     }
 
+  const history = useHistory();
   return (
-  <div className={classes.root}>
-<Container maxWidth="sm">
-      <Card variant="outlined">
-      <Typography component="div"  align='center' style={{ height: '100vh',}}>
+
+    <Grid container justify='center' alignItems= "center" direction ="column">
 
         <AppBar position="static" elevation={0}>
-        <Toolbar className={classes.toolbar}>
-            <Typography className={classes.title} 
-            variant="h3"  noWrap>
-                Login
-            </Typography>
-        </Toolbar>
+          <Toolbar className={classes.toolbar}>
+          <IconButton aria-label="back"
+          onClick={() => history.push("/splashscreen")}
+          >
+          <ArrowBackRoundedIcon />
+        </IconButton>
+          </Toolbar>
         </AppBar>
+      <Grid item>
+            <div className="col-centeredd">
+              <img alt="Logo" className={classes.logo} src={logo} />
+            </div>
+      </Grid>
 
+      <Grid item>
         <form>
 
-
-       <CardContent>
-          <div>
+          <Grid item>
             <TextField
               error={state.isError}
               id="username"
@@ -180,8 +194,11 @@ export const Login = () => {
               variant="outlined"
               onChange={handleUsernameChange}
               onKeyPress={handleKeyPress}
-              style = {{ width: 400 }}
+              //style = {{ width: 400 }}
             />
+          </Grid>
+          
+          <Grid item>
             <TextField
               error={state.isError}
               id="password"
@@ -193,29 +210,26 @@ export const Login = () => {
               helperText={state.helperText}
               onChange={handlePasswordChange}
               onKeyPress={handleKeyPress}
-              style = {{ width: 400 }}
+              //style = {{ width: 400 }}
             />
-          </div>
-
+          </Grid>
+        </form>
+      </Grid>
+        
+      <Grid item>
           <Button size="large"
           variant = "outlined" 
           disabled={state.isButtonDisabled}
           onClick={handleLogin}
           className={classes.button} >
           Login
-        </Button>
-
-        </CardContent>
+          </Button>
+      </Grid>
            
 
 
-        </form>
+        
+        
 
-
-       
-
-    </Typography>
-    </Card>
-    </Container>
-  </div>
+  </Grid>
 )}
