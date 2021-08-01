@@ -142,6 +142,8 @@ export const StudySesh = () => {
               justify="center"
               
             >
+            
+            {/* card 1 */}
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
               <Grid container>
@@ -182,12 +184,12 @@ export const StudySesh = () => {
                 <Button size="small">Learn More</Button>
               </CardActions>
             </Card> 
-            
-            
+
+
+
+          
             {/* card 2 */}
-
             &nbsp;
-
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
               <Grid container spacing={3}>
@@ -231,12 +233,11 @@ export const StudySesh = () => {
               </CardActions>
             </Card> 
             
+
+
 
             {/* card 3 */}
-
-          
             &nbsp;
-
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
               <Grid container spacing={3}>
@@ -280,11 +281,11 @@ export const StudySesh = () => {
               </CardActions>
             </Card> 
             
+
+
+
             {/* card 4 */}
-
-          
             &nbsp;
-
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
               <Grid container spacing={3}>
@@ -328,11 +329,11 @@ export const StudySesh = () => {
               </CardActions>
             </Card> 
             
+
+
+
             {/* card 5 */}
-
-          
             &nbsp;
-
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
               <Grid container spacing={3}>
@@ -376,12 +377,54 @@ export const StudySesh = () => {
               </CardActions>
             </Card> 
             
+
+
+
             {/* card 6 */}
-
-          
             &nbsp;
+            <Card className={classes.cardcomponent} variant="outlined">
+              <CardContent>
+              <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} direction="row-reverse"
+               justifyContent="flex-end" alignItems="flex-start">
+              <Typography className={classes.username }gutterBottom variant="h5" component="h2">
+                  Study Sesh
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+
+              <Typography 
+              className={classes.rightAlignText} >
+                HH:MM
+              </Typography>
+
+              </Grid>
+
+              </Grid>
 
 
+              <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} direction="row-reverse"
+               justifyContent="flex-end" alignItems="flex-start">
+                <Typography className={classes.username}>
+                  username
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <Typography 
+              className={classes.rightAlignText} >
+                <LocationOnOutlinedIcon></LocationOnOutlinedIcon>
+                Location
+              </Typography>
+                </Grid>
+                </Grid>
+
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card> 
+            
             </Grid>
 
           {/*fabicon */}
