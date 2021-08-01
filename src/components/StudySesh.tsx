@@ -6,6 +6,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
@@ -117,11 +118,12 @@ const useStyles = makeStyles((theme) => ({
 export const StudySesh = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const history = useHistory();
   return (
     <div className={classes.root}>
       <Grid container direction="column" justifyContent="center">
         <Typography component="div" align="center" style={{ height: "100vh" }}>
-          <Grid>
+
             <AppBar position="sticky" elevation={0}>
               <Toolbar className={classes.toolbar}>
                 <Grid
@@ -144,7 +146,6 @@ export const StudySesh = () => {
                 </Grid>
               </Toolbar>
             </AppBar>
-          </Grid>
           &nbsp;
           <Grid
             container
@@ -495,6 +496,7 @@ export const StudySesh = () => {
             <BottomNavigationAction
               label="House Parties"
               icon={<LocalBarIcon />}
+              onClick={() => history.push("/login")}
             />
           </BottomNavigation>
         </Typography>

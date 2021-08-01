@@ -58,7 +58,7 @@ export const SignUpForm = () => {
   return (
     <div className={classes.root}>
       <Grid container justifyContent="center" direction="column">
-        <AppBar position="static" elevation={0}>
+        <AppBar position="sticky" elevation={0}>
           <Toolbar className={classes.toolbar}>
           <IconButton aria-label="back"
           onClick={() => history.push("/splashscreen")}
