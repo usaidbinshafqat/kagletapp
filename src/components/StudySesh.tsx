@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  Card,
-  AppBar,
-  BottomNavigation,
-  BottomNavigationAction,
-} from "@material-ui/core";
+import {Typography,Card,AppBar} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
@@ -22,6 +16,7 @@ import logo from "../logos/favicon.png";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,14 +56,6 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
-  fabplacement: {
-    margin: 0,
-    top: "auto",
-    right: 170,
-    bottom: 30,
-    left: "auto",
-    position: "fixed",
-  },
   extendedIcon: {
     marginRight: theme.spacing(2),
   },
@@ -92,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
   accountIcon: {
     minHeight: 30,
     minWidth: 30,
+    color: "black",
   },
   appicon: {
     height: "4%",
@@ -104,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     top: "auto",
     right: 20,
-    bottom: 70,
+    bottom: 20,
     left: "auto",
     position: "fixed",
   },
@@ -119,41 +107,85 @@ export const StudySesh = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const history = useHistory();
+  const [flag1, setFlag1] = React.useState(true);
+  const [flag2, setFlag2] = React.useState(true);
+  const [flag3, setFlag3] = React.useState(true);
+  const handleClickCampus = () => {
+    setFlag1(!flag1);
+  };
+  const handleClickStudy = () => {
+    setFlag2(!flag2);
+  };
+  const handleClickParty = () => {
+    setFlag3(!flag3);
+  };
   return (
     <div className={classes.root}>
       <Grid container direction="column" justifyContent="center">
         <Typography component="div" align="center" style={{ height: "100vh" }}>
-
-            <AppBar position="sticky" elevation={0}>
-              <Toolbar className={classes.toolbar}>
-                <Grid
-                  container
-                  spacing={1}
-                  justifyContent="center"
-                  alignItems="center"
+          <AppBar position="sticky" elevation={0}>
+            <Toolbar className={classes.toolbar}>
+              <Grid
+                container
+                spacing={1}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <img className={classes.appicon} src={logo} alt="Logo" />
+                <Typography variant="h5" className={classes.title}>
+                  Events Today
+                </Typography>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
                 >
-                  <img className={classes.appicon} src={logo} alt="Logo" />
-                  <Typography variant="h5" className={classes.title}>
-                    Study Seshes
-                  </Typography>
-                  <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                  >
-                    <AccountCircle className={classes.accountIcon} />
-                  </IconButton>
+                  <AccountCircle className={classes.accountIcon} />
+                </IconButton>
+              </Grid>
+            </Toolbar>
+
+            <Toolbar className={classes.toolbar}>
+              <Grid container spacing={1}>
+                <Grid item>
+                  <Chip
+                    onClick={handleClickCampus}
+                    label="Campus Events"
+                    clickable
+                    color="secondary"
+                    variant={flag1 ? "outlined" : "default"}
+                    icon={<SchoolRoundedIcon />}
+                  />
                 </Grid>
-              </Toolbar>
-            </AppBar>
+
+                <Grid item>
+                <Chip
+                onClick={handleClickStudy}
+                    variant={flag2 ? "outlined" : "default"}
+                    label="Study Seshes"
+                    clickable
+                    color="secondary"
+                    icon={<BackpackRoundedIcon />}
+                  />
+
+                </Grid>
+
+                <Grid item>  
+                <Chip
+                onClick={handleClickParty}
+                    variant={flag3 ? "outlined" : "default"}
+                    label="House Parties"
+                    clickable
+                    color="secondary"
+                    icon={<LocalBarIcon />}
+                  />
+
+                </Grid>
+              </Grid>
+            </Toolbar>
+          </AppBar>
           &nbsp;
-          <Grid
-            container
-            spacing={2}
-            direction="column"
-            alignItems="center"
-            justify="center"
-          >
+          <Grid container spacing={2} direction="column" alignItems="center" justify="center">
             {/* card 1 */}
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
@@ -477,28 +509,6 @@ export const StudySesh = () => {
               <AddIcon />
             </Fab>
           </Grid>
-          <BottomNavigation
-            className={classes.bottomNav}
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-            showLabels
-          >
-            <BottomNavigationAction
-              label="Study Seshes"
-              icon={<BackpackRoundedIcon />}
-            />
-            <BottomNavigationAction
-              label="Campus Events"
-              icon={<SchoolRoundedIcon />}
-            />
-            <BottomNavigationAction
-              label="House Parties"
-              icon={<LocalBarIcon />}
-              onClick={() => history.push("/login")}
-            />
-          </BottomNavigation>
         </Typography>
       </Grid>
     </div>
