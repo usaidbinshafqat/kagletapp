@@ -1,4 +1,4 @@
-import { FormControl, Grid, IconButton, Toolbar } from "@material-ui/core";
+import { Grid, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -6,14 +6,7 @@ import logo from "../logos/logo.png";
 import { Typography, AppBar } from "@material-ui/core";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import { useHistory } from "react-router-dom";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import React from "react";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Input from "@material-ui/core/Input";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import clsx from 'clsx';
 import { useRef } from "react";
 import { auth } from "../firebaseSetup";
 
@@ -66,29 +59,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-interface State {
-  password: string;
-  showPassword: boolean;
-}
 
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [values, setValues] = React.useState<State>({
-    password: "",
-    showPassword: false,
-  });
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-  };
   // firebaseItems
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -102,21 +76,52 @@ export const Login = () => {
       console.error(error);
     }
   };
-  
+
+  var actionCodeSettings = {
+    url: "https://kaglet-91224.web.app",
+    handleCodeInApp: true,
+  }
+
   const signIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(
+      await auth.sendSignInLinkToEmail(
         emailRef.current!.value,
-        passwordRef.current!.value
+        actionCodeSettings
       );
+      window.localStorage.setItem('emailForSignIn', emailRef.current!.value);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const confirmSignIn = async () => {
+    try {
+      if(auth.isSignInWithEmailLink(window.location.href)){
+        var email = window.localStorage.getItem('emailForSignIn');
+        if (!email) {
+          email = window.prompt('Please provide your email for confirmation');
+        const result = await auth.signInWithEmailLink(email, url);
+      }
+    }}
+    catch (error){
+      console.error(error);
+    }
+  }
+
+  // const signIn = async () => {
+  //   try {
+  //     await auth.signInWithEmailAndPassword(
+  //       emailRef.current!.value,
+  //       passwordRef.current!.value
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   
-  const signOut = async () => {
-    await auth.signOut();
-  };
+  // const signOut = async () => {
+  //   await auth.signOut();
+  // };
   return (
     <div className={classes.root}>
       <Grid container justifyContent="center" direction="column">
@@ -152,42 +157,6 @@ export const Login = () => {
                   className={classes.textfield}
                 />
               </Grid>
-              <Grid item xs={12}>
-              <FormControl
-                className={clsx(classes.marginPassword, classes.textfield)}
-                variant="outlined"
-                color="secondary"
-                required
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  inputRef={passwordRef}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  labelWidth={85}
-                />
-              </FormControl>
-              </Grid>
             </form>
           </Grid>
 
@@ -199,7 +168,7 @@ export const Login = () => {
               onClick={signIn}
               className={classes.button}
             >
-              Login
+              Get Login Link
             </Button>
           </Grid>
 
