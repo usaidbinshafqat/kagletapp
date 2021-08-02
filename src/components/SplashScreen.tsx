@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
 import { useHistory } from "react-router-dom";
-import Chip from '@material-ui/core/Chip';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +25,17 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 20,
     padding: "0.25rem 2rem",
     borderColor: "#becddc",
+  },
+  loginButton:{
+    color: "red",
+    alignContent: "center",
+    alignItems: "flex-start",
+    justify: "center",
+    marginTop: theme.spacing(2),
+    borderRadius: 20,
+    padding: "0.25rem 2rem",
+    borderColor: "#becddc",
+    textTransform: "none"
   },
   toolbar: {
     paddingTop: theme.spacing(0),
@@ -76,10 +86,10 @@ export const SplashScreen = () => {
         <Button
           size="small"
           color="primary"
-          className={classes.button}
+          className={classes.loginButton}
           onClick={() => history.push("/login")}
         >
-          Or login
+          Or Login
         </Button>
       </Grid>
 

@@ -68,7 +68,6 @@ export const SignUpForm = () => {
           </Toolbar>
         </AppBar>
 
-        <Card variant="outlined">
           <Typography
             component="div"
             align="center"
@@ -166,7 +165,7 @@ export const SignUpForm = () => {
               </Button>
             </Grid>
           </Typography>
-        </Card>
+
       </Grid>
     </div>
   );
