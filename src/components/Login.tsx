@@ -94,19 +94,19 @@ export const Login = () => {
     }
   };
 
-  const confirmSignIn = async () => {
-    try {
-      if(auth.isSignInWithEmailLink(window.location.href)){
-        var email = window.localStorage.getItem('emailForSignIn');
-        if (!email) {
-          email = window.prompt('Please provide your email for confirmation');
-        const result = await auth.signInWithEmailLink(email, url);
-      }
-    }}
-    catch (error){
-      console.error(error);
-    }
-  }
+  // const confirmSignIn = async () => {
+  //   try {
+  //     if(auth.isSignInWithEmailLink(window.location.href)){
+  //       var email = window.localStorage.getItem('emailForSignIn');
+  //       if (!email) {
+  //         email = window.prompt('Please provide your email for confirmation');
+  //       const result = await auth.signInWithEmailLink(email, url);
+  //     }
+  //   }}
+  //   catch (error){
+  //     console.error(error);
+  //   }
+  // }
 
   // const signIn = async () => {
   //   try {
