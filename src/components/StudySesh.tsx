@@ -1,5 +1,13 @@
 import React from "react";
-import {Typography,Card,AppBar} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import {
+  Typography,
+  Card,
+  AppBar,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
@@ -17,6 +25,10 @@ import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 import { Chip } from "@material-ui/core";
+import Popover from "@material-ui/core/Popover";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import { TextField } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,11 +62,8 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end",
     color: "#000000",
   },
-  field: {
-    "& > *": {
-      margin: theme.spacing(3),
-      width: "25ch",
-    },
+  textfield: {
+    width: 200,
   },
   extendedIcon: {
     marginRight: theme.spacing(2),
@@ -101,6 +110,27 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: 0,
   },
+  popoverFab: {
+    padding: theme.spacing(2),
+  },
+  formControl: {
+    minWidth: 150,
+    maxWidth: 450
+  },
+  dateAndTime: {
+    marginLeft: theme.spacing(1),
+    minWidth: 150,
+    maxWidth: 450
+  },
+  locationField: 
+  {
+    minWidth: 150,
+    maxWidth: 450
+  }, 
+  eventBox: {
+    minWidth: 200,
+    maxWidth: 500
+  }
 }));
 
 export const StudySesh = () => {
@@ -119,6 +149,13 @@ export const StudySesh = () => {
   const handleClickParty = () => {
     setFlag3(!flag3);
   };
+  const [events, setEventType] = React.useState("");
+  const handleDropDownChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setEventType(event.target.value as string);
+  };
+
   return (
     <div className={classes.root}>
       <Grid container direction="column" justifyContent="center">
@@ -159,33 +196,37 @@ export const StudySesh = () => {
                 </Grid>
 
                 <Grid item>
-                <Chip
-                onClick={handleClickStudy}
+                  <Chip
+                    onClick={handleClickStudy}
                     variant={flag2 ? "outlined" : "default"}
                     label="Study Seshes"
                     clickable
                     color="secondary"
                     icon={<BackpackRoundedIcon />}
                   />
-
                 </Grid>
 
-                <Grid item>  
-                <Chip
-                onClick={handleClickParty}
+                <Grid item>
+                  <Chip
+                    onClick={handleClickParty}
                     variant={flag3 ? "outlined" : "default"}
                     label="House Parties"
                     clickable
                     color="secondary"
                     icon={<LocalBarIcon />}
                   />
-
                 </Grid>
               </Grid>
             </Toolbar>
           </AppBar>
           &nbsp;
-          <Grid container spacing={2} direction="column" alignItems="center" justify="center">
+          <Grid
+            container
+            spacing={2}
+            direction="column"
+            alignItems="center"
+            justify="center"
+          >
             {/* card 1 */}
             <Card className={classes.cardcomponent} variant="outlined">
               <CardContent>
@@ -503,14 +544,104 @@ export const StudySesh = () => {
               </CardActions>
             </Card>
           </Grid>
-          {/*fabicon */}
           <Grid item>
-            <Fab aria-label="add" color="secondary" className={classes.fabicon}>
-              <AddIcon />
-            </Fab>
+            <PopupState variant="popover" popupId="demo-popup-popover">
+              {(popupState) => (
+                <div>
+                  <Fab
+                    color="secondary"
+                    variant="extended"
+                    className={classes.fabicon}
+                    {...bindTrigger(popupState)}
+                  >
+                    <AddIcon />
+                    New Event
+                  </Fab>
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Box p={2} className={classes.eventBox}>
+                      <Typography>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <Typography variant="h6">Create Event</Typography>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <TextField
+                              variant="outlined"
+                              className={classes.textfield}
+                              label="Event Name"
+                            ></TextField>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <FormControl
+                              variant="outlined"
+                              className={classes.formControl}
+                            >
+                              <InputLabel>Select Event Types</InputLabel>
+                              <Select
+                                value={events}
+                                onChange={handleDropDownChange}
+                                label="Age"
+                              >
+                                <MenuItem value={10}>Campus Event</MenuItem>
+                                <MenuItem value={20}>Study Sesh</MenuItem>
+                                <MenuItem value={30}>House Party</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Grid>
+
+                          <Grid item xs>
+                            <form noValidate>
+                              <TextField
+                                id="datetime-local"
+                                label="Event Date and Time"
+                                type="datetime-local"
+                                defaultValue=""
+                                className={classes.dateAndTime}
+                                InputLabelProps={{
+                                  shrink: true,
+                                }}
+                              />
+                            </form>
+                          </Grid>
+                          <Grid item xs>
+                          <TextField
+                              variant="outlined"
+                              className={classes.textfield}
+                              label="Event Location"
+                            ></TextField>
+                          </Grid>
+                        </Grid>
+                      </Typography>
+                    </Box>
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
           </Grid>
         </Typography>
       </Grid>
     </div>
   );
 };
+
+// {/*fabicon */}
+
+// <Grid item className={classes.popoverFab}>
+// <Fab
+// aria-label="add" color="secondary"
+// className={classes.fabicon}>
+//   <AddIcon />
+
+// </Fab>
+
+// </Grid>
