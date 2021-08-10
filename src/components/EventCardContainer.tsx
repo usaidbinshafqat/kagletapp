@@ -34,9 +34,10 @@ export const EventCardContainer = () => {
     <>
       {Object.values(eventsList).map((event: any) => (
         <EventCards
-          name={event.name}
-          time={event.time}
-          location={event.location}
+          name={event.eventName}
+          time={event.eventTime}
+          location={event.eventLocation}
+          type={event.eventType}
         />
       ))}
     </>

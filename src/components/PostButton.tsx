@@ -17,6 +17,8 @@ import { TextField } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import firebase from "firebase";
 import { useRef } from "react";
+import { useState } from "react";
+import { Input } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,28 +59,45 @@ const useStyles = makeStyles((theme) => ({
 
 export const PostButton = () => {
   const classes = useStyles();
-  const [events, setEventType] = React.useState("");
-  const eventNameField = useRef<HTMLInputElement>(null);
-  const eventTypeField = useRef<HTMLInputElement>(null);
-  const eventTimeField = useRef<HTMLInputElement>(null);
-  const eventLocationField = useRef<HTMLInputElement>(null);
+
+  //pushing into Firebase
+  var database = firebase.database();
+  const [eventName, setEventName] = React.useState("");
+  const [eventLocation, setEventLocation] = React.useState("");
+  const [eventType, setEventType] = React.useState("");
+  const [eventTime, setEventTime] = React.useState("");
+
+  const Push = () => {
+    database
+      .ref("events")
+      .push({
+        eventName: eventName,
+        eventLocation: eventLocation,
+        eventType: eventType,
+        eventTime: eventTime,
+      })
+      .catch(alert);
+  };
   const handleDropDownChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     setEventType(event.target.value as string);
   };
-  // function addNewEvent() {
-  //   const databaseRef = firebase.database().ref().push();
-  //   const key = databaseRef.key();
-  //   var newEvent = {
-  //     eventID: key,
-  //     eventName: eventNameField.current!.value,
-  //     eventTime: eventTimeField.current!.value,
-  //     eventLocation: eventLocationField.current!.value,
-  //     eventType: eventTypeField.current!.value,
-  //   };
-  //   databaseRef.push(newEvent)
-  // }
+  const handleEventNameInput = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setEventName(event.target.value as string);
+  };
+
+  const handleEventLocationInput = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setEventLocation(event.target.value as string);
+  };
+
+  const handleEventTime = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setEventLocation(event.target.value as string);
+  };
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -115,7 +134,7 @@ export const PostButton = () => {
                       variant="outlined"
                       className={classes.textfield}
                       label="Event Name"
-                      inputRef={eventNameField}
+                      onChange={handleEventNameInput}
                     ></TextField>
                   </Grid>
                   <Grid item xs={12}>
@@ -125,14 +144,13 @@ export const PostButton = () => {
                     >
                       <InputLabel>Select Event Types</InputLabel>
                       <Select
-                        value={events}
+                        value={eventType}
                         onChange={handleDropDownChange}
-                        label="Age"
-                        inputRef={eventTypeField}
+                        label="Event Type"
                       >
-                        <MenuItem value={10}>Campus Event</MenuItem>
-                        <MenuItem value={20}>Study Sesh</MenuItem>
-                        <MenuItem value={30}>House Party</MenuItem>
+                        <MenuItem value={"Campus Event"}>Campus Event</MenuItem>
+                        <MenuItem value={"Study Sesh"}>Study Sesh</MenuItem>
+                        <MenuItem value={"House Party"}>House Party</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -144,8 +162,9 @@ export const PostButton = () => {
                         label="Event Date and Time"
                         type="datetime-local"
                         defaultValue=""
-                        inputRef={eventTimeField}
                         className={classes.dateAndTime}
+                        onChange={handleEventTime}
+                        value={eventTime}
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -157,11 +176,15 @@ export const PostButton = () => {
                       variant="outlined"
                       className={classes.textfield}
                       label="Event Location"
-                      inputRef={eventLocationField}
+                      onChange={handleEventLocationInput}
                     ></TextField>
                   </Grid>
                   <Grid item xs={12}>
-                    <Button color="secondary" variant="contained">
+                    <Button
+                      onClick={Push}
+                      color="secondary"
+                      variant="contained"
+                    >
                       Post
                     </Button>
                   </Grid>

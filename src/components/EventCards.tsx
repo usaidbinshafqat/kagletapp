@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
 
 export interface EventDetails {
   name: string;
-  eventType?: string;
+  type?: string;
   location?: string;
   time?: string;
 }
