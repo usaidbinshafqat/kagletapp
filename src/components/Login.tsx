@@ -55,10 +55,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   textfield: {
-    width: 300
-  }
+    width: 300,
+  },
 }));
-
 
 export const Login = () => {
   const classes = useStyles();
@@ -80,7 +79,7 @@ export const Login = () => {
   var actionCodeSettings = {
     url: "https://kaglet-91224.web.app",
     handleCodeInApp: true,
-  }
+  };
 
   const signIn = async () => {
     try {
@@ -88,7 +87,7 @@ export const Login = () => {
         emailRef.current!.value,
         actionCodeSettings
       );
-      window.localStorage.setItem('emailForSignIn', emailRef.current!.value);
+      window.localStorage.setItem("emailForSignIn", emailRef.current!.value);
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +117,7 @@ export const Login = () => {
   //     console.error(error);
   //   }
   // };
-  
+
   // const signOut = async () => {
   //   await auth.signOut();
   // };
@@ -155,6 +154,7 @@ export const Login = () => {
                   placeholder="@kzoo.edu"
                   inputRef={emailRef}
                   className={classes.textfield}
+                  helperText="Please use your @kzoo.edu school email."
                 />
               </Grid>
             </form>

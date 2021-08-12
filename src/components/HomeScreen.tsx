@@ -1,11 +1,9 @@
-import React from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { PostButton } from "./PostButton";
 import { ToolbarAndChips } from "./ToolbarAndChips";
 import { EventCardContainer } from "./EventCardContainer";
-import firebase from "firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {

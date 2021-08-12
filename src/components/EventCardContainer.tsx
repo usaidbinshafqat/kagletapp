@@ -19,11 +19,22 @@ export const EventCardContainer = () => {
       // console.log(Object.values(result.data));
       // setEventsList(Object.values(result.data));
 
-      let allEvents = firebase.database().ref("events");
+      var dateToday = Date.now();
+
+      let allEvents = firebase
+        .database()
+        .ref("events")
+        .startAfter(dateToday)
+        .orderByChild("eventTime");
 
       allEvents.once("value").then((snapshot) => {
-        console.log(snapshot.val());
-        setEventsList(Object.values(snapshot.val()));
+        // console.log(snapshot.val());
+        // setEventsList(Object.values(snapshot.val()));
+        var fetchedEvents = [] as any;
+        snapshot.forEach(function (child) {
+          fetchedEvents.push(child.val());
+        });
+        setEventsList(fetchedEvents);
       });
     };
     fetchData();
