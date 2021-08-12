@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomeScreen = () => {
   const classes = useStyles();
- 
 
   return (
     <div className={classes.root}>
@@ -30,9 +29,7 @@ export const HomeScreen = () => {
             alignItems="center"
             justify="center"
           >
-            {/* card */}
             <EventCardContainer />
-            {/* <EventCards /> */}
           </Grid>
           <Grid item>
             <PostButton />

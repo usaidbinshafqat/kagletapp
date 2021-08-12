@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rightAlignText: {
     textAlign: "right",
+    justifyContent: "center",
   },
   accountIcon: {
     minHeight: 30,
@@ -119,19 +120,6 @@ export interface EventDetails {
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
 
-  // const [collegeEvents, setEvents] = useState(props);
-  // useEffect(()=> { setEvents(collegeEvents)}, [collegeEvents])
-  // const event = firebase.database().ref('events');
-  // const eventNames = []
-  // event.on('value', (snapshot) => {
-  //   snapshot.forEach((childSnapshot) => {
-  //     const event = childSnapshot.val();
-  //     console.log(event.eventType);
-  //     eventNames.push(event.name);
-  //   });
-  //   // console.log(data);
-  // }, []);
-
   return (
     <div className={classes.cardcomponent}>
       <Card variant="outlined">
@@ -150,7 +138,6 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             <Grid item xs={12} sm={6} alignItems="flex-end">
               <Typography className={classes.rightAlignText}>
                 {props.time}
-                {/* HH:MM */}
               </Typography>
             </Grid>
           </Grid>
@@ -164,7 +151,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
               justifyContent="flex-end"
               alignItems="flex-start"
             >
-              <Typography className={classes.username}>username</Typography>
+              <Typography className={classes.username}>{props.type}</Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography className={classes.rightAlignText}>
@@ -175,7 +162,24 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="flex-end"
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              size="small"
+              disableElevation
+            >
+              RSVP
+            </Button>
+            <Grid algin-content="flex-end">
+              <Typography>username</Typography>
+            </Grid>
+          </Grid>
         </CardActions>
       </Card>
       &nbsp;

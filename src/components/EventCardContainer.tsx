@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { EventDetails, EventCards } from "./EventCards";
 import axios from "axios";
+import moment from "moment";
 
 export const GetEventCards = () => {};
 
@@ -30,12 +31,18 @@ export const EventCardContainer = () => {
 
   console.log("eventsList", eventsList);
 
+  function timeConverter(timeFromFirebase: string) {
+    let dateString = timeFromFirebase;
+    let stringToDate = new Date(dateString);
+    return moment(stringToDate).format("MMMM Do, h:mm a");
+  }
+
   return (
     <>
       {Object.values(eventsList).map((event: any) => (
         <EventCards
           name={event.eventName}
-          time={event.eventTime}
+          time={timeConverter(event.eventTime)}
           location={event.eventLocation}
           type={event.eventType}
         />

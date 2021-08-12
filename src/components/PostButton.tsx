@@ -16,9 +16,17 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { TextField } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import firebase from "firebase";
-import { useRef } from "react";
-import { useState } from "react";
-import { Input } from "@material-ui/core";
+import Timestamp from "firebase";
+import DateFnsUtils from "@date-io/date-fns";
+import { IconButton, InputAdornment } from "@material-ui/core";
+import EventRoundedIcon from "@material-ui/icons/EventRounded";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+  DateTimePicker,
+} from "@material-ui/pickers";
+import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,8 +73,7 @@ export const PostButton = () => {
   const [eventName, setEventName] = React.useState("");
   const [eventLocation, setEventLocation] = React.useState("");
   const [eventType, setEventType] = React.useState("");
-  const [eventTime, setEventTime] = React.useState("");
-
+  const [eventTime, setEventTime] = React.useState<Date | null>(new Date());
   const Push = () => {
     database
       .ref("events")
@@ -74,7 +81,7 @@ export const PostButton = () => {
         eventName: eventName,
         eventLocation: eventLocation,
         eventType: eventType,
-        eventTime: eventTime,
+        eventTime: eventTime?.getTime(),
       })
       .catch(alert);
   };
@@ -95,9 +102,18 @@ export const PostButton = () => {
     setEventLocation(event.target.value as string);
   };
 
-  const handleEventTime = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setEventLocation(event.target.value as string);
+  const handleEventTime = (date: Date | null) => {
+    setEventTime(date);
   };
+
+  function refreshPage() {
+    window.location.reload();
+  }
+
+  function postButton() {
+    Push();
+    refreshPage();
+  }
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -156,20 +172,26 @@ export const PostButton = () => {
                   </Grid>
 
                   <Grid item xs>
-                    <form noValidate>
-                      <TextField
-                        id="datetime-local"
-                        label="Event Date and Time"
-                        type="datetime-local"
-                        defaultValue=""
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <DateTimePicker
+                        label="Event Time"
+                        inputVariant="outlined"
                         className={classes.dateAndTime}
-                        onChange={handleEventTime}
                         value={eventTime}
-                        InputLabelProps={{
-                          shrink: true,
+                        onChange={handleEventTime}
+                        onError={console.log}
+                        disablePast
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton>
+                                <EventRoundedIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                       />
-                    </form>
+                    </MuiPickersUtilsProvider>
                   </Grid>
                   <Grid item xs>
                     <TextField
@@ -181,7 +203,7 @@ export const PostButton = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Button
-                      onClick={Push}
+                      onClick={postButton}
                       color="secondary"
                       variant="contained"
                     >
