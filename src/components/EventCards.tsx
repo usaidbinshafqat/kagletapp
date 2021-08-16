@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import CardHeader from "@material-ui/core/CardHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,11 +49,7 @@ const useStyles = makeStyles((theme) => ({
   cardcomponent: {
     width: "90%",
   },
-  cardTitle: {
-    flexGrow: 1,
-    color: "#000000",
-    paddingLeft: theme.spacing(7),
-  },
+
   cardpositions: {
     marginBottom: 12,
   },
@@ -108,6 +105,19 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 200,
     maxWidth: 500,
   },
+  cardLooks: {
+    borderRadius: 12,
+  },
+  rsvpButton: {
+    backgroundColor: "#ff8c1a",
+    borderRadius: 12,
+  },
+  cardTitle: {
+    flexGrow: 1,
+    color: "#000000",
+    textAlign: "left",
+    backgroundColor: "#ff8c1a",
+  },
 }));
 
 export interface EventDetails {
@@ -122,26 +132,43 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
 
   return (
     <div className={classes.cardcomponent}>
-      <Card variant="outlined">
-        <CardContent>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Typography
-                className={classes.username}
-                gutterBottom
-                variant="h5"
-                component="h2"
-              >
+      <Card variant="outlined" className={classes.cardLooks}>
+        <CardHeader
+          className={classes.cardTitle}
+          title={
+            <Grid container>
+              <Grid item xs={12} sm={6}>
                 {props.name}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} alignItems="flex-end">
-              <Typography className={classes.rightAlignText}>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                alignItems="flex-end"
+                className={classes.rightAlignText}
+              >
                 {props.time}
-              </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-
+          }
+          // subheader={
+          //   <Grid container>
+          //     <Grid item xs={12} sm={6}>
+          //       {props.type}
+          //     </Grid>
+          //     <Grid
+          //       item
+          //       xs={12}
+          //       sm={6}
+          //       alignItems="flex-end"
+          //       className={classes.rightAlignText}
+          //     >
+          //       {props.location}
+          //     </Grid>
+          //   </Grid>
+          // }
+        />
+        <CardContent>
           <Grid container spacing={2}>
             <Grid
               item
@@ -173,8 +200,9 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
               variant="contained"
               size="small"
               disableElevation
+              className={classes.rsvpButton}
             >
-              RSVP
+              RSVP +1
             </Button>
             <Grid algin-content="flex-end">
               <Typography>username</Typography>
