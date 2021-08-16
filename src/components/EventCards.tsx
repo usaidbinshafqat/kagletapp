@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import CardHeader from "@material-ui/core/CardHeader";
+import LocalBarIcon from "@material-ui/icons/LocalBar";
+import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -151,22 +154,6 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
               </Grid>
             </Grid>
           }
-          // subheader={
-          //   <Grid container>
-          //     <Grid item xs={12} sm={6}>
-          //       {props.type}
-          //     </Grid>
-          //     <Grid
-          //       item
-          //       xs={12}
-          //       sm={6}
-          //       alignItems="flex-end"
-          //       className={classes.rightAlignText}
-          //     >
-          //       {props.location}
-          //     </Grid>
-          //   </Grid>
-          // }
         />
         <CardContent>
           <Grid container spacing={2}>

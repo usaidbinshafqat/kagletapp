@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
 import { useHistory } from "react-router-dom";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.25rem 2rem",
     borderColor: "#becddc",
   },
-  loginButton:{
+  loginButton: {
     color: "red",
     alignContent: "center",
     alignItems: "flex-start",
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 20,
     padding: "0.25rem 2rem",
     borderColor: "#becddc",
-    textTransform: "none"
+    textTransform: "none",
   },
   toolbar: {
     paddingTop: theme.spacing(0),
@@ -61,8 +60,7 @@ export const SplashScreen = () => {
   return (
     <Grid container justify="center" alignItems="center" direction="column">
       <AppBar position="static" elevation={0}>
-        <Toolbar className={classes.toolbar}>
-        </Toolbar>
+        <Toolbar className={classes.toolbar}></Toolbar>
       </AppBar>
       <Grid item>
         <div className="col-centeredd">
@@ -98,12 +96,11 @@ export const SplashScreen = () => {
           size="small"
           color="primary"
           className={classes.button}
-          onClick={() => history.push("/studyseshes")}
+          onClick={() => history.push("/home")}
         >
           Home Screen Test
         </Button>
       </Grid>
-
     </Grid>
   );
 };
