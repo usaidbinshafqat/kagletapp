@@ -144,8 +144,8 @@ export const ToolbarAndChips = () => {
           </IconButton>
         </Grid>
       </Toolbar>
-      {/* 
-      <Toolbar className={classes.toolbar}>
+
+      {/* <Toolbar className={classes.toolbar}>
         <Grid container spacing={1}>
           <Grid item>
             <Chip
