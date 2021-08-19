@@ -19,12 +19,18 @@ export const EventCardContainer = () => {
       // console.log(Object.values(result.data));
       // setEventsList(Object.values(result.data));
 
-      var dateToday = Date.now();
+      var dateToday = new Date();
+
+      dateToday.setHours(dateToday.getHours() - 2);
+
+      var timeTwoHoursAgoMS = dateToday.getTime();
+
+      console.log(dateToday);
 
       let allEvents = firebase
         .database()
         .ref("events")
-        .startAfter(dateToday)
+        .startAfter(timeTwoHoursAgoMS)
         .orderByChild("eventTime");
 
       allEvents.once("value").then((snapshot) => {
@@ -56,6 +62,7 @@ export const EventCardContainer = () => {
           time={timeConverter(event.eventTime)}
           location={event.eventLocation}
           type={event.eventType}
+          email={event.hostEmail}
         />
       ))}
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import {
   Typography,
@@ -68,6 +68,21 @@ const useStyles = makeStyles((theme) => ({
 export const PostButton = () => {
   const classes = useStyles();
 
+  // Get user's email address
+  const [loggedInUserEmail, setLoggedInUserEmail] = useState("");
+  useEffect(() => {
+    const fetchIsLoggedIn = async () => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          setLoggedInUserEmail(user.email!);
+        } else {
+          setLoggedInUserEmail("");
+        }
+      });
+    };
+    fetchIsLoggedIn();
+  }, [loggedInUserEmail]);
+
   //pushing into Firebase
   var database = firebase.database();
   const [eventName, setEventName] = React.useState("");
@@ -82,6 +97,7 @@ export const PostButton = () => {
         eventLocation: eventLocation,
         eventType: eventType,
         eventTime: eventTime?.getTime(),
+        hostEmail: loggedInUserEmail,
       })
       .catch(alert);
   };

@@ -128,6 +128,7 @@ export interface EventDetails {
   type?: string;
   location?: string;
   time?: string;
+  email?: string;
 }
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
@@ -192,7 +193,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
               RSVP +1
             </Button>
             <Grid algin-content="flex-end">
-              <Typography>username</Typography>
+              <Typography>{props.email}</Typography>
             </Grid>
           </Grid>
         </CardActions>
