@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
@@ -6,10 +5,10 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Grid from "@material-ui/core/Grid";
 import logo from "../logos/favicon.png";
-import LocalBarIcon from "@material-ui/icons/LocalBar";
-import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
-import { Chip } from "@material-ui/core";
+// import LocalBarIcon from "@material-ui/icons/LocalBar";
+// import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+// import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+// import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +75,8 @@ const useStyles = makeStyles((theme) => ({
     width: "4%",
     minHeight: 30,
     minWidth: 30,
+    maxHeight: 40,
+    maxWidth: 40,
     paddingBlock: 5,
   },
   fabicon: {
@@ -115,18 +116,18 @@ const useStyles = makeStyles((theme) => ({
 
 export const ToolbarAndChips = () => {
   const classes = useStyles();
-  const [flag1, setFlag1] = React.useState(true);
-  const [flag2, setFlag2] = React.useState(true);
-  const [flag3, setFlag3] = React.useState(true);
-  const handleClickCampus = () => {
-    setFlag1(!flag1);
-  };
-  const handleClickStudy = () => {
-    setFlag2(!flag2);
-  };
-  const handleClickParty = () => {
-    setFlag3(!flag3);
-  };
+  // const [flag1, setFlag1] = React.useState(true);
+  // const [flag2, setFlag2] = React.useState(true);
+  // const [flag3, setFlag3] = React.useState(true);
+  // const handleClickCampus = () => {
+  //   setFlag1(!flag1);
+  // };
+  // const handleClickStudy = () => {
+  //   setFlag2(!flag2);
+  // };
+  // const handleClickParty = () => {
+  //   setFlag3(!flag3);
+  // };
   return (
     <AppBar position="sticky" elevation={0}>
       <Toolbar className={classes.toolbar}>

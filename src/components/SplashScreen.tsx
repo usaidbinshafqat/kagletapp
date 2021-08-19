@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
 import { useHistory } from "react-router-dom";
+import firebase from "firebase";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +60,16 @@ const useStyles = makeStyles((theme) => ({
 export const SplashScreen = () => {
   const classes = useStyles();
   const history = useHistory();
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      redirectToHomepage();
+    }
+  });
+
+  function redirectToHomepage() {
+    window.location.href = "https://kaglet-91224.web.app/home";
+  }
   return (
     <Grid container justify="center" alignItems="center" direction="column">
       <AppBar position="static" elevation={0}>
