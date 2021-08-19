@@ -94,10 +94,8 @@ export const Login = () => {
   };
 
   try {
-    console.log("something");
     if (auth.isSignInWithEmailLink(window.location.href)) {
       var email = window.localStorage.getItem("emailForSignIn");
-      console.log("saved email", email);
       if (!email) {
         email = window.prompt("Please provide your email for confirmation");
       } else {
@@ -105,7 +103,6 @@ export const Login = () => {
           .signInWithEmailLink(email, window.location.href)
           .then((result) => {
             window.localStorage.removeItem("emailForSignIn");
-            console.log("signed in", email);
             redirectToHomepage();
           })
           .catch((error) => {
