@@ -6,7 +6,6 @@ import logo from "../logos/logo.png";
 import { Typography, AppBar } from "@material-ui/core";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import { useHistory } from "react-router-dom";
-import React from "react";
 import { useRef } from "react";
 import { auth } from "../firebaseSetup";
 
@@ -98,6 +97,8 @@ export const Login = () => {
       var email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
         email = window.prompt("Please provide your email for confirmation");
+        redirectToHomepage();
+        return <div>Try again in a non-private window.</div>;
       } else {
         auth
           .signInWithEmailLink(email, window.location.href)
