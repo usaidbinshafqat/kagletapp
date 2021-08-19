@@ -77,7 +77,7 @@ export const Login = () => {
   };
 
   var actionCodeSettings = {
-    url: "https://kaglet-91224.web.app",
+    url: "https://kaglet-91224.web.app/login",
     handleCodeInApp: true,
   };
 
@@ -93,34 +93,37 @@ export const Login = () => {
     }
   };
 
-  // const confirmSignIn = async () => {
-  //   try {
-  //     if(auth.isSignInWithEmailLink(window.location.href)){
-  //       var email = window.localStorage.getItem('emailForSignIn');
-  //       if (!email) {
-  //         email = window.prompt('Please provide your email for confirmation');
-  //       const result = await auth.signInWithEmailLink(email, url);
-  //     }
-  //   }}
-  //   catch (error){
-  //     console.error(error);
-  //   }
-  // }
+  try {
+    console.log("something");
+    if (auth.isSignInWithEmailLink(window.location.href)) {
+      var email = window.localStorage.getItem("emailForSignIn");
+      console.log("saved email", email);
+      if (!email) {
+        email = window.prompt("Please provide your email for confirmation");
+      } else {
+        auth
+          .signInWithEmailLink(email, window.location.href)
+          .then((result) => {
+            window.localStorage.removeItem("emailForSignIn");
+            console.log("signed in", email);
+            redirectToHomepage();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
-  // const signIn = async () => {
-  //   try {
-  //     await auth.signInWithEmailAndPassword(
-  //       emailRef.current!.value,
-  //       passwordRef.current!.value
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const signOut = async () => {
+    await auth.signOut();
+  };
 
-  // const signOut = async () => {
-  //   await auth.signOut();
-  // };
+  function redirectToHomepage() {
+    window.location.href = "https://kaglet-91224.web.app/home";
+  }
   return (
     <div className={classes.root}>
       <Grid container justifyContent="center" direction="column">
