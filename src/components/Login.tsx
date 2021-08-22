@@ -63,17 +63,6 @@ export const Login = () => {
   const history = useHistory();
   // firebaseItems
   const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const createAccount = async () => {
-    try {
-      await auth.createUserWithEmailAndPassword(
-        emailRef.current!.value,
-        passwordRef.current!.value
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   var actionCodeSettings = {
     url: "https://kaglet-91224.web.app/login",
@@ -170,17 +159,6 @@ export const Login = () => {
               className={classes.button}
             >
               Get Login Link
-            </Button>
-          </Grid>
-
-          <Grid item>
-            <Button
-              size="large"
-              onClick={createAccount}
-              color="secondary"
-              className={classes.button}
-            >
-              Signup
             </Button>
           </Grid>
         </Typography>
