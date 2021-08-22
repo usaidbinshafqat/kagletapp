@@ -4,8 +4,6 @@ import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +25,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 20,
     padding: "0.25rem 2rem",
     borderColor: "#becddc",
-  },
-  loginButton: {
-    color: "red",
-    alignContent: "center",
-    alignItems: "flex-start",
-    justify: "center",
-    marginTop: theme.spacing(2),
-    borderRadius: 20,
-    padding: "0.25rem 2rem",
-    borderColor: "#becddc",
-    textTransform: "none",
   },
   toolbar: {
     paddingTop: theme.spacing(0),
@@ -87,20 +74,9 @@ export const SplashScreen = () => {
           variant="outlined"
           color="secondary"
           className={classes.button}
-          onClick={() => history.push("/signup")}
-        >
-          Sign Up
-        </Button>
-      </Grid>
-
-      <Grid item>
-        <Button
-          size="small"
-          color="primary"
-          className={classes.loginButton}
           onClick={() => history.push("/login")}
         >
-          Or Login
+          Login
         </Button>
       </Grid>
 

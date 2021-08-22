@@ -6,10 +6,22 @@ import { ToolbarAndChips } from "./ToolbarAndChips";
 import { EventCardContainer } from "./EventCardContainer";
 import firebase from "firebase";
 import { useEffect, useState } from "react";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 0,
+  },
+  button: {
+    color: "red",
+    alignContent: "center",
+    alignItems: "flex-start",
+    justify: "center",
+    marginTop: theme.spacing(2),
+    borderRadius: 20,
+    padding: "0.25rem 2rem",
+    borderColor: "#becddc",
   },
 }));
 
@@ -28,6 +40,7 @@ export const HomeScreen = () => {
     fetchIsLoggedIn();
   }, [loggedInUserId]);
   const classes = useStyles();
+  const history = useHistory();
   return (
     <div className={classes.root}>
       {loggedInUserId === "" && (
@@ -49,6 +62,22 @@ export const HomeScreen = () => {
               <Typography variant="h5">
                 Please log in to view awesome K events! :)
               </Typography>
+              &nbsp;
+              <Typography variant="h6">
+                If you've logged in, try again in a non-private window.
+              </Typography>
+              &nbsp;
+              <Grid item>
+                <Button
+                  size="large"
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button}
+                  onClick={() => history.push("/login")}
+                >
+                  Login
+                </Button>
+              </Grid>
             </Grid>
           </Typography>
         </Grid>
