@@ -7,9 +7,6 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import CardHeader from "@material-ui/core/CardHeader";
-import LocalBarIcon from "@material-ui/icons/LocalBar";
-import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -135,11 +132,18 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
 
   return (
+    // holding the cards in this div, using useStyles from up top
     <div className={classes.cardcomponent}>
+      {/* card component for each card */}
       <Card variant="outlined" className={classes.cardLooks}>
+        {/* 
+        card header holds title (orange part) 
+        gets data from firebase where it says props.xxx
+        */}
         <CardHeader
           className={classes.cardTitle}
           title={
+            // a grid to hold name and time with good alignment
             <Grid container>
               <Grid item xs={12} sm={6}>
                 {props.name}
@@ -156,6 +160,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             </Grid>
           }
         />
+        {/* card content (the white part),  */}
         <CardContent>
           <Grid container spacing={2}>
             <Grid
@@ -183,7 +188,8 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             justifyContent="space-between"
             alignItems="flex-end"
           >
-            <Button
+            {/* RSVP button, does not do anything yet so this is commented out. */}
+            {/* <Button
               color="secondary"
               variant="contained"
               size="small"
@@ -191,7 +197,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
               className={classes.rsvpButton}
             >
               RSVP +1
-            </Button>
+            </Button> */}
             <Grid algin-content="flex-end">
               <Typography>{props.email}</Typography>
             </Grid>

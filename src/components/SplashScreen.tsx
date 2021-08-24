@@ -48,6 +48,7 @@ export const SplashScreen = () => {
   const classes = useStyles();
   const history = useHistory();
 
+  //if the user is logged in, it redirects to the home page
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       redirectToHomepage();
@@ -57,6 +58,7 @@ export const SplashScreen = () => {
   function redirectToHomepage() {
     window.location.href = "https://kaglet-91224.web.app/home";
   }
+  // only dealing with sending to other screens
   return (
     <Grid container justify="center" alignItems="center" direction="column">
       <AppBar position="static" elevation={0}>

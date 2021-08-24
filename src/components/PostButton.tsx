@@ -135,6 +135,7 @@ export const PostButton = () => {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
+          {/* Floating action button in the bottom right corner, the styles are defined in useStyles */}
           <Fab
             color="secondary"
             variant="extended"
@@ -144,6 +145,7 @@ export const PostButton = () => {
             <AddIcon />
             New Event
           </Fab>
+          {/* Opens popover, the rest inside is self explanatory */}
           <Popover
             {...bindPopover(popupState)}
             anchorOrigin={{
@@ -155,6 +157,7 @@ export const PostButton = () => {
               horizontal: "left",
             }}
           >
+            {/* Box that shows up when button is clicked, all following tags are self explanatory*/}
             <Box p={2} className={classes.eventBox}>
               <Typography>
                 <Grid container spacing={2}>
