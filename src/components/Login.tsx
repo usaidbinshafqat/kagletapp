@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { auth } from "../firebaseSetup";
 
+//defining the styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -58,12 +59,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//the actual function coming out of this class hence the export.
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
   // firebaseItems
+  //getting the email data from the text field
   const emailRef = useRef<HTMLInputElement>(null);
-
   var actionCodeSettings = {
     url: "https://kaglet-91224.web.app/login",
     handleCodeInApp: true,
@@ -81,6 +83,7 @@ export const Login = () => {
     }
   };
 
+  //firebase login items
   try {
     if (auth.isSignInWithEmailLink(window.location.href)) {
       var email = window.localStorage.getItem("emailForSignIn");
@@ -104,16 +107,23 @@ export const Login = () => {
     console.error(error);
   }
 
+  //this will be called later.
   const signOut = async () => {
     await auth.signOut();
   };
 
+  //redirects if the user is already logged in
   function redirectToHomepage() {
     window.location.href = "https://kaglet-91224.web.app/home";
   }
+
+  //firebase-ends
+
   return (
     <div className={classes.root}>
+      {/* grid containing all elements in the screen */}
       <Grid container justifyContent="center" direction="column">
+        {/* app bar which has the back button */}
         <AppBar position="sticky" elevation={0}>
           <Toolbar className={classes.toolbar}>
             <IconButton
@@ -125,6 +135,7 @@ export const Login = () => {
           </Toolbar>
         </AppBar>
 
+        {/* this holds the components after the app  */}
         <Typography component="div" align="center" style={{ height: "100vh" }}>
           <Grid item>
             <div className="col-centered">

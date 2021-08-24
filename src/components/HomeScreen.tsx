@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
 export const HomeScreen = () => {
   const [loggedInUserId, setLoggedInUserId] = useState("");
   useEffect(() => {
@@ -33,7 +34,7 @@ export const HomeScreen = () => {
         if (user) {
           setLoggedInUserId(user.uid);
         } else {
-          setLoggedInUserId("");
+          setLoggedInUserId("afs");
         }
       });
     };
@@ -41,15 +42,19 @@ export const HomeScreen = () => {
   }, [loggedInUserId]);
   const classes = useStyles();
   const history = useHistory();
+  //return statement that contains the UI
   return (
     <div className={classes.root}>
+      {/* only shows this if the user is logged in (it should contain something in the string if it exists) */}
       {loggedInUserId === "" && (
+        //Grid holding all elements in the homescreen UI
         <Grid container direction="column" justifyContent="center">
           <Typography
             component="div"
             align="center"
             style={{ height: "100vh" }}
           >
+            {/* Toolbar component being imported from the other screen */}
             <ToolbarAndChips />
             &nbsp;
             <Grid
@@ -82,6 +87,8 @@ export const HomeScreen = () => {
           </Typography>
         </Grid>
       )}
+
+      {/* otherwise, if it's not an empty string, it should print this. All tags are self-explantory (from Material UI) */}
       {loggedInUserId !== "" && (
         <Grid container direction="column" justifyContent="center">
           <Typography
