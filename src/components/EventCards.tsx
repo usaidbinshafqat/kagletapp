@@ -138,7 +138,8 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
       <Card variant="outlined" className={classes.cardLooks}>
         {/* 
         card header holds title (orange part) 
-        gets data from firebase where it says props.xxx
+        gets data from firebase where it says props.xxx 
+        "xxx" is defined in the interface before the export const EventCards
         */}
         <CardHeader
           className={classes.cardTitle}
@@ -198,7 +199,13 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             >
               RSVP +1
             </Button> */}
-            <Grid algin-content="flex-end">
+
+            <Grid
+              item
+              xs={12}
+              alignItems="flex-end"
+              className={classes.rightAlignText}
+            >
               <Typography>{props.email}</Typography>
             </Grid>
           </Grid>
