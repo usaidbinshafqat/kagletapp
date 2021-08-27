@@ -17,10 +17,11 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { TextField } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import firebase from "firebase";
-import Timestamp from "firebase";
 import DateFnsUtils from "@date-io/date-fns";
 import { IconButton, InputAdornment } from "@material-ui/core";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
+import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
+=======
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
