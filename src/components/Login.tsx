@@ -1,5 +1,4 @@
-import { Grid, IconButton, Toolbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { FormControl, Grid, IconButton, Toolbar } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
@@ -8,6 +7,17 @@ import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import { useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { auth } from "../firebaseSetup";
+import React, { useState, KeyboardEvent, KeyboardEventHandler } from 'react';
+import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 
 //defining the styles
 const useStyles = makeStyles((theme) => ({
@@ -57,19 +67,108 @@ const useStyles = makeStyles((theme) => ({
   textfield: {
     width: 300,
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 }));
 
+export interface State extends SnackbarOrigin {
+  open: boolean;
+}
+
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 //the actual function coming out of this class hence the export.
+  
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
+
+  const [state, setState] = React.useState<State>({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal } = state;
+  const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
+  const [submitDisabled, setSubmitDisabled] = React.useState(true);
+  const [email1, setEmail] = React.useState("");
+
+  const handleClick = (newState: SnackbarOrigin) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClickOpen = () => {
+    setOpen1(true);
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+    setOpen(false);
+    setOpen1(false);
+  };
+
+  const handleEmailInput = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setEmail(event.target.value as string);
+    checkValidity();
+  };
+
+  function validity() {
+    if (emailRef.current!.value.includes("@kzoo.edu")) { 
+      signIn();
+      handleToggle();
+      handleClick({ vertical: 'bottom', horizontal: 'center' });
+    }
+    else{
+      handleClickOpen();
+    }
+    };
+
+  function checkValidity() {
+    if (emailRef.current!.value  != ""){        
+      setSubmitDisabled(false) ;
+    }
+   }
+
+  const buttons = (
+    <React.Fragment>
+      <Button size="large"
+        variant="outlined"
+        color="secondary"
+        className={classes.button}
+        disabled={submitDisabled}
+        onClick = {() => {validity()}}>
+        Get Login Link
+      </Button>
+    </React.Fragment>
+    );
+
+
+  const handleToggle = () => {
+    setOpen(!open);
+   };
+
+//enter keu check
+const handleKeyPress = (event: { key: string; }) => {
+  if(event.key === 'Enter'){
+   validity();
+  }
+}
+
   // firebaseItems
   //getting the email data from the text field
-  const emailRef = useRef<HTMLInputElement>(null);
+  let emailRef = useRef<HTMLInputElement>(null);
   var actionCodeSettings = {
     url: "https://kaglet-91224.web.app/login",
     handleCodeInApp: true,
   };
+
 
   const signIn = async () => {
     try {
@@ -111,6 +210,7 @@ export const Login = () => {
   const signOut = async () => {
     await auth.signOut();
   };
+
 
   //redirects if the user is already logged in
   function redirectToHomepage() {
@@ -156,24 +256,46 @@ export const Login = () => {
                   inputRef={emailRef}
                   className={classes.textfield}
                   helperText="Please use your @kzoo.edu school email."
+                  onKeyPress= {handleKeyPress}
+                  onChange={handleEmailInput}
                 />
               </Grid>
             </form>
           </Grid>
-
-          <Grid item>
-            <Button
-              size="large"
-              variant="outlined"
-              color="secondary"
-              onClick={signIn}
-              className={classes.button}
-            >
-              Get Login Link
-            </Button>
-          </Grid>
+              <div>
+                {buttons}
+                <Snackbar
+                  autoHideDuration={10000}
+                  anchorOrigin={{ vertical, horizontal }}
+                  open={open}
+                  onClose={handleClose}
+                  message="Link successfully sent"
+                  key={vertical + horizontal}
+                >
+                  <Alert onClose={handleClose} severity="success">
+                    Check your email! 🤪
+                  </Alert>
+                </Snackbar>
+                <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+                <Dialog
+                  open={open1}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">{"Use K email"}</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      It appears that the email you typed in was not a Kalamazoo College email which, is the only valid email for login.
+                    </DialogContentText>
+                  </DialogContent>
+                </Dialog>
+              </div>         
         </Typography>
       </Grid>
     </div>
   );
 };
+
