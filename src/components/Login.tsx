@@ -107,11 +107,6 @@ export const Login = () => {
     console.error(error);
   }
 
-  //this will be called later.
-  const signOut = async () => {
-    await auth.signOut();
-  };
-
   //redirects if the user is already logged in
   function redirectToHomepage() {
     window.location.href = "https://kaglet-91224.web.app/home";
