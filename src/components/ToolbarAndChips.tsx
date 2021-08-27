@@ -126,13 +126,10 @@ const useStyles = makeStyles((theme) => ({
 export const ToolbarAndChips = () => {
   const classes = useStyles();
   //this will be called later.
-  const signOut = async () => {
+
+  function signOut() {
+    auth.signOut();
     console.log("Logging ya out bitch");
-    await auth.signOut();
-    refreshPage();
-  };
-  function refreshPage() {
-    window.location.reload();
   }
 
   // const [flag1, setFlag1] = React.useState(true);
