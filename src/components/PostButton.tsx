@@ -154,6 +154,7 @@ export const PostButton = () => {
 
   };
 
+
   function checkValidity() {
     if (eventName != "" &&  eventLocation != "" &&  eventType != "" &&  eventTime  != null){
       setSubmitDisabled(false) ;
