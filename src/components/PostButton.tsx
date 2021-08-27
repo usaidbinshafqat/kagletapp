@@ -131,6 +131,20 @@ export const PostButton = () => {
     checkValidity();
   };
 
+  //delete key check
+  const handleKeyPress = () => {
+    checkValidity();
+  }
+
+  const handleEventNameInput1 = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    if(eventName == "" ){
+      setEventName(event.target.value as string);
+      checkValidity();
+    }
+  };
+
   const handleEventLocationInput = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -143,6 +157,7 @@ export const PostButton = () => {
     checkValidity();
   };
 
+  
   function checkValidity() {
     if (
       eventName != "" &&
@@ -151,6 +166,9 @@ export const PostButton = () => {
       eventTime != null
     ) {
       setSubmitDisabled(false);
+    }
+    else{
+      setSubmitDisabled(true);
     }
   }
 
@@ -216,7 +234,9 @@ export const PostButton = () => {
                           variant="outlined"
                           className={classes.textfield}
                           label="Event Name"
+                          onKeyPress= {handleKeyPress}
                           onChange={handleEventNameInput}
+                          
                         ></TextField>
                       </FormControl>
                     </Typography>
@@ -228,6 +248,7 @@ export const PostButton = () => {
                         variant="outlined"
                         className={classes.textfield}
                         label="Event Location"
+                        onKeyPress= {handleKeyPress}
                         onChange={handleEventLocationInput}
                       ></TextField>
                     </Typography>
