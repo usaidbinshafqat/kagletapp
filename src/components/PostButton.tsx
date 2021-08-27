@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import {
@@ -21,13 +20,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { IconButton, InputAdornment } from "@material-ui/core";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
-=======
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-  DateTimePicker,
-} from "@material-ui/pickers";
+
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import Icon from "@material-ui/core/Icon";
 import { useDebugValue } from "react";
@@ -106,9 +99,6 @@ export const PostButton = () => {
     fetchIsLoggedIn();
   }, [loggedInUserEmail]);
 
-
-
-
   //pushing into Firebase
   var database = firebase.database();
   const [eventName, setEventName] = React.useState("");
@@ -152,13 +142,16 @@ export const PostButton = () => {
   const handleEventTime = (date: Date | null) => {
     setEventTime(date);
     checkValidity();
-
   };
 
-
   function checkValidity() {
-    if (eventName != "" &&  eventLocation != "" &&  eventType != "" &&  eventTime  != null){
-      setSubmitDisabled(false) ;
+    if (
+      eventName != "" &&
+      eventLocation != "" &&
+      eventType != "" &&
+      eventTime != null
+    ) {
+      setSubmitDisabled(false);
     }
   }
 
@@ -172,25 +165,17 @@ export const PostButton = () => {
   }
 
   function handleValidation(this: any) {
-    const {
-      eventName,
-      eventLocation,
-      eventType,
-      eventTime,
-    } = this.state;
-    let error = '';
+    const { eventName, eventLocation, eventType, eventTime } = this.state;
+    let error = "";
     let formIsValid = true;
-        if(!eventName || 
-            !eventLocation ||
-            !eventType ||
-            !eventTime){
-            formIsValid = false;
-            error = "Input fields cannot be empty";
-        } 
+    if (!eventName || !eventLocation || !eventType || !eventTime) {
+      formIsValid = false;
+      error = "Input fields cannot be empty";
+    }
 
-this.setState({error: error});
-return formIsValid;
-}
+    this.setState({ error: error });
+    return formIsValid;
+  }
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -227,14 +212,14 @@ return formIsValid;
                   </Grid>
                   <Grid item xs={12}>
                     <Typography>
-                    <FormControl>
+                      <FormControl>
                         <TextField
                           variant="outlined"
                           className={classes.textfield}
                           label="Event Name"
                           onChange={handleEventNameInput}
                         ></TextField>
-                    </FormControl>
+                      </FormControl>
                     </Typography>
                   </Grid>
 
@@ -262,7 +247,9 @@ return formIsValid;
                           label="Event Type"
                           autoWidth
                         >
-                          <MenuItem value={"Campus Event"}>Campus Event</MenuItem>
+                          <MenuItem value={"Campus Event"}>
+                            Campus Event
+                          </MenuItem>
                           <MenuItem value={"Study Sesh"}>Study Sesh</MenuItem>
                           <MenuItem value={"House Party"}>House Party</MenuItem>
                         </Select>
@@ -294,7 +281,7 @@ return formIsValid;
                       </MuiPickersUtilsProvider>
                     </Typography>
                   </Grid>
-                  
+
                   <Grid item xs={12}>
                     <Button
                       onClick={postButton}
