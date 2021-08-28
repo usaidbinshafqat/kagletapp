@@ -135,12 +135,12 @@ export const PostButton = () => {
   //delete key check
   const handleKeyPress = () => {
     checkValidity();
-  }
+  };
 
   const handleEventNameInput1 = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    if(eventName == "" ){
+    if (eventName == "") {
       setEventName(event.target.value as string);
       checkValidity();
     }
@@ -158,7 +158,6 @@ export const PostButton = () => {
     checkValidity();
   };
 
-  
   function checkValidity() {
     if (
       eventName != "" &&
@@ -167,8 +166,7 @@ export const PostButton = () => {
       eventTime != null
     ) {
       setSubmitDisabled(false);
-    }
-    else{
+    } else {
       setSubmitDisabled(true);
     }
   }
@@ -235,13 +233,9 @@ export const PostButton = () => {
                           variant="outlined"
                           className={classes.textfield}
                           label="Event Name"
-                          onKeyPress= {handleKeyPress}
+                          onKeyPress={handleKeyPress}
                           onChange={handleEventNameInput}
-
                           required
-
-                          
-
                         ></TextField>
                       </FormControl>
                     </Typography>
@@ -250,11 +244,11 @@ export const PostButton = () => {
                   <Grid item xs={12}>
                     <Typography>
                       <TextField
-                      required
+                        required
                         variant="outlined"
                         className={classes.textfield}
                         label="Event Location"
-                        onKeyPress= {handleKeyPress}
+                        onKeyPress={handleKeyPress}
                         onChange={handleEventLocationInput}
                       ></TextField>
                     </Typography>
@@ -273,7 +267,6 @@ export const PostButton = () => {
                           onChange={handleDropDownChange}
                           label="Event Type"
                           autoWidth
-                          
                         >
                           <MenuItem value={"Campus Event"}>
                             Campus Event
@@ -289,7 +282,7 @@ export const PostButton = () => {
                     <Typography>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
-                        required
+                          required
                           label="Event Time"
                           inputVariant="outlined"
                           className={classes.dateAndTime}
