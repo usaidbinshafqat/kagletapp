@@ -81,7 +81,7 @@ export const SplashScreen = () => {
           Login
         </Button>
       </Grid>
-
+      {/* 
       <Grid item>
         <Button
           size="small"
@@ -91,7 +91,7 @@ export const SplashScreen = () => {
         >
           Home Screen Test
         </Button>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
