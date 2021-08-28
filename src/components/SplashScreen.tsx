@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   field: {
     "& > *": {
-      margin: theme.spacing(3),
+      margin: theme.spacing(2),
       width: "25ch",
     },
   },

@@ -232,6 +232,7 @@ return formIsValid;
                           className={classes.textfield}
                           label="Event Name"
                           onChange={handleEventNameInput}
+                          required
                         ></TextField>
                     </FormControl>
                     </Typography>
@@ -240,6 +241,7 @@ return formIsValid;
                   <Grid item xs={12}>
                     <Typography>
                       <TextField
+                      required
                         variant="outlined"
                         className={classes.textfield}
                         label="Event Location"
@@ -253,6 +255,7 @@ return formIsValid;
                       <FormControl
                         variant="outlined"
                         className={classes.formControl}
+                        required
                       >
                         <InputLabel>Select Event Types</InputLabel>
                         <Select
@@ -260,6 +263,7 @@ return formIsValid;
                           onChange={handleDropDownChange}
                           label="Event Type"
                           autoWidth
+                          
                         >
                           <MenuItem value={"Campus Event"}>Campus Event</MenuItem>
                           <MenuItem value={"Study Sesh"}>Study Sesh</MenuItem>
@@ -273,6 +277,7 @@ return formIsValid;
                     <Typography>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
+                        required
                           label="Event Time"
                           inputVariant="outlined"
                           className={classes.dateAndTime}
