@@ -1,10 +1,19 @@
-import { Typography, AppBar } from "@material-ui/core";
+import { Typography, AppBar, Box, Popover, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Grid from "@material-ui/core/Grid";
 import logo from "../logos/favicon.png";
+import PopupState, { bindPopover } from "material-ui-popup-state";
+import {
+  usePopupState,
+  bindTrigger,
+  bindMenu,
+} from "material-ui-popup-state/hooks";
+import React from "react";
+import { auth } from "../firebaseSetup";
+
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 // import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
@@ -116,6 +125,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const ToolbarAndChips = () => {
   const classes = useStyles();
+  //this will be called later.
+
+  function signOut() {
+    auth.signOut();
+    console.log("Logging ya out bitch");
+  }
+
   // const [flag1, setFlag1] = React.useState(true);
   // const [flag2, setFlag2] = React.useState(true);
   // const [flag3, setFlag3] = React.useState(true);
@@ -136,13 +152,40 @@ export const ToolbarAndChips = () => {
           <Typography variant="h5" className={classes.title}>
             What's Poppin @K
           </Typography>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-          >
-            <AccountCircle className={classes.accountIcon} />
-          </IconButton>
+
+          <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  {...bindTrigger(popupState)}
+                >
+                  <AccountCircle
+                    className={classes.accountIcon}
+                  ></AccountCircle>
+                </IconButton>
+                <Popover
+                  {...bindPopover(popupState)}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                >
+                  <Box p={2}>
+                    <Typography>
+                      <Button onClick={signOut}>Logout</Button>
+                    </Typography>
+                  </Box>
+                </Popover>
+              </div>
+            )}
+          </PopupState>
         </Grid>
       </Toolbar>
 

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import {
@@ -17,16 +16,11 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { TextField } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import firebase from "firebase";
-import Timestamp from "firebase";
 import DateFnsUtils from "@date-io/date-fns";
 import { IconButton, InputAdornment } from "@material-ui/core";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-  DateTimePicker,
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
+
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import Icon from "@material-ui/core/Icon";
 import { useDebugValue } from "react";
@@ -105,9 +99,6 @@ export const PostButton = () => {
     fetchIsLoggedIn();
   }, [loggedInUserEmail]);
 
-
-
-
   //pushing into Firebase
   var database = firebase.database();
   const [eventName, setEventName] = React.useState("");
@@ -141,6 +132,20 @@ export const PostButton = () => {
     checkValidity();
   };
 
+  //delete key check
+  const handleKeyPress = () => {
+    checkValidity();
+  }
+
+  const handleEventNameInput1 = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    if(eventName == "" ){
+      setEventName(event.target.value as string);
+      checkValidity();
+    }
+  };
+
   const handleEventLocationInput = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -151,13 +156,20 @@ export const PostButton = () => {
   const handleEventTime = (date: Date | null) => {
     setEventTime(date);
     checkValidity();
-
   };
 
-
+  
   function checkValidity() {
-    if (eventName != "" &&  eventLocation != "" &&  eventType != "" &&  eventTime  != null){
-      setSubmitDisabled(false) ;
+    if (
+      eventName != "" &&
+      eventLocation != "" &&
+      eventType != "" &&
+      eventTime != null
+    ) {
+      setSubmitDisabled(false);
+    }
+    else{
+      setSubmitDisabled(true);
     }
   }
 
@@ -171,25 +183,17 @@ export const PostButton = () => {
   }
 
   function handleValidation(this: any) {
-    const {
-      eventName,
-      eventLocation,
-      eventType,
-      eventTime,
-    } = this.state;
-    let error = '';
+    const { eventName, eventLocation, eventType, eventTime } = this.state;
+    let error = "";
     let formIsValid = true;
-        if(!eventName || 
-            !eventLocation ||
-            !eventType ||
-            !eventTime){
-            formIsValid = false;
-            error = "Input fields cannot be empty";
-        } 
+    if (!eventName || !eventLocation || !eventType || !eventTime) {
+      formIsValid = false;
+      error = "Input fields cannot be empty";
+    }
 
-this.setState({error: error});
-return formIsValid;
-}
+    this.setState({ error: error });
+    return formIsValid;
+  }
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -226,15 +230,20 @@ return formIsValid;
                   </Grid>
                   <Grid item xs={12}>
                     <Typography>
-                    <FormControl>
+                      <FormControl>
                         <TextField
                           variant="outlined"
                           className={classes.textfield}
                           label="Event Name"
+                          onKeyPress= {handleKeyPress}
                           onChange={handleEventNameInput}
+
                           required
+
+                          
+
                         ></TextField>
-                    </FormControl>
+                      </FormControl>
                     </Typography>
                   </Grid>
 
@@ -245,6 +254,7 @@ return formIsValid;
                         variant="outlined"
                         className={classes.textfield}
                         label="Event Location"
+                        onKeyPress= {handleKeyPress}
                         onChange={handleEventLocationInput}
                       ></TextField>
                     </Typography>
@@ -265,7 +275,9 @@ return formIsValid;
                           autoWidth
                           
                         >
-                          <MenuItem value={"Campus Event"}>Campus Event</MenuItem>
+                          <MenuItem value={"Campus Event"}>
+                            Campus Event
+                          </MenuItem>
                           <MenuItem value={"Study Sesh"}>Study Sesh</MenuItem>
                           <MenuItem value={"House Party"}>House Party</MenuItem>
                         </Select>
@@ -298,7 +310,7 @@ return formIsValid;
                       </MuiPickersUtilsProvider>
                     </Typography>
                   </Grid>
-                  
+
                   <Grid item xs={12}>
                     <Button
                       onClick={postButton}
