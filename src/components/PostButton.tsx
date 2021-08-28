@@ -237,7 +237,11 @@ export const PostButton = () => {
                           label="Event Name"
                           onKeyPress= {handleKeyPress}
                           onChange={handleEventNameInput}
+
+                          required
+
                           
+
                         ></TextField>
                       </FormControl>
                     </Typography>
@@ -246,6 +250,7 @@ export const PostButton = () => {
                   <Grid item xs={12}>
                     <Typography>
                       <TextField
+                      required
                         variant="outlined"
                         className={classes.textfield}
                         label="Event Location"
@@ -260,6 +265,7 @@ export const PostButton = () => {
                       <FormControl
                         variant="outlined"
                         className={classes.formControl}
+                        required
                       >
                         <InputLabel>Select Event Types</InputLabel>
                         <Select
@@ -267,6 +273,7 @@ export const PostButton = () => {
                           onChange={handleDropDownChange}
                           label="Event Type"
                           autoWidth
+                          
                         >
                           <MenuItem value={"Campus Event"}>
                             Campus Event
@@ -282,6 +289,7 @@ export const PostButton = () => {
                     <Typography>
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DateTimePicker
+                        required
                           label="Event Time"
                           inputVariant="outlined"
                           className={classes.dateAndTime}
