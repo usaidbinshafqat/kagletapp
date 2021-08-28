@@ -144,13 +144,23 @@ export const ToolbarAndChips = () => {
   // const handleClickParty = () => {
   //   setFlag3(!flag3);
   // };
+
+  function getRandomInt(min : number | any, max : number | any){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+  }
+  
+  const alphabet=["Whats Poppin @K","Looking for something to do? 🥱","You're such an amazing soul","In the mood to have fun?😬","Look at that beautiful face"];
+
+
   return (
     <AppBar position="sticky" elevation={0}>
       <Toolbar className={classes.toolbar}>
         <Grid container spacing={1} justifyContent="center" alignItems="center">
           <img className={classes.appicon} src={logo} alt="Logo" />
           <Typography variant="h5" className={classes.title}>
-            What's Poppin @K
+            {alphabet[getRandomInt(0,(alphabet.length-1))]}
           </Typography>
 
           <PopupState variant="popover" popupId="demo-popup-popover">
