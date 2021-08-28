@@ -95,7 +95,7 @@ export const Login = () => {
   const { vertical, horizontal } = state;
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
-  const [submitDisabled, setSubmitDisabled] = React.useState(true);
+  const [submitDisabled, setSubmitDisabled] = React.useState(false);
   const [email1, setEmail] = React.useState("");
 
   const handleClick = (newState: SnackbarOrigin) => () => {
@@ -104,6 +104,10 @@ export const Login = () => {
 
   const handleClickOpen = () => {
     setOpen1(true);
+  };
+
+  const handleError = () => {
+    setSubmitDisabled(true) ;
   };
 
   const handleClose = () => {
@@ -126,7 +130,8 @@ export const Login = () => {
       handleClick({ vertical: 'bottom', horizontal: 'center' });
     }
     else{
-      handleClickOpen();
+      //handleClickOpen();
+      handleError();
     }
     };
 
@@ -154,7 +159,7 @@ export const Login = () => {
     setOpen(!open);
    };
 
-//enter keu check
+//enter key check
 const handleKeyPress = (event: { key: string; }) => {
   if(event.key === 'Enter'){
    validity();
@@ -205,6 +210,13 @@ const handleKeyPress = (event: { key: string; }) => {
   } catch (error) {
     console.error(error);
   }
+
+  //this will be called later.
+  const signOut = async () => {
+    await auth.signOut();
+  };
+
+
   //redirects if the user is already logged in
   function redirectToHomepage() {
     window.location.href = "https://kaglet-91224.web.app/home";
@@ -242,6 +254,8 @@ const handleKeyPress = (event: { key: string; }) => {
                 <TextField
                   id="outlined-basic"
                   label="Email"
+                  //helperText="Incorrect entry."
+                  error={submitDisabled}
                   required
                   color="secondary"
                   variant="outlined"
