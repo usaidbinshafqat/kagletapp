@@ -128,8 +128,19 @@ export const ToolbarAndChips = () => {
   //this will be called later.
 
   function signOut() {
-    auth.signOut();
-    console.log("Logging ya out bitch");
+    auth
+      .signOut()
+      .then(() => {
+        console.log("Logging ya out bitch");
+        refreshPage();
+      })
+      .catch((error) => {
+        console.log("error logging in", error);
+      });
+  }
+
+  function refreshPage() {
+    window.location.reload();
   }
 
   // const [flag1, setFlag1] = React.useState(true);
