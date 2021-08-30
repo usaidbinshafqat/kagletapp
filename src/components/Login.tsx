@@ -17,6 +17,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { withStyles } from "@material-ui/core";
+import { createTheme } from "@material-ui/core";
+import { MuiThemeProvider } from "@material-ui/core";
 
 
 //defining the styles
@@ -25,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-    color: "red",
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
@@ -66,12 +68,31 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     width: 300,
+    color: '#4C5760'
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
 }));
+
+const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    //color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: '#ffcc80',
+    '&:hover': {
+      backgroundColor: '#f57c00',
+    },
+  },
+}))(Button);
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: '#ffcc80'
+    }
+  }
+});
 
 export interface State extends SnackbarOrigin {
   open: boolean;
@@ -96,6 +117,7 @@ export const Login = () => {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const [submitDisabled, setSubmitDisabled] = React.useState(false);
+  const [submitDisabled1, setSubmitDisabled1] = React.useState(true);
   const [email1, setEmail] = React.useState("");
 
   const handleClick = (newState: SnackbarOrigin) => () => {
@@ -138,19 +160,20 @@ export const Login = () => {
   function checkValidity() {
     if (emailRef.current!.value  != ""){        
       setSubmitDisabled(false) ;
+      setSubmitDisabled1(false) ;
     }
    }
 
   const buttons = (
     <React.Fragment>
-      <Button size="large"
-        variant="outlined"
-        color="secondary"
+      <ColorButton size="large"
+        //variant="outlined"
+        //color='#f57c00'
         className={classes.button}
-        disabled={submitDisabled}
+        disabled={submitDisabled1}
         onClick = {() => {validity()}}>
         Get Login Link
-      </Button>
+      </ColorButton>
     </React.Fragment>
     );
 
@@ -251,13 +274,14 @@ const handleKeyPress = (event: { key: string; }) => {
           <Grid item>
             <form className={classes.form} noValidate autoComplete="on">
               <Grid item xs={12}>
+              <MuiThemeProvider theme={theme}>
                 <TextField
                   id="outlined-basic"
                   label="Email"
                   //helperText="Incorrect entry."
                   error={submitDisabled}
                   required
-                  color="secondary"
+                  //color="secondary"
                   variant="outlined"
                   placeholder="@kzoo.edu"
                   inputRef={emailRef}
@@ -266,6 +290,7 @@ const handleKeyPress = (event: { key: string; }) => {
                   onKeyPress= {handleKeyPress}
                   onChange={handleEmailInput}
                 />
+                </MuiThemeProvider>
               </Grid>
             </form>
           </Grid>

@@ -14,10 +14,10 @@ import {
 import React from "react";
 import { auth } from "../firebaseSetup";
 
-// import LocalBarIcon from "@material-ui/icons/LocalBar";
-// import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-// import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
-// import { Chip } from "@material-ui/core";
+import LocalBarIcon from "@material-ui/icons/LocalBar";
+import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,18 +132,19 @@ export const ToolbarAndChips = () => {
     console.log("Logging ya out bitch");
   }
 
-  // const [flag1, setFlag1] = React.useState(true);
-  // const [flag2, setFlag2] = React.useState(true);
-  // const [flag3, setFlag3] = React.useState(true);
-  // const handleClickCampus = () => {
-  //   setFlag1(!flag1);
-  // };
-  // const handleClickStudy = () => {
-  //   setFlag2(!flag2);
-  // };
-  // const handleClickParty = () => {
-  //   setFlag3(!flag3);
-  // };
+  const [flag1, setFlag1] = React.useState(true);
+  const [flag2, setFlag2] = React.useState(true);
+  const [flag3, setFlag3] = React.useState(true);
+  const handleClickCampus = () => {
+    setFlag1(!flag1);
+  };
+  const handleClickStudy = () => {
+    setFlag2(!flag2);
+  };
+  const handleClickParty = () => {
+    setFlag3(!flag3);
+  };
+  
 
   function getRandomInt(min : number | any, max : number | any){
     min = Math.ceil(min);
@@ -151,7 +152,9 @@ export const ToolbarAndChips = () => {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
   }
   
-  const alphabet=["Whats Poppin @K","Looking for something to do? 🥱","You're such an amazing soul","In the mood to have fun?😬","Look at that beautiful face"];
+  const alphabet=["Whats Poppin @K","Looking for something to do? 🥱",
+  "You're such an amazing soul","In the mood to have fun?😬",
+  "Look at that beautiful face"];
 
 
   return (
@@ -160,7 +163,7 @@ export const ToolbarAndChips = () => {
         <Grid container spacing={1} justifyContent="center" alignItems="center">
           <img className={classes.appicon} src={logo} alt="Logo" />
           <Typography variant="h5" className={classes.title}>
-            {alphabet[getRandomInt(0,(alphabet.length-1))]}
+            {alphabet[getRandomInt(0,alphabet.length-1)]}
           </Typography>
 
           <PopupState variant="popover" popupId="demo-popup-popover">
@@ -199,7 +202,7 @@ export const ToolbarAndChips = () => {
         </Grid>
       </Toolbar>
 
-      {/* <Toolbar className={classes.toolbar}>
+      <Toolbar className={classes.toolbar}>
         <Grid container spacing={1}>
           <Grid item>
             <Chip
@@ -234,7 +237,7 @@ export const ToolbarAndChips = () => {
             />
           </Grid>
         </Grid>
-      </Toolbar> */}
+      </Toolbar>
     </AppBar>
   );
 };
