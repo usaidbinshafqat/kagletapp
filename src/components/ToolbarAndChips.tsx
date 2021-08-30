@@ -1,5 +1,5 @@
 import { Typography, AppBar, Box, Popover, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -13,6 +13,7 @@ import {
 } from "material-ui-popup-state/hooks";
 import React from "react";
 import { auth } from "../firebaseSetup";
+import { createTheme } from "@material-ui/core/styles";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
@@ -156,14 +157,52 @@ export const ToolbarAndChips = () => {
   //   setFlag3(!flag3);
   // };
 
-  function getRandomInt(min : number | any, max : number | any){
+  function getRandomInt(min: number | any, max: number | any) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  
-  const alphabet=["Whats Poppin @K","Looking for something to do? 🥱","You're such an amazing soul","In the mood to have fun?😬","Look at that beautiful face"];
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#EE6C4D",
+        light: "#ff9b79",
+        dark: "#b53a22",
+      },
+      secondary: {
+        main: "#4C5760",
+        light: "#78848d",
+        dark: "#242e36",
+      },
+    },
+  });
+
+  const alphabet = [
+    "🔛 🎋 🎱",
+    "📴 😏 😚",
+    "⏲ 🏓 🚝",
+    "🙏 🐐 ⚽️",
+    "🛍 ◾️ 🐡",
+    "🍷 🌼 🎓",
+    "🐊 🗝 📥",
+    "🔇 👺 📼 ",
+    "☺️ 🔂 🏌",
+    "🍻 🍊 🐩",
+    "😐 🐝 💟",
+    "😣 🕰 ⛩ ",
+    "📽 🛁 ⏰ ",
+    "🏙 🔦 🦁 ",
+    "☠ 🚧 📝",
+    "🖊 ☢ 👄",
+    "🏒 🎢 🌘  ",
+    "🕸 🐌 🗞 ",
+    "🍃 🍄 🔊",
+    "🌈 🐒 📹 ",
+    "🌿 🎁 😤  ",
+    "☝️ 🏓 🐗 ",
+    "📽 ⏰ 🙃",
+  ];
 
   return (
     <AppBar position="sticky" elevation={0}>
@@ -171,7 +210,7 @@ export const ToolbarAndChips = () => {
         <Grid container spacing={1} justifyContent="center" alignItems="center">
           <img className={classes.appicon} src={logo} alt="Logo" />
           <Typography variant="h5" className={classes.title}>
-            {alphabet[getRandomInt(0,(alphabet.length-1))]}
+            {alphabet[getRandomInt(0, alphabet.length - 1)]}
           </Typography>
 
           <PopupState variant="popover" popupId="demo-popup-popover">
@@ -200,7 +239,15 @@ export const ToolbarAndChips = () => {
                 >
                   <Box p={2}>
                     <Typography>
-                      <Button onClick={signOut}>Logout</Button>
+                      <ThemeProvider theme={theme}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={signOut}
+                        >
+                          Logout
+                        </Button>
+                      </ThemeProvider>
                     </Typography>
                   </Box>
                 </Popover>

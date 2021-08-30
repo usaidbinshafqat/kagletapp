@@ -1,25 +1,24 @@
 import React from "react";
 import { Typography, Card } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import CardHeader from "@material-ui/core/CardHeader";
+import { createTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   button: {
-    color: "red",
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
     marginTop: theme.spacing(3),
     borderRadius: 20,
     padding: "0.25rem 2rem",
-    borderColor: "#becddc",
   },
 
   menuButton: {
@@ -115,10 +114,20 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: "#000000",
     textAlign: "left",
-    backgroundColor: "#ff8c1a",
+    backgroundColor: "#EE6C4D",
   },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#EE6C4D",
+    },
+    secondary: {
+      main: "#4C5760",
+    },
+  },
+});
 export interface EventDetails {
   name: string;
   type?: string;
@@ -129,7 +138,6 @@ export interface EventDetails {
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
-
   return (
     // holding the cards in this div, using useStyles from up top
     <div className={classes.cardcomponent}>
@@ -140,26 +148,28 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
         gets data from firebase where it says props.xxx 
         "xxx" is defined in the interface before the export const EventCards
         */}
-        <CardHeader
-          className={classes.cardTitle}
-          title={
-            // a grid to hold name and time with good alignment
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                {props.name}
+        <MuiThemeProvider theme={theme}>
+          <CardHeader
+            className={classes.cardTitle}
+            title={
+              // a grid to hold name and time with good alignment
+              <Grid container>
+                <Grid item xs={12} sm={6}>
+                  {props.name}
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  alignItems="flex-end"
+                  className={classes.rightAlignText}
+                >
+                  {props.time}
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                alignItems="flex-end"
-                className={classes.rightAlignText}
-              >
-                {props.time}
-              </Grid>
-            </Grid>
-          }
-        />
+            }
+          />
+        </MuiThemeProvider>
         {/* card content (the white part),  */}
         <CardContent>
           <Grid container spacing={2}>
