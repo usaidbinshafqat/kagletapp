@@ -190,7 +190,7 @@ export const Login = () => {
   //getting the email data from the text field
   let emailRef = useRef<HTMLInputElement>(null);
   var actionCodeSettings = {
-    url: "https://kaglet-91224.web.app/login",
+    url: "https://kaglet.app/login",
     handleCodeInApp: true,
   };
 
