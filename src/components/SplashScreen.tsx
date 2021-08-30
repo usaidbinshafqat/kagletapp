@@ -101,7 +101,7 @@ export const SplashScreen = () => {
           </Button>
         </Grid>
 
-        <Grid item>
+        {/* <Grid item>
           <Button
             size="small"
             color="primary"
@@ -110,7 +110,7 @@ export const SplashScreen = () => {
           >
             Home Screen Test
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </ThemeProvider>
   );
