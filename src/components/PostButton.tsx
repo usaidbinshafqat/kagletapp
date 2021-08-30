@@ -7,7 +7,7 @@ import {
   Select,
   Button,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
@@ -24,6 +24,7 @@ import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import Icon from "@material-ui/core/Icon";
 import { useDebugValue } from "react";
+import { createTheme } from "@material-ui/core/styles";
 
 export interface EventDetails {
   name: string;
@@ -119,6 +120,7 @@ export const PostButton = () => {
       })
       .catch(alert);
   };
+
   const handleDropDownChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -157,6 +159,20 @@ export const PostButton = () => {
     setEventTime(date);
     checkValidity();
   };
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#EE6C4D",
+        light: "#ff9b79",
+        dark: "#b53a22",
+      },
+      secondary: {
+        main: "#4C5760",
+        light: "#78848d",
+        dark: "#242e36",
+      },
+    },
+  });
 
   function checkValidity() {
     if (
@@ -198,15 +214,17 @@ export const PostButton = () => {
       {(popupState) => (
         <div>
           {/* Floating action button in the bottom right corner, the styles are defined in useStyles */}
-          <Fab
-            color="secondary"
-            variant="extended"
-            className={classes.fabicon}
-            {...bindTrigger(popupState)}
-          >
-            <AddIcon />
-            New Event
-          </Fab>
+          <ThemeProvider theme={theme}>
+            <Fab
+              color="primary"
+              variant="extended"
+              className={classes.fabicon}
+              {...bindTrigger(popupState)}
+            >
+              <AddIcon />
+              New Event
+            </Fab>
+          </ThemeProvider>
           {/* Opens popover, the rest inside is self explanatory */}
           <Popover
             {...bindPopover(popupState)}
@@ -220,104 +238,115 @@ export const PostButton = () => {
             }}
           >
             {/* Box that shows up when button is clicked, all following tags are self explanatory*/}
-            <Box p={2} className={classes.eventBox}>
-              <Typography>
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <Typography variant="h6">Create Event</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography>
-                      <FormControl>
+            <ThemeProvider theme={theme}>
+              <Box p={2} className={classes.eventBox}>
+                <Typography>
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <Typography variant="h6">Create Event</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography>
+                        <FormControl>
+                          <TextField
+                            color="secondary"
+                            variant="outlined"
+                            className={classes.textfield}
+                            label="Event Name"
+                            onKeyPress={handleKeyPress}
+                            onChange={handleEventNameInput}
+                            required
+                          ></TextField>
+                        </FormControl>
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Typography>
                         <TextField
+                          color="secondary"
+                          required
                           variant="outlined"
                           className={classes.textfield}
-                          label="Event Name"
+                          label="Event Location"
                           onKeyPress={handleKeyPress}
-                          onChange={handleEventNameInput}
-                          required
+                          onChange={handleEventLocationInput}
                         ></TextField>
-                      </FormControl>
-                    </Typography>
-                  </Grid>
+                      </Typography>
+                    </Grid>
 
-                  <Grid item xs={12}>
-                    <Typography>
-                      <TextField
-                        required
-                        variant="outlined"
-                        className={classes.textfield}
-                        label="Event Location"
-                        onKeyPress={handleKeyPress}
-                        onChange={handleEventLocationInput}
-                      ></TextField>
-                    </Typography>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Typography>
-                      <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                        required
-                      >
-                        <InputLabel>Select Event Types</InputLabel>
-                        <Select
-                          value={eventType}
-                          onChange={handleDropDownChange}
-                          label="Event Type"
-                          autoWidth
-                        >
-                          <MenuItem value={"Campus Event"}>
-                            Campus Event
-                          </MenuItem>
-                          <MenuItem value={"Study Sesh"}>Study Sesh</MenuItem>
-                          <MenuItem value={"House Party"}>House Party</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Typography>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker
+                    <Grid item xs={12}>
+                      <Typography>
+                        <FormControl
+                          color="secondary"
+                          variant="outlined"
+                          className={classes.formControl}
                           required
-                          label="Event Time"
-                          inputVariant="outlined"
-                          className={classes.dateAndTime}
-                          value={eventTime}
-                          onChange={handleEventTime}
-                          onError={console.log}
-                          disablePast
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <IconButton>
-                                  <EventRoundedIcon />
-                                </IconButton>
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </MuiPickersUtilsProvider>
-                    </Typography>
-                  </Grid>
+                        >
+                          <InputLabel>Select Event Types</InputLabel>
+                          <Select
+                            color="secondary"
+                            value={eventType}
+                            onChange={handleDropDownChange}
+                            label="Event Type"
+                            autoWidth
+                          >
+                            <MenuItem color="secondary" value={"Campus Event"}>
+                              Campus Event
+                            </MenuItem>
+                            <MenuItem color="secondary" value={"Study Sesh"}>
+                              Study Sesh
+                            </MenuItem>
+                            <MenuItem color="secondary" value={"House Party"}>
+                              House Party
+                            </MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Typography>
+                    </Grid>
 
-                  <Grid item xs={12}>
-                    <Button
-                      onClick={postButton}
-                      color="secondary"
-                      variant="contained"
-                      endIcon={<Icon>send</Icon>}
-                      disabled={submitDisabled}
-                    >
-                      Post
-                    </Button>
+                    <Grid item xs={12}>
+                      <Typography>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                          <DateTimePicker
+                            required
+                            color="secondary"
+                            label="Event Time"
+                            inputVariant="outlined"
+                            className={classes.dateAndTime}
+                            value={eventTime}
+                            onChange={handleEventTime}
+                            onError={console.log}
+                            disablePast
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton>
+                                    <EventRoundedIcon />
+                                  </IconButton>
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </MuiPickersUtilsProvider>
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Button
+                        onClick={postButton}
+                        color="secondary"
+                        variant="contained"
+                        endIcon={<Icon>send</Icon>}
+                        disabled={submitDisabled}
+                      >
+                        Post
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Typography>
-            </Box>
+                </Typography>
+              </Box>
+            </ThemeProvider>
           </Popover>
         </div>
       )}

@@ -1,4 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  createTheme,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { PostButton } from "./PostButton";
 import { Typography } from "@material-ui/core";
@@ -14,16 +18,29 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 0,
   },
   button: {
-    color: "red",
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
     marginTop: theme.spacing(2),
     borderRadius: 20,
     padding: "0.25rem 2rem",
-    borderColor: "#becddc",
   },
 }));
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#EE6C4D",
+      light: "#ff9b79",
+      dark: "#b53a22",
+    },
+    secondary: {
+      main: "#4C5760",
+      light: "#78848d",
+      dark: "#242e36",
+    },
+  },
+});
 
 //homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
 export const HomeScreen = () => {
@@ -66,24 +83,26 @@ export const HomeScreen = () => {
               justify="center"
             >
               <Typography variant="h5">
-                Please log in to view awesome K events! :)
+                Please log in to view awesome K events!
               </Typography>
               &nbsp;
               <Typography variant="h6">
                 If you've logged in, try again in a non-private window.
               </Typography>
               &nbsp;
-              <Grid item>
-                <Button
-                  size="large"
-                  variant="outlined"
-                  color="secondary"
-                  className={classes.button}
-                  onClick={() => history.push("/login")}
-                >
-                  Login
-                </Button>
-              </Grid>
+              <ThemeProvider theme={theme}>
+                <Grid item>
+                  <Button
+                    size="large"
+                    variant="outlined"
+                    color="primary"
+                    className={classes.button}
+                    onClick={() => history.push("/login")}
+                  >
+                    Login
+                  </Button>
+                </Grid>
+              </ThemeProvider>
             </Grid>
           </Typography>
         </Grid>
