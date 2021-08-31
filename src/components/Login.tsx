@@ -237,7 +237,7 @@ export const Login = () => {
 
   //redirects if the user is already logged in
   function redirectToHomepage() {
-    window.location.href = "https://kaglet-91224.web.app/home";
+    window.location.href = "https://kaglet.app/home";
   }
 
   //firebase-ends
