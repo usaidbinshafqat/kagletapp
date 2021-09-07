@@ -122,11 +122,25 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#EE6C4D",
+      light: "#ff9b79",
+      dark: "#b53a22",
     },
     secondary: {
       main: "#4C5760",
+      light: "#78848d",
+      dark: "#242e36",
     },
   },
+  // typography: {
+  //   h1: {
+  //     fontFamily: "Nunito",
+  //     fontSize: 30,
+  //   },
+  //   h2: {
+  //     fontFamily: "Roboto",
+  //     fontSize: 14,
+  //   },
+  // },
 });
 export interface EventDetails {
   name: string;
@@ -154,7 +168,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             title={
               // a grid to hold name and time with good alignment
               <Grid container>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} className="heading">
                   {props.name}
                 </Grid>
                 <Grid
