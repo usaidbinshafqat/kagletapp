@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Grid from "@material-ui/core/Grid";
 import logo from "../logos/favicon.png";
+import logoText from "../logos/HomeHeader.png";
 import PopupState, { bindPopover } from "material-ui-popup-state";
 import {
   usePopupState,
@@ -81,10 +82,10 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   appicon: {
-    height: "4%",
-    width: "4%",
-    minHeight: 30,
-    minWidth: 30,
+    height: "3%",
+    width: "3%",
+    minHeight: 26,
+    minWidth: 26,
     maxHeight: 40,
     maxWidth: 40,
     paddingBlock: 5,
@@ -122,6 +123,11 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 200,
     maxWidth: 500,
   },
+  iconText: {
+    color: "#000000",
+    fontSize: 35,
+    paddingLeft: 10,
+  },
 }));
 
 export const ToolbarAndChips = () => {
@@ -132,7 +138,6 @@ export const ToolbarAndChips = () => {
     auth
       .signOut()
       .then(() => {
-        console.log("Logging ya out bitch");
         refreshPage();
       })
       .catch((error) => {
@@ -209,17 +214,18 @@ export const ToolbarAndChips = () => {
       <Toolbar className={classes.toolbar}>
         <Grid container spacing={1} justifyContent="center" alignItems="center">
           <img className={classes.appicon} src={logo} alt="Logo" />
+          <Typography variant="h1" className={classes.iconText}>
+            Kaglet
+          </Typography>
           <Typography variant="h5" className={classes.title}>
             {alphabet[getRandomInt(0, alphabet.length - 1)]}
           </Typography>
-
           <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
               <div>
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
-                  aria-haspopup="true"
                   {...bindTrigger(popupState)}
                 >
                   <AccountCircle
