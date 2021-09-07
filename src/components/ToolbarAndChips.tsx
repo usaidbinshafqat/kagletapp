@@ -124,8 +124,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
   },
   iconText: {
-    color: "#000000",
-    fontSize: 35,
+    color: "#543B31",
+    fontSize: 25,
     paddingLeft: 10,
   },
 }));
@@ -162,12 +162,6 @@ export const ToolbarAndChips = () => {
   //   setFlag3(!flag3);
   // };
 
-  function getRandomInt(min: number | any, max: number | any) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   const theme = createTheme({
     palette: {
       primary: {
@@ -183,83 +177,69 @@ export const ToolbarAndChips = () => {
     },
   });
 
-  const alphabet = [
-    "🔛 🎋 🎱",
-    "📴 😏 😚",
-    "⏲ 🏓 🚝",
-    "🙏 🐐 ⚽️",
-    "🛍 ◾️ 🐡",
-    "🍷 🌼 🎓",
-    "🐊 🗝 📥",
-    "🔇 👺 📼 ",
-    "☺️ 🔂 🏌",
-    "🍻 🍊 🐩",
-    "😐 🐝 💟",
-    "😣 🕰 ⛩ ",
-    "📽 🛁 ⏰ ",
-    "🏙 🔦 🦁 ",
-    "☠ 🚧 📝",
-    "🖊 ☢ 👄",
-    "🏒 🎢 🌘  ",
-    "🕸 🐌 🗞 ",
-    "🍃 🍄 🔊",
-    "🌈 🐒 📹 ",
-    "🌿 🎁 😤  ",
-    "☝️ 🏓 🐗 ",
-    "📽 ⏰ 🙃",
-  ];
-
   return (
     <AppBar position="sticky" elevation={0}>
       <Toolbar className={classes.toolbar}>
-        <Grid container spacing={1} justifyContent="center" alignItems="center">
-          <img className={classes.appicon} src={logo} alt="Logo" />
-          <Typography variant="h1" className={classes.iconText}>
-            Kaglet
-          </Typography>
-          <Typography variant="h5" className={classes.title}>
-            {alphabet[getRandomInt(0, alphabet.length - 1)]}
-          </Typography>
-          <PopupState variant="popover" popupId="demo-popup-popover">
-            {(popupState) => (
-              <div>
-                <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  {...bindTrigger(popupState)}
-                >
-                  <AccountCircle
-                    className={classes.accountIcon}
-                  ></AccountCircle>
-                </IconButton>
-                <Popover
-                  {...bindPopover(popupState)}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center",
-                  }}
-                >
-                  <Box p={2}>
-                    <Typography>
-                      <ThemeProvider theme={theme}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={signOut}
-                        >
-                          Logout
-                        </Button>
-                      </ThemeProvider>
-                    </Typography>
-                  </Box>
-                </Popover>
-              </div>
-            )}
-          </PopupState>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item>
+            <Grid
+              container
+              spacing={0}
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
+            >
+              <img className={classes.appicon} src={logo} alt="Logo" />{" "}
+              <h1 className={`${classes.iconText} ${"heading"}`}>Kaglet</h1>{" "}
+            </Grid>
+          </Grid>
+          <Grid item>
+            <PopupState variant="popover" popupId="demo-popup-popover">
+              {(popupState) => (
+                <div>
+                  <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    {...bindTrigger(popupState)}
+                  >
+                    <AccountCircle
+                      className={classes.accountIcon}
+                    ></AccountCircle>
+                  </IconButton>
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                  >
+                    <Box p={2}>
+                      <Typography>
+                        <ThemeProvider theme={theme}>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={signOut}
+                          >
+                            Logout
+                          </Button>
+                        </ThemeProvider>
+                      </Typography>
+                    </Box>
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
+          </Grid>
         </Grid>
       </Toolbar>
 

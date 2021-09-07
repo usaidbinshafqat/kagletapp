@@ -40,6 +40,9 @@ const theme = createTheme({
       dark: "#242e36",
     },
   },
+  typography: {
+    fontFamily: ["Nunito"].join(","),
+  },
 });
 
 //homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
