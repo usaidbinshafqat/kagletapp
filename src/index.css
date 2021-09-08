@@ -1,8 +1,7 @@
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
 }
 
 .heading {
@@ -19,4 +18,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'Gliber';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/src/components/fonts/nunito/Nunito-Bold.woff') format('woff');
 }
