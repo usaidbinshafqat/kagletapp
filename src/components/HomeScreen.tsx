@@ -17,14 +17,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 0,
   },
-  button: {
-    alignContent: "center",
-    alignItems: "flex-start",
-    justify: "center",
-    marginTop: theme.spacing(2),
-    borderRadius: 20,
-    padding: "0.25rem 2rem",
-  },
 }));
 
 const theme = createTheme({
@@ -40,9 +32,6 @@ const theme = createTheme({
       dark: "#242e36",
     },
   },
-  typography: {
-    fontFamily: ["Nunito"].join(","),
-  },
 });
 
 //homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
@@ -55,7 +44,7 @@ export const HomeScreen = () => {
           setLoggedInUserId(user.uid);
           console.log(user.uid);
         } else {
-          setLoggedInUserId("df");
+          setLoggedInUserId("sf");
         }
       });
     };
@@ -99,7 +88,8 @@ export const HomeScreen = () => {
                     size="large"
                     variant="outlined"
                     color="primary"
-                    className={classes.button}
+                    className="subheading"
+                    style={{ borderRadius: 20, padding: "0.25rem 2rem" }}
                     onClick={() => history.push("/login")}
                   >
                     Login
