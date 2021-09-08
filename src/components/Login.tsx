@@ -292,7 +292,7 @@ export const Login = () => {
           <div>
             {buttons}
             <Snackbar
-              autoHideDuration={10000}
+              autoHideDuration={100000000}
               anchorOrigin={{ vertical, horizontal }}
               open={open}
               onClose={handleClose}
