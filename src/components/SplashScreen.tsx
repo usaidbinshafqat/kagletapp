@@ -74,7 +74,7 @@ export const SplashScreen = () => {
   });
 
   function redirectToHomepage() {
-    window.location.href = "https://kaglet-91224.web.app/home";
+    window.location.href = "https://kaglet.app/home";
   }
   // only dealing with sending to other screens
   return (

@@ -1,4 +1,11 @@
-import { Typography, AppBar, Box, Popover, Button } from "@material-ui/core";
+import {
+  Typography,
+  AppBar,
+  Box,
+  Popover,
+  Button,
+  Avatar,
+} from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -84,11 +91,11 @@ const useStyles = makeStyles((theme) => ({
   appicon: {
     height: "3%",
     width: "3%",
-    minHeight: 26,
-    minWidth: 26,
-    maxHeight: 40,
-    maxWidth: 40,
-    paddingBlock: 5,
+    minHeight: 28,
+    minWidth: 28,
+    maxHeight: 42,
+    maxWidth: 42,
+    paddingBlock: 2,
   },
   fabicon: {
     margin: 0,
@@ -126,7 +133,11 @@ const useStyles = makeStyles((theme) => ({
   iconText: {
     color: "#543B31",
     fontSize: 25,
-    paddingLeft: 10,
+    paddingLeft: 1,
+  },
+  logoButton: {
+    maxHeight: 45,
+    maxWidth: 45,
   },
 }));
 
@@ -194,8 +205,11 @@ export const ToolbarAndChips = () => {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <img className={classes.appicon} src={logo} alt="Logo" />{" "}
-              <h1 className={`${classes.iconText} ${"heading"}`}>Kaglet</h1>{" "}
+              <IconButton className={classes.logoButton} onClick={refreshPage}>
+                <Avatar className={classes.appicon} src={logo} />
+              </IconButton>
+              {/* <img className={classes.appicon} src={logo} alt="Logo" />{" "} */}
+              <h1 className={`${classes.iconText} ${"heading"}`}>Kaglet</h1>
             </Grid>
           </Grid>
           <Grid item>
