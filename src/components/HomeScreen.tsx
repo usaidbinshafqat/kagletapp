@@ -44,7 +44,7 @@ export const HomeScreen = () => {
           setLoggedInUserId(user.uid);
           console.log(user.uid);
         } else {
-          setLoggedInUserId("sf");
+          setLoggedInUserId("df");
         }
       });
     };
