@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Card } from "@material-ui/core";
+import { Typography, Card, CardMedia, Icon } from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,49 +7,22 @@ import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import CardHeader from "@material-ui/core/CardHeader";
 import { createTheme } from "@material-ui/core/styles";
+import partyImage1 from "../logos/partyImage1.png";
+import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
+import EventRoundedIcon from "@material-ui/icons/EventRounded";
+import { prependOnceListener } from "process";
+import campusImage1 from "../logos/campusImage1.png";
+import studyImage1 from "../logos/studyImage1.png";
+import LocalBarIcon from "@material-ui/icons/LocalBar";
+import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  button: {
-    alignContent: "center",
-    alignItems: "flex-start",
-    justify: "center",
-    marginTop: theme.spacing(3),
-    borderRadius: 20,
-    padding: "0.25rem 2rem",
-  },
-
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  toolbar: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    backgroundColor: "#ffffff",
-  },
-  title: {
-    flexGrow: 1,
-    color: "#000000",
-  },
-  subtitle: {
-    flexGrow: 1,
-    alignSelf: "flex-end",
-    color: "#000000",
-  },
-  textfield: {
-    width: 200,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(2),
-  },
   cardcomponent: {
-    width: "90%",
-  },
-
-  cardpositions: {
-    marginBottom: 12,
+    width: "82%",
   },
   username: {
     textAlign: "left",
@@ -58,63 +31,30 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "right",
     justifyContent: "center",
   },
-  accountIcon: {
-    minHeight: 30,
-    minWidth: 30,
-    color: "black",
-  },
-  appicon: {
-    height: "4%",
-    width: "4%",
-    minHeight: 30,
-    minWidth: 30,
-    paddingBlock: 5,
-  },
-  fabicon: {
-    margin: 0,
-    top: "auto",
-    right: 20,
-    bottom: 20,
-    left: "auto",
-    position: "fixed",
-  },
-  bottomNav: {
-    width: "100%",
-    position: "fixed",
-    bottom: 0,
-  },
-  popoverFab: {
-    padding: theme.spacing(2),
-  },
-  formControl: {
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  dateAndTime: {
-    marginLeft: theme.spacing(1),
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  locationField: {
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  eventBox: {
-    minWidth: 200,
-    maxWidth: 500,
-  },
   cardLooks: {
     borderRadius: 12,
   },
-  rsvpButton: {
-    backgroundColor: "#ff8c1a",
-    borderRadius: 12,
-  },
   cardTitle: {
-    flexGrow: 1,
-    color: "#000000",
-    textAlign: "left",
-    backgroundColor: "#EE6C4D",
+    fontSize: 30,
+    paddingLeft: 10,
+  },
+  cardSubtitle: {
+    fontSize: 20,
+    paddingLeft: 103,
+  },
+  media: {
+    height: 170,
+  },
+  titleIcon: {
+    paddingTop: 7,
+    paddingLeft: 70,
+  },
+  locationSubtitle: {
+    fontSize: 23,
+    paddingLeft: 10,
+  },
+  locationSubtitleIcon: {
+    paddingLeft: 70,
   },
 }));
 
@@ -131,16 +71,6 @@ const theme = createTheme({
       dark: "#242e36",
     },
   },
-  // typography: {
-  //   h1: {
-  //     fontFamily: "Nunito",
-  //     fontSize: 30,
-  //   },
-  //   h2: {
-  //     fontFamily: "Roboto",
-  //     fontSize: 14,
-  //   },
-  // },
 });
 export interface EventDetails {
   name: string;
@@ -148,6 +78,35 @@ export interface EventDetails {
   location?: string;
   time?: string;
   email?: string;
+}
+
+function chooseImage(type?: string) {
+  let imageName = "";
+  if (type === "Study Sesh") {
+    imageName = studyImage1;
+  }
+  if (type === "House Party") {
+    imageName = partyImage1;
+  }
+  if (type === "Campus Event") {
+    imageName = campusImage1;
+  }
+
+  return imageName;
+}
+
+function chooseIcon(type?: string) {
+  let typeIcon: any = "";
+  if (type === "Study Sesh") {
+    typeIcon = <BackpackRoundedIcon />;
+  }
+  if (type === "House Party") {
+    typeIcon = <LocalBarIcon />;
+  }
+  if (type === "Campus Event") {
+    typeIcon = <SchoolRoundedIcon />;
+  }
+  return typeIcon;
 }
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
@@ -163,45 +122,51 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
         "xxx" is defined in the interface before the export const EventCards
         */}
         <MuiThemeProvider theme={theme}>
-          <CardHeader
-            className={classes.cardTitle}
-            title={
-              // a grid to hold name and time with good alignment
-              <Grid container>
-                <Grid item xs={12} sm={6} className="heading">
-                  {props.name}
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  alignItems="flex-end"
-                  className={classes.rightAlignText}
-                >
-                  {props.time}
-                </Grid>
-              </Grid>
-            }
+          <CardMedia
+            className={classes.media}
+            image={chooseImage(props.type)}
+            title="Test"
           />
         </MuiThemeProvider>
         {/* card content (the white part),  */}
         <CardContent>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            direction="row-reverse"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <Grid item className={`${classes.cardTitle} ${"heading"}`}>
+              {props.name}
+            </Grid>
+            <Grid item className={classes.titleIcon}>
+              {chooseIcon(props.type)}
+            </Grid>
+          </Grid>
+
+          {/* <span>&nbsp;</span> */}
+          <Grid
+            container
+            direction="row-reverse"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
             <Grid
               item
-              xs={12}
-              sm={6}
-              direction="row-reverse"
-              justifyContent="flex-end"
-              alignItems="flex-start"
+              className={`${classes.locationSubtitle} ${"subheading"}`}
             >
-              <Typography className={classes.username}>{props.type}</Typography>
+              {props.location}
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography className={classes.rightAlignText}>
-                <LocationOnOutlinedIcon></LocationOnOutlinedIcon>
-                {props.location}
-              </Typography>
+            <LocationOnOutlinedIcon className={classes.locationSubtitleIcon} />
+          </Grid>
+          <Grid
+            container
+            direction="row-reverse"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <Grid item className={`${classes.cardSubtitle} ${"subheading"}`}>
+              {props.time}
             </Grid>
           </Grid>
         </CardContent>
@@ -212,17 +177,6 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             justifyContent="space-between"
             alignItems="flex-end"
           >
-            {/* RSVP button, does not do anything yet so this is commented out. */}
-            {/* <Button
-              color="secondary"
-              variant="contained"
-              size="small"
-              disableElevation
-              className={classes.rsvpButton}
-            >
-              RSVP +1
-            </Button> */}
-
             <Grid
               item
               xs={12}

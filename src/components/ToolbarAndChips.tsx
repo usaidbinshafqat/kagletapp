@@ -139,6 +139,13 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 45,
     maxWidth: 45,
   },
+  logoText: {
+    maxHeight: 40,
+    maxWidth: 90,
+    minHeight: 30,
+    minWidth: 66,
+    paddingTop: 5,
+  },
 }));
 
 export const ToolbarAndChips = () => {
@@ -172,7 +179,12 @@ export const ToolbarAndChips = () => {
   // const handleClickParty = () => {
   //   setFlag3(!flag3);
   // };
-
+  // const nunito = {
+  //   fontFamily: "Nunito",
+  //   fontStyle: "bold",
+  //   src: `
+  //   url(${font}) format('woff')`,
+  // };
   const theme = createTheme({
     palette: {
       primary: {
@@ -186,6 +198,20 @@ export const ToolbarAndChips = () => {
         dark: "#242e36",
       },
     },
+    // typography: {
+    //   h1: {
+    //     fontFamily: "Nunito",
+    //     fontWeight: 700,
+    //     fontStyle: "bold",
+    //   },
+    // },
+    // overrides: {
+    //   MuiCssBaseline: {
+    //     "@global": {
+    //       "@font-face": [nunito],
+    //     },
+    //   },
+    // },
   });
 
   return (
@@ -208,8 +234,7 @@ export const ToolbarAndChips = () => {
               <IconButton className={classes.logoButton} onClick={refreshPage}>
                 <Avatar className={classes.appicon} src={logo} />
               </IconButton>
-              {/* <img className={classes.appicon} src={logo} alt="Logo" />{" "} */}
-              <h1 className={`${classes.iconText} ${"heading"}`}>Kaglet</h1>
+              <img src={logoText} className={classes.logoText} alt="logoText" />
             </Grid>
           </Grid>
           <Grid item>
@@ -269,7 +294,6 @@ export const ToolbarAndChips = () => {
               icon={<SchoolRoundedIcon />}
             />
           </Grid>
-
           <Grid item>
             <Chip
               onClick={handleClickStudy}
@@ -280,7 +304,6 @@ export const ToolbarAndChips = () => {
               icon={<BackpackRoundedIcon />}
             />
           </Grid>
-
           <Grid item>
             <Chip
               onClick={handleClickParty}
