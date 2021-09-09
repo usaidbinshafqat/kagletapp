@@ -135,21 +135,6 @@ function chooseIcon(type?: string) {
   return typeIcon;
 }
 
-// const ci = [campusImage1, campusImage2];
-// const si = [{ studyImage1 }, { studyImage2 }];
-// const pi = [{ partyImage1 }, { partyImage2 }];
-
-// function randomci() {
-//   ci[Math.floor(Math.random() * ci.length)];
-// }
-
-// const randomsi = Math.floor(Math.random() * si.length);
-// const randompi = Math.floor(Math.random() * pi.length);
-
-// //ci[randomci]
-
-// console.log(randomci, ci[randomci]);
-
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
   return (
