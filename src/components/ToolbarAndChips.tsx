@@ -22,7 +22,6 @@ import {
 import React from "react";
 import { auth } from "../firebaseSetup";
 import { createTheme } from "@material-ui/core/styles";
-import font from "./fonts/nunito/Nunito-ExtraBold.woff";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
@@ -180,12 +179,12 @@ export const ToolbarAndChips = () => {
   // const handleClickParty = () => {
   //   setFlag3(!flag3);
   // };
-  const nunito = {
-    fontFamily: "Nunito",
-    fontStyle: "bold",
-    src: `
-    url(${font}) format('woff')`,
-  };
+  // const nunito = {
+  //   fontFamily: "Nunito",
+  //   fontStyle: "bold",
+  //   src: `
+  //   url(${font}) format('woff')`,
+  // };
   const theme = createTheme({
     palette: {
       primary: {
@@ -199,20 +198,20 @@ export const ToolbarAndChips = () => {
         dark: "#242e36",
       },
     },
-    typography: {
-      h1: {
-        fontFamily: "Nunito",
-        fontWeight: 700,
-        fontStyle: "bold",
-      },
-    },
-    overrides: {
-      MuiCssBaseline: {
-        "@global": {
-          "@font-face": [nunito],
-        },
-      },
-    },
+    // typography: {
+    //   h1: {
+    //     fontFamily: "Nunito",
+    //     fontWeight: 700,
+    //     fontStyle: "bold",
+    //   },
+    // },
+    // overrides: {
+    //   MuiCssBaseline: {
+    //     "@global": {
+    //       "@font-face": [nunito],
+    //     },
+    //   },
+    // },
   });
 
   return (
@@ -295,7 +294,6 @@ export const ToolbarAndChips = () => {
               icon={<SchoolRoundedIcon />}
             />
           </Grid>
-
           <Grid item>
             <Chip
               onClick={handleClickStudy}
@@ -306,7 +304,6 @@ export const ToolbarAndChips = () => {
               icon={<BackpackRoundedIcon />}
             />
           </Grid>
-
           <Grid item>
             <Chip
               onClick={handleClickParty}
