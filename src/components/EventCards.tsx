@@ -7,12 +7,16 @@ import Grid from "@material-ui/core/Grid";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import CardHeader from "@material-ui/core/CardHeader";
 import { createTheme } from "@material-ui/core/styles";
-import partyImage1 from "../logos/partyImage1.png";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import { prependOnceListener } from "process";
+import partyImage1 from "../logos/partyImage1.png";
 import campusImage1 from "../logos/campusImage1.png";
 import studyImage1 from "../logos/studyImage1.png";
+import studyImage2 from "../logos/studyImage2.png";
+import campusImage2 from "../logos/campusImage2.png";
+import partyImage2 from "../logos/partyImage2.png";
+
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
@@ -80,16 +84,38 @@ export interface EventDetails {
   email?: string;
 }
 
+function randomGenerator() {
+  const min = 0;
+  const max = 1;
+  const random = min + Math.random() * (max - min);
+
+  return random;
+}
+
 function chooseImage(type?: string) {
   let imageName = "";
+  let random = Math.round(randomGenerator());
+  console.log(Math.round(random));
   if (type === "Study Sesh") {
-    imageName = studyImage1;
+    if (random === 0) {
+      imageName = studyImage1;
+    } else {
+      imageName = studyImage2;
+    }
   }
   if (type === "House Party") {
-    imageName = partyImage1;
+    if (random === 0) {
+      imageName = partyImage1;
+    } else {
+      imageName = partyImage2;
+    }
   }
   if (type === "Campus Event") {
-    imageName = campusImage1;
+    if (random === 0) {
+      imageName = campusImage1;
+    } else {
+      imageName = campusImage2;
+    }
   }
 
   return imageName;
@@ -108,6 +134,21 @@ function chooseIcon(type?: string) {
   }
   return typeIcon;
 }
+
+// const ci = [campusImage1, campusImage2];
+// const si = [{ studyImage1 }, { studyImage2 }];
+// const pi = [{ partyImage1 }, { partyImage2 }];
+
+// function randomci() {
+//   ci[Math.floor(Math.random() * ci.length)];
+// }
+
+// const randomsi = Math.floor(Math.random() * si.length);
+// const randompi = Math.floor(Math.random() * pi.length);
+
+// //ci[randomci]
+
+// console.log(randomci, ci[randomci]);
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
