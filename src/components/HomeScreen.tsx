@@ -62,6 +62,7 @@ export const HomeScreen = () => {
           <Typography
             component="div"
             align="center"
+            ///still figuring out
             style={{ height: "100vh" }}
           >
             {/* Toolbar component being imported from the other screen */}
