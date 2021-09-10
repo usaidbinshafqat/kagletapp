@@ -7,13 +7,18 @@ body {
 .heading {
   font-family: 'Nunito';
   font-weight: 600;
+  font-size: clamp(10px, 4.9vw, 28px);
 }
 
 .subheading {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  /* font-size: 3.9vw; */
+  font-size: clamp(10px, 4vw, 20px);
+  /* max-block-size: 5vw; */
 
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -143,7 +143,7 @@ export const Login = () => {
     if (emailRef.current!.value.includes("@kzoo.edu")) {
       signIn();
       handleToggle();
-      handleClick({ vertical: "bottom", horizontal: "center" });
+      handleClick({ vertical: "top", horizontal: "center" });
     } else {
       //handleClickOpen();
       handleError();
@@ -292,8 +292,8 @@ export const Login = () => {
           <div>
             {buttons}
             <Snackbar
-              autoHideDuration={100000000}
-              anchorOrigin={{ vertical, horizontal }}
+              //autoHideDuration={100000000}
+              anchorOrigin={{ vertical: "top", horizontal }}
               open={open}
               onClose={handleClose}
               message="Link successfully sent"
