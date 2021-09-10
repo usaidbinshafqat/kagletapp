@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Card, CardMedia, Icon } from "@material-ui/core";
+import { Typography, Card, CardMedia, Icon, Button, IconButton } from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -17,6 +17,9 @@ import partyImage2 from "../logos/partyImage2.png";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import { AccountBox, CalendarToday, CalendarViewDayRounded } from "@material-ui/icons";
+import { Calendar } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,30 +35,49 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "right",
     justifyContent: "center",
   },
+  leftAlignText: {
+    textAlign: "left",
+    justifyContent: "center",
+    paddingLeft: 10,
+  },
   cardLooks: {
     borderRadius: 12,
   },
   cardTitle: {
-    fontSize: 30,
+    //fontSize: 20,
     paddingLeft: 10,
   },
   cardSubtitle: {
-    fontSize: 20,
-    paddingLeft: 103,
+    //fontSize: 17,
+    paddingLeft: 5,
   },
   media: {
     height: 170,
   },
   titleIcon: {
     paddingTop: 7,
-    paddingLeft: 70,
+    //paddingLeft: 70,
   },
   locationSubtitle: {
-    fontSize: 23,
+    //fontSize: 17,
     paddingLeft: 10,
   },
   locationSubtitleIcon: {
-    paddingLeft: 70,
+    //paddingLeft: 70,
+  },
+  PeopleIcon: {
+    //paddingLeft: 7,
+  },
+  button: {
+    margin: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      minWidth: 32,
+      paddingLeft: 8,
+      paddingRight: 8,
+      "& .MuiButton-startIcon": {
+        margin: 0
+      }
+    }
   },
 }));
 
@@ -132,6 +154,10 @@ function chooseIcon(type?: string) {
   return typeIcon;
 }
 
+const styleForIcons = () => { 
+  return "className={classes.titleIcon}";
+}
+
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
   return (
@@ -158,11 +184,12 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             direction="row-reverse"
             justifyContent="flex-end"
             alignItems="center"
+            wrap='nowrap'
           >
-            <Grid item className={`${classes.cardTitle} ${"heading"}`}>
+            <Grid item className={`${classes.cardTitle} ${"heading"}`}> 
               {props.name}
             </Grid>
-            <Grid item className={classes.titleIcon}>
+            <Grid item className={`${classes.titleIcon} ${"subheading"}`}>
               {chooseIcon(props.type)}
             </Grid>
           </Grid>
@@ -173,6 +200,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             direction="row-reverse"
             justifyContent="flex-end"
             alignItems="center"
+            wrap='nowrap'
           >
             <Grid
               item
@@ -187,29 +215,31 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             direction="row-reverse"
             justifyContent="flex-end"
             alignItems="center"
+            wrap='nowrap'
           >
             <Grid item className={`${classes.cardSubtitle} ${"subheading"}`}>
               {props.time}
             </Grid>
           </Grid>
-        </CardContent>
-        <CardActions>
+
+          &nbsp;
+
           <Grid
             container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="flex-end"
+            direction="row-reverse"
+            justifyContent="flex-end"
+            alignItems="center"
+            wrap='nowrap'
           >
-            <Grid
-              item
-              xs={12}
-              alignItems="flex-end"
-              className={classes.rightAlignText}
-            >
-              <Typography>{props.email}</Typography>
+              <Grid item className={`${classes.leftAlignText} ${"subheading"}`}>
+              {/* <EmojiPeopleIcon className={classes.PeopleIcon}/> */}
+              {props.email}
             </Grid>
+              <AccountBox className={classes.PeopleIcon}/> 
           </Grid>
-        </CardActions>
+
+        </CardContent>
+        {/* Card actions goes here */}
       </Card>
       &nbsp;
     </div>
