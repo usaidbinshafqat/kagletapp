@@ -117,6 +117,7 @@ export const PostButton = () => {
         eventType: eventType,
         eventTime: eventTime?.getTime(),
         hostEmail: loggedInUserEmail,
+        rsvp: [""],
       })
       .catch(alert);
   };
