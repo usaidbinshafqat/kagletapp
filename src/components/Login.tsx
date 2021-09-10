@@ -180,8 +180,9 @@ export const Login = () => {
   };
 
   //enter key check
-  const handleKeyPress = (event: { key: string }) => {
-    if (event.key === "Enter") {
+  const handleKeyPress = (event: any)  => {
+    event.preventDefault();
+    if (event.which === 13 || event.key === "Enter" || event.key === "Go" ) {
       validity();
     }
   };
