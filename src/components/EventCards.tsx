@@ -80,7 +80,8 @@ export interface EventDetails {
   location?: string;
   time?: string;
   email?: string;
-  rsvp?: string;
+  rsvpList?: any;
+  eventID?: string;
 }
 
 function randomGenerator() {
@@ -94,7 +95,6 @@ function randomGenerator() {
 function chooseImage(type?: string) {
   let imageName = "";
   let random = Math.round(randomGenerator());
-  console.log(Math.round(random));
   if (type === "Study Sesh") {
     if (random === 0) {
       imageName = studyImage1;
@@ -212,7 +212,11 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
         </CardContent>
         {/* Card actions goes here */}
         <CardActions>
-          <PlusOneButton></PlusOneButton>
+          <PlusOneButton
+            eventID={props.eventID}
+            rsvpList={props.rsvpList}
+          ></PlusOneButton>
+          {props.rsvpList.length}
         </CardActions>
       </Card>
       &nbsp;

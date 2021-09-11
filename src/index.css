@@ -8,6 +8,7 @@ body {
   font-family: 'Nunito';
   font-weight: 600;
   font-size: clamp(10px, 4.9vw, 28px);
+  text-align: left;
 }
 
 .subheading {

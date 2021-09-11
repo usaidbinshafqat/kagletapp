@@ -1,46 +1,51 @@
-import { Button } from "@material-ui/core";
+import { Button, SnackbarOrigin, Typography } from "@material-ui/core";
 import firebase from "firebase";
+import React, { useState, KeyboardEvent, KeyboardEventHandler } from "react";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 
-export interface EventDetails {
-  email?: string;
-  rsvpCount?: string;
+export interface RsvpDetails {
+  eventID?: string;
+  rsvpList?: any;
 }
 
-// function AddOne(currentNumber: number) {
-//   currentNumber = currentNumber + 1;
-//   return currentNumber
-// }
 const database = firebase.database();
 
-var array: any[];
-function UIDarray() {
+export interface State extends SnackbarOrigin {
+  open: boolean;
+}
+
+function UIDarray(eventID?: string, rsvpList?: any) {
+  console.log(eventID);
   const auth = firebase.auth();
   const user = auth.currentUser;
+  console.log(typeof rsvpList);
+
   if (user) {
-    if (!array.includes(user.uid)) {
-      array.push(user.uid);
-      console.log(user.uid);
-      database.ref("events/").set({
-        rsvp: array,
-      });
-      //put in ref to event ID
+    if (!rsvpList.includes(user.uid)) {
+      rsvpList.push(user.uid);
+      PushFirebase(rsvpList, eventID);
+    } else {
+      // snackbar shows up saying you're already going
+      // to the event, add to calendar here
+      console.log("Nah");
     }
-  } else {
-    // snackbar shows up saying you're already going
-    // to the event, add to calendar here
-    console.log("Nah");
   }
 }
 
-const PushFirebase = () => {
-  database.ref("events").push({
-    rsvpCount: array,
+function PushFirebase(rsvpList?: any, eventID?: string) {
+  database.ref("events/" + eventID + "/").update({
+    rsvpList: rsvpList,
   });
-};
+}
 
-// const getCount = () => {
-// }
-
-export const PlusOneButton = () => {
-  return <Button onClick={UIDarray}>RSVP</Button>;
+export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
+  return (
+    <Button
+      onClick={() => {
+        UIDarray(props.eventID, props.rsvpList);
+      }}
+    >
+      RSVP
+    </Button>
+  );
 };

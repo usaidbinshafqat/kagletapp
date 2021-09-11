@@ -62,7 +62,8 @@ export const EventCardContainer = () => {
           location={event.eventLocation}
           type={event.eventType}
           email={event.hostEmail}
-          rsvp={event.rsvpCount}
+          rsvpList={event.rsvpList}
+          eventID={event.id}
         />
       ))}
     </>
