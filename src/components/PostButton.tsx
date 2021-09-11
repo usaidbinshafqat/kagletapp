@@ -108,18 +108,24 @@ export const PostButton = () => {
   const [eventTime, setEventTime] = React.useState<Date | null>(new Date());
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const [textValid, setTextValid] = React.useState(false);
-  const Push = () => {
-    database
-      .ref("events")
-      .push({
-        eventName: eventName,
-        eventLocation: eventLocation,
-        eventType: eventType,
-        eventTime: eventTime?.getTime(),
-        hostEmail: loggedInUserEmail,
-      })
-      .catch(alert);
-  };
+
+  function PushData() {
+    const newPostKey = database.ref().child("events").push().key;
+    var postData = {
+      id: newPostKey,
+      eventName: eventName,
+      eventLocation: eventLocation,
+      eventType: eventType,
+      eventTime: eventTime?.getTime(),
+      hostEmail: loggedInUserEmail,
+      rsvpList: [loggedInUserEmail],
+    };
+
+    var updates: any = {};
+    updates["events/" + newPostKey] = postData;
+
+    console.log(firebase.database().ref().update(updates));
+  }
 
   const handleDropDownChange = (
     event: React.ChangeEvent<{ value: unknown }>
@@ -192,7 +198,7 @@ export const PostButton = () => {
   }
 
   function postButton() {
-    Push();
+    PushData();
     refreshPage();
   }
 
