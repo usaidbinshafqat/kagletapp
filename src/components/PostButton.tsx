@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 20,
     left: "auto",
     position: "fixed",
+    borderRadius: 20,
   },
   locationField: {
     minWidth: 150,
@@ -224,6 +225,7 @@ export const PostButton = () => {
             <Fab
               color="primary"
               variant="extended"
+              //variant="outlined"
               className={classes.fabicon}
               {...bindTrigger(popupState)}
             >

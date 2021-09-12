@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardMedia } from "@material-ui/core";
+import { Card, CardMedia, Collapse, IconButton, Typography } from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -18,6 +18,10 @@ import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 import { AccountBox } from "@material-ui/icons";
 import { PlusOneButton } from "./PlusOneButton";
+import { WithComments } from "./WithComments"
+import clsx from 'clsx';
+
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +61,16 @@ const useStyles = makeStyles((theme) => ({
   },
   locationSubtitle: {
     paddingLeft: 10,
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
   },
 }));
 
@@ -136,6 +150,12 @@ function chooseIcon(type?: string) {
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
   return (
     // holding the cards in this div, using useStyles from up top
     <div className={classes.cardcomponent}>
@@ -212,12 +232,38 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
         </CardContent>
         {/* Card actions goes here */}
         <CardActions>
-          <PlusOneButton
-            eventID={props.eventID}
-            rsvpList={props.rsvpList}
-          ></PlusOneButton>
-          {props.rsvpList.length}
+            <PlusOneButton
+              eventID={props.eventID}
+              rsvpList={props.rsvpList}
+            ></PlusOneButton>
+            &nbsp;
+            &nbsp;
+            {props.rsvpList.length}
+
+            {/* <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton> */}
         </CardActions>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+           <Typography paragraph>
+              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
+              heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
+              browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
+              and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
+              pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
+              saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+            </Typography> 
+            <WithComments></WithComments>
+        </CardContent>
+      </Collapse> */}
       </Card>
       &nbsp;
     </div>
