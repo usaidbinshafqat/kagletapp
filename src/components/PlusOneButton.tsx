@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
 import firebase from "firebase";
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 import React, { useState, KeyboardEvent, KeyboardEventHandler } from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import {
@@ -30,8 +30,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 20,
     padding: "0.25rem 2rem",
   },
+  rsvpCount: {
+    paddingBottom: 1,
+  },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#EE6C4D",
+      light: "#ff9b79",
+      dark: "#b53a22",
+    },
+    secondary: {
+      main: "#4C5760",
+      light: "#78848d",
+      dark: "#242e36",
+    },
+  },
+});
 
 export interface RsvpDetails {
   eventID?: string;
@@ -64,7 +81,6 @@ function UIDarray(eventID?: string, rsvpList?: any) {
       check = true;
       // snackbar shows up saying you're already going
       // to the event, add to calendar here
-      console.log("Nah");
     }
   }
 }
@@ -76,12 +92,11 @@ function PushFirebase(rsvpList?: any, eventID?: string) {
 }
 
 export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
-
   const classes = useStyles();
   const [submitDisabled, setSubmitDisabled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
-  
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -89,7 +104,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   const handleClick1 = () => {
     setOpen1(true);
   };
-  
+
   // const [state, setState] = React.useState<State>({
   //   open: false,
   //   vertical: "bottom",
@@ -105,7 +120,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   // };
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -127,19 +142,20 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     },
   });
 
-  function handleDisable () {
+  function handleDisable() {
     setSubmitDisabled(true);
-  };
-  
+  }
+
   function validity() {
     UIDarray(props.eventID, props.rsvpList);
     console.log(check);
-    if (check === false){
+    if (check === false) {
       handleClick();
       handleDisable();
-      {props.rsvpList.length = props.rsvpList.length + 1}
-    }
-    else{
+      {
+        props.rsvpList.length = props.rsvpList.length + 1;
+      }
+    } else {
       handleClick1();
       handleDisable();
     }
@@ -152,8 +168,11 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
           variant="contained"
           disabled={submitDisabled}
           className={classes.button}
+          size="small"
+          color="primary"
           onClick={() => {
-            validity()}}
+            validity();
+          }}
         >
           RSVP
         </Button>
@@ -162,7 +181,8 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   );
 
   return (
-    <div >
+    <div>
+      <ThemeProvider theme={theme}>
         <Typography component="div" align="center">
           <div>
             {buttons}
@@ -174,8 +194,8 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
               //message="Link successfully sent"
               //key={vertical + horizontal}
             >
-              <Alert onClose={handleClose} severity="info">
-                RSVP successful! 👍
+              <Alert onClose={handleClose} severity="success">
+                You're on the list! 👍
               </Alert>
             </Snackbar>
 
@@ -193,6 +213,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
             </Snackbar>
           </div>
         </Typography>
+      </ThemeProvider>
     </div>
   );
 };

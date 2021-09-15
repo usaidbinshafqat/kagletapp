@@ -16,6 +16,7 @@ body {
   font-weight: 300;
   /* font-size: 3.9vw; */
   font-size: clamp(10px, 4vw, 20px);
+  text-align: left;
   /* max-block-size: 5vw; */
 
 }

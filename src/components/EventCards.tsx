@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardMedia, Collapse, IconButton, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardMedia,
+  Collapse,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -18,10 +24,10 @@ import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 import { AccountBox } from "@material-ui/icons";
 import { PlusOneButton } from "./PlusOneButton";
-import { WithComments } from "./WithComments"
-import clsx from 'clsx';
+import { WithComments } from "./WithComments";
+import clsx from "clsx";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,14 +69,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
+  },
+  rsvpCount: {
+    paddingBottom: 5,
   },
 }));
 
@@ -232,15 +241,15 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
         </CardContent>
         {/* Card actions goes here */}
         <CardActions>
-            <PlusOneButton
-              eventID={props.eventID}
-              rsvpList={props.rsvpList}
-            ></PlusOneButton>
-            &nbsp;
-            &nbsp;
+          <PlusOneButton
+            eventID={props.eventID}
+            rsvpList={props.rsvpList}
+          ></PlusOneButton>
+          &nbsp; &nbsp;
+          <Grid item className={classes.rsvpCount}>
             {props.rsvpList.length}
-
-            {/* <IconButton
+          </Grid>
+          {/* <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
               })}
