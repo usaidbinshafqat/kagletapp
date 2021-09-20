@@ -3,16 +3,17 @@ import firebase from "firebase";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import { makeStyles } from "@material-ui/styles";
 
-function GetUserEmail() {
-  const auth = firebase.auth();
-  const user = auth.currentUser;
-  if (user != null) {
-    // var email: any = "";
-    return user.email;
-  } else {
-    return "Not Logged In";
-  }
-}
+// function GetUserEmail() {
+//   const auth = firebase.auth();
+//   const user = auth.currentUser;
+//   if (user) {
+//     console.log(user.email);
+//     return user.email;
+//   } else {
+//     console.log("not logged in");
+//     return "Not Logged In";
+//   }
+// }
 
 const useStyles = makeStyles((theme) => ({
   userEmail: {
@@ -27,6 +28,17 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignedInUserEmail = () => {
   const classes = useStyles();
+  const auth = firebase.auth();
+  const user = auth.currentUser;
+  if (user) {
+    console.log(user.email);
+    var email: any;
+    email = user.email;
+  } else {
+    console.log("Not Logged In");
+    email = "Not Logged In";
+  }
+
   return (
     <Grid
       container
@@ -36,7 +48,7 @@ export const SignedInUserEmail = () => {
       className={classes.gridContainerEmailIcon}
     >
       <Grid item>
-        <Typography className={classes.userEmail}>{GetUserEmail}</Typography>
+        <Typography className={classes.userEmail}>{email}</Typography>
       </Grid>
       <Grid item>
         <AccountBoxRoundedIcon />
