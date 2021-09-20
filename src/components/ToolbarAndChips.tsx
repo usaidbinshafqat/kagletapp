@@ -22,6 +22,7 @@ import {
 import React from "react";
 import { auth } from "../firebaseSetup";
 import { createTheme } from "@material-ui/core/styles";
+import { SignedInUserEmail } from "./signedInUserEmail";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
@@ -33,14 +34,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-    color: "red",
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
-    marginTop: theme.spacing(3),
     borderRadius: 20,
-    padding: "0.25rem 2rem",
     borderColor: "#becddc",
+    alignSelf: "center",
   },
 
   menuButton: {
@@ -250,6 +249,7 @@ export const ToolbarAndChips = () => {
                       className={classes.accountIcon}
                     ></AccountCircle>
                   </IconButton>
+
                   <Popover
                     {...bindPopover(popupState)}
                     anchorOrigin={{
@@ -264,10 +264,12 @@ export const ToolbarAndChips = () => {
                     <Box p={2}>
                       <Typography>
                         <ThemeProvider theme={theme}>
+                          <SignedInUserEmail></SignedInUserEmail>
                           <Button
                             variant="contained"
                             color="secondary"
                             onClick={signOut}
+                            className={classes.button}
                           >
                             Logout
                           </Button>
