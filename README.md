@@ -3,7 +3,7 @@ An app made by K students, for K students.
 
 
 ## Why? 
-Socializing in COVID was hard. For all of us. Kaglet is helping K college students meet up again! 
+Socializing during COVID was hard. For all of us. Kaglet is helping K college students meet up again! 
 
 ## What?  
 An event app! Find or post about events on and around campus. 
