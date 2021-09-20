@@ -180,9 +180,9 @@ export const Login = () => {
   };
 
   //enter key check
-  const handleKeyPress = (event: any)  => {
+  const handleKeyPress = (event: any) => {
     event.preventDefault();
-    if (event.which === 13 || event.key === "Enter" || event.key === "Go" ) {
+    if (event.which === 13 || event.key === "Enter" || event.key === "Go") {
       validity();
     }
   };
@@ -283,7 +283,7 @@ export const Login = () => {
                     inputRef={emailRef}
                     className={classes.textfield}
                     helperText="Please use your @kzoo.edu school email."
-                    onKeyPress={handleKeyPress}
+                    // onKeyPress={handleKeyPress}
                     onChange={handleEmailInput}
                   />
                 </ThemeProvider>

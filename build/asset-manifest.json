@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.eaa5fb48.chunk.css",
-    "main.js": "/static/js/main.75d3f977.chunk.js",
-    "main.js.map": "/static/js/main.75d3f977.chunk.js.map",
+    "main.js": "/static/js/main.4d04e015.chunk.js",
+    "main.js.map": "/static/js/main.4d04e015.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.4554dedd.js",
     "runtime-main.js.map": "/static/js/runtime-main.4554dedd.js.map",
     "static/js/2.bad4ede0.chunk.js": "/static/js/2.bad4ede0.chunk.js",
@@ -16,17 +16,20 @@
     "static/media/index.css": "/static/media/Nunito-Bold.70941b69.woff",
     "static/media/campusImage1.c1c2f219.png": "/static/media/campusImage1.c1c2f219.png",
     "static/media/campusImage2.91f3a786.png": "/static/media/campusImage2.91f3a786.png",
+    "static/media/campusImage3.b8d12bb7.png": "/static/media/campusImage3.b8d12bb7.png",
     "static/media/favicon.0d794a5d.png": "/static/media/favicon.0d794a5d.png",
     "static/media/logo.53ca20cd.png": "/static/media/logo.53ca20cd.png",
     "static/media/partyImage1.59010835.png": "/static/media/partyImage1.59010835.png",
     "static/media/partyImage2.9159f47b.png": "/static/media/partyImage2.9159f47b.png",
+    "static/media/partyImage3.9874ef6e.png": "/static/media/partyImage3.9874ef6e.png",
     "static/media/studyImage1.b669a69c.png": "/static/media/studyImage1.b669a69c.png",
-    "static/media/studyImage2.54d40e84.png": "/static/media/studyImage2.54d40e84.png"
+    "static/media/studyImage2.54d40e84.png": "/static/media/studyImage2.54d40e84.png",
+    "static/media/studyImage3.65de07e1.png": "/static/media/studyImage3.65de07e1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4554dedd.js",
     "static/js/2.bad4ede0.chunk.js",
     "static/css/main.eaa5fb48.chunk.css",
-    "static/js/main.75d3f977.chunk.js"
+    "static/js/main.4d04e015.chunk.js"
   ]
 }

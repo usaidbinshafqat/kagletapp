@@ -16,9 +16,11 @@ import partyImage1 from "../logos/partyImage1.png";
 import campusImage1 from "../logos/campusImage1.png";
 import studyImage1 from "../logos/studyImage1.png";
 import studyImage2 from "../logos/studyImage2.png";
+import studyImage3 from "../logos/studyImage3.png";
 import campusImage2 from "../logos/campusImage2.png";
+import campusImage3 from "../logos/campusImage3.png";
 import partyImage2 from "../logos/partyImage2.png";
-
+import partyImage3 from "../logos/partyImage3.png";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
@@ -109,7 +111,7 @@ export interface EventDetails {
 
 function randomGenerator() {
   const min = 0;
-  const max = 1;
+  const max = 2;
   const random = min + Math.random() * (max - min);
 
   return random;
@@ -121,22 +123,28 @@ function chooseImage(type?: string) {
   if (type === "Study Sesh") {
     if (random === 0) {
       imageName = studyImage1;
-    } else {
+    } else if (random === 1) {
       imageName = studyImage2;
+    } else {
+      imageName = studyImage3;
     }
   }
   if (type === "House Party") {
     if (random === 0) {
       imageName = partyImage1;
-    } else {
+    } else if (random === 1) {
       imageName = partyImage2;
+    } else {
+      imageName = partyImage3;
     }
   }
   if (type === "Campus Event") {
     if (random === 0) {
       imageName = campusImage1;
-    } else {
+    } else if (random === 1) {
       imageName = campusImage2;
+    } else {
+      imageName = campusImage3;
     }
   }
 
@@ -155,6 +163,10 @@ function chooseIcon(type?: string) {
     typeIcon = <SchoolRoundedIcon />;
   }
   return typeIcon;
+}
+function increment(rsvpListLength: number) {
+  let counter = rsvpListLength + 1;
+  return counter;
 }
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
