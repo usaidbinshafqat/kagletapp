@@ -2,15 +2,17 @@
 An app made by K students, for K students.
 
 
-## Why? 
-Socializing during COVID was hard. For all of us. Kaglet is helping K college students meet up again! 
 
 ## What?  
 An event app! Find or post about events on and around campus. 
 
-House Party? Get it started here!
-Campus Event? Ask people to join!
-Study Session? Someone probably wants to join! 
+House Party? Get the pregame started here!
+Campus Event? Attract an audience!
+Study Session? Ace those classes together!
+
+
+## Why? 
+Socializing during COVID was hard. For all of us. Kaglet is helping K college students meet up again! 
 
 ### How?
 
