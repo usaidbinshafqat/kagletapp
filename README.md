@@ -20,4 +20,4 @@ Just login using your K email, sign in using the link and you're in! Post or vie
 
 ## What next? 
 
-We will keep rolling out updates with new features. Leave us a feedback at [feedback@kaglet.app](mailto: feedback@kaglet.app)! Keep checking kaglet.app for more. 
+We will keep rolling out updates with new features. Leave us a feedback at feedback@kaglet.app! Keep checking kaglet.app for more. 
