@@ -2,6 +2,8 @@ import { Grid, Typography } from "@material-ui/core";
 import firebase from "firebase";
 import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import { makeStyles } from "@material-ui/styles";
+import Avatar from "@mui/material/Avatar";
+import { deepOrange } from "@mui/material/colors";
 
 // function GetUserEmail() {
 //   const auth = firebase.auth();
@@ -47,11 +49,24 @@ export const SignedInUserEmail = () => {
       alignItems="center"
       className={classes.gridContainerEmailIcon}
     >
-      <Grid item>
-        <Typography className={classes.userEmail}>{email}</Typography>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Avatar sx={{ bgcolor: deepOrange[500], width: 60, height: 60 }}>
+          K
+        </Avatar>
+        &nbsp;
       </Grid>
-      <Grid item>
-        <AccountBoxRoundedIcon />
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Typography className={classes.userEmail}>{email}</Typography>
       </Grid>
     </Grid>
   );

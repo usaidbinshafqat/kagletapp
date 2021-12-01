@@ -23,6 +23,9 @@ import React from "react";
 import { auth } from "../firebaseSetup";
 import { createTheme } from "@material-ui/core/styles";
 import { SignedInUserEmail } from "./signedInUserEmail";
+import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
+import Divider from "@mui/material/Divider";
+import { Link } from "@mui/material";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
@@ -40,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 20,
     borderColor: "#becddc",
     alignSelf: "center",
+    textTransform: "none",
   },
 
   menuButton: {
@@ -265,14 +269,49 @@ export const ToolbarAndChips = () => {
                       <Typography>
                         <ThemeProvider theme={theme}>
                           <SignedInUserEmail></SignedInUserEmail>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={signOut}
-                            className={classes.button}
+                          <Box m={1.5} pt={1}>
+                            <Divider />
+                          </Box>
+                          <Grid
+                            container
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="center"
                           >
-                            Logout
-                          </Button>
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={signOut}
+                              className={classes.button}
+                              startIcon={<MeetingRoomRoundedIcon />}
+                            >
+                              Logout
+                            </Button>
+                          </Grid>
+                          <Box m={1} pt={1}>
+                            <Divider />
+                          </Box>
+                          <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <Grid item>
+                              <Link href="www.google.com" color="#555555">
+                                Feedback
+                              </Link>
+                            </Grid>
+                            <Grid item>&ensp;&middot;&ensp;</Grid>
+                            <Grid item>
+                              <Link
+                                href="www.usaidbinshafqat.com"
+                                color="#555555"
+                              >
+                                About Us
+                              </Link>
+                            </Grid>
+                          </Grid>
                         </ThemeProvider>
                       </Typography>
                     </Box>
