@@ -55,8 +55,8 @@ export const SignedInUserEmail = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar sx={{ bgcolor: deepOrange[500], width: 60, height: 60 }}>
-          K
+        <Avatar sx={{ bgcolor: "#EE6C4D", width: 80, height: 80 }}>
+          <h1>KC</h1>
         </Avatar>
         &nbsp;
       </Grid>

@@ -5,7 +5,12 @@ import {
   Popover,
   Button,
   Avatar,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
+import { Icon } from "@iconify/react";
+
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Toolbar } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -25,7 +30,8 @@ import { createTheme } from "@material-ui/core/styles";
 import { SignedInUserEmail } from "./signedInUserEmail";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import Divider from "@mui/material/Divider";
-import { Link } from "@mui/material";
+import { Link, Menu } from "@mui/material";
+import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
 // import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
@@ -149,12 +155,28 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 66,
     paddingTop: 5,
   },
+  linkButton: {
+    textTransform: "none",
+  },
 }));
 
 export const ToolbarAndChips = () => {
   const classes = useStyles();
   //this will be called later.
 
+  //code to deal with opening links "dropdown"
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  //end dropdown code
+
+  //signout function
   function signOut() {
     auth
       .signOut()
@@ -166,9 +188,12 @@ export const ToolbarAndChips = () => {
       });
   }
 
+  //refreshes page after logging out so user cannot access stuff after logging out
   function refreshPage() {
     window.location.reload();
   }
+
+  //to be implented later: chips with event types
 
   // const [flag1, setFlag1] = React.useState(true);
   // const [flag2, setFlag2] = React.useState(true);
@@ -268,10 +293,9 @@ export const ToolbarAndChips = () => {
                     <Box p={2}>
                       <Typography>
                         <ThemeProvider theme={theme}>
+                          {/* Here comes the first name extracted from the email */}
                           <SignedInUserEmail></SignedInUserEmail>
-                          <Box m={1.5} pt={1}>
-                            <Divider />
-                          </Box>
+                          <Box m={6} pt={1}></Box>
                           <Grid
                             container
                             direction="column"
@@ -279,8 +303,8 @@ export const ToolbarAndChips = () => {
                             alignItems="center"
                           >
                             <Button
-                              variant="contained"
-                              color="secondary"
+                              variant="outlined"
+                              color="primary"
                               onClick={signOut}
                               className={classes.button}
                               startIcon={<MeetingRoomRoundedIcon />}
@@ -288,9 +312,7 @@ export const ToolbarAndChips = () => {
                               Logout
                             </Button>
                           </Grid>
-                          <Box m={1} pt={1}>
-                            <Divider />
-                          </Box>
+                          <Box m={1} pt={0}></Box>
                           <Grid
                             container
                             direction="row"
@@ -298,19 +320,75 @@ export const ToolbarAndChips = () => {
                             alignItems="center"
                           >
                             <Grid item>
-                              <Link href="www.google.com" color="#555555">
+                              <Button
+                                id="basic-button"
+                                aria-controls="basic-menu"
+                                aria-haspopup="true"
+                                aria-expanded={open ? "true" : undefined}
+                                onClick={handleClick}
+                                className={classes.linkButton}
+                              >
                                 Feedback
-                              </Link>
+                                {/* </Link> */}
+                              </Button>
+
+                              <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                MenuListProps={{
+                                  "aria-labelledby": "basic-button",
+                                }}
+                              >
+                                <Link
+                                  href="mailto:suggestions@kaglet.app"
+                                  color="#555555"
+                                  underline="none"
+                                >
+                                  <MenuItem>
+                                    <Box m={0.5} pt={1}>
+                                      <BugReportRounded fontSize="small" />
+                                    </Box>
+                                    Bugs or Suggestions?
+                                  </MenuItem>
+                                </Link>
+                                <Link
+                                  href="mailto:help@kaglet.app"
+                                  color="#555555"
+                                  underline="none"
+                                >
+                                  <MenuItem>
+                                    <Box m={0.5} pt={1}>
+                                      <HelpOutlineRounded fontSize="small" />
+                                    </Box>
+                                    Need help?
+                                  </MenuItem>
+                                </Link>
+
+                                <Link
+                                  href="https://discord.link/KzooKaglet"
+                                  color="#555555"
+                                  underline="none"
+                                >
+                                  <MenuItem>
+                                    <Box m={0.5} pt={1}>
+                                      <Icon icon="akar-icons:discord-fill" />
+                                    </Box>
+                                    Join Our Discord!
+                                  </MenuItem>
+                                </Link>
+                              </Menu>
                             </Grid>
-                            <Grid item>&ensp;&middot;&ensp;</Grid>
+                            {/* <Grid item>&ensp;&middot;&ensp;</Grid>
                             <Grid item>
                               <Link
-                                href="www.usaidbinshafqat.com"
+                                href="https://usaidbinshafqat.com/"
                                 color="#555555"
                               >
                                 About Us
                               </Link>
-                            </Grid>
+                            </Grid> */}
                           </Grid>
                         </ThemeProvider>
                       </Typography>
