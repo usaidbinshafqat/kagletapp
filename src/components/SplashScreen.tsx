@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
-import MuiThemeProvider from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {

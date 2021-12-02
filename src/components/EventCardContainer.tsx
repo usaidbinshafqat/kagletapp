@@ -2,7 +2,7 @@ import firebase from "firebase";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { EventDetails, EventCards } from "./EventCards";
+import { EventCards } from "./EventCards";
 import moment from "moment";
 
 export const GetEventCards = () => {};

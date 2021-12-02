@@ -1,4 +1,4 @@
-import { FormControl, Grid, IconButton, Toolbar } from "@material-ui/core";
+import { Grid, IconButton, Toolbar } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import logo from "../logos/logo.png";
@@ -7,22 +7,16 @@ import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import { useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { auth } from "../firebaseSetup";
-import React, { useState, KeyboardEvent, KeyboardEventHandler } from "react";
+import React from "react";
 import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   makeStyles,
-  createStyles,
-  Theme,
   createTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 //defining the styles
 const useStyles = makeStyles((theme) => ({
@@ -151,7 +145,7 @@ export const Login = () => {
   }
 
   function checkValidity() {
-    if (emailRef.current!.value != "") {
+    if (emailRef.current!.value !== "") {
       setSubmitDisabled(false);
     }
   }
@@ -231,10 +225,10 @@ export const Login = () => {
     console.error(error);
   }
 
-  //this will be called later.
-  const signOut = async () => {
-    await auth.signOut();
-  };
+  // //this will be called later.
+  // const signOut = async () => {
+  //   await auth.signOut();
+  // };
 
   //redirects if the user is already logged in
   function redirectToHomepage() {

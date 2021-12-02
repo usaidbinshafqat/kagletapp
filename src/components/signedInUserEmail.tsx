@@ -1,9 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
 import firebase from "firebase";
-import AccountBoxRoundedIcon from "@material-ui/icons/AccountBoxRounded";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@mui/material/Avatar";
-import { deepOrange } from "@mui/material/colors";
 
 // function GetUserEmail() {
 //   const auth = firebase.auth();
@@ -26,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 10,
     paddingBottom: 5,
   },
+  typography: {
+    fontSize: 35,
+  },
 }));
 
 export const SignedInUserEmail = () => {
@@ -37,7 +38,6 @@ export const SignedInUserEmail = () => {
     var email: any;
     email = user.email;
   } else {
-    console.log("Not Logged In");
     email = "Not Logged In";
   }
 
@@ -56,7 +56,7 @@ export const SignedInUserEmail = () => {
         alignItems="center"
       >
         <Avatar sx={{ bgcolor: "#EE6C4D", width: 80, height: 80 }}>
-          <h1>KC</h1>
+          <Typography className={classes.typography}>KC</Typography>
         </Avatar>
         &nbsp;
       </Grid>

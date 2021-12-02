@@ -1,12 +1,11 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import firebase from "firebase";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import React, { useState, KeyboardEvent, KeyboardEventHandler } from "react";
+import React from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import {
   makeStyles,
-  createStyles,
   Theme,
   createTheme,
   ThemeProvider,
@@ -35,20 +34,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#EE6C4D",
-      light: "#ff9b79",
-      dark: "#b53a22",
-    },
-    secondary: {
-      main: "#4C5760",
-      light: "#78848d",
-      dark: "#242e36",
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#EE6C4D",
+//       light: "#ff9b79",
+//       dark: "#b53a22",
+//     },
+//     secondary: {
+//       main: "#4C5760",
+//       light: "#78848d",
+//       dark: "#242e36",
+//     },
+//   },
+// });
 
 export interface RsvpDetails {
   eventID?: string;
@@ -152,9 +151,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     if (check === false) {
       handleClick();
       handleDisable();
-      {
-        props.rsvpList.length = props.rsvpList.length + 1;
-      }
+      props.rsvpList.length = props.rsvpList.length + 1;
     } else {
       handleClick1();
       handleDisable();
