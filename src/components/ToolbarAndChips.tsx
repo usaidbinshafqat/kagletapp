@@ -6,8 +6,6 @@ import {
   Button,
   Avatar,
   MenuItem,
-  ListItemIcon,
-  ListItemText,
 } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 
@@ -19,17 +17,12 @@ import Grid from "@material-ui/core/Grid";
 import logo from "../logos/favicon.png";
 import logoText from "../logos/HomeHeader.png";
 import PopupState, { bindPopover } from "material-ui-popup-state";
-import {
-  usePopupState,
-  bindTrigger,
-  bindMenu,
-} from "material-ui-popup-state/hooks";
+import { bindTrigger } from "material-ui-popup-state/hooks";
 import React from "react";
 import { auth } from "../firebaseSetup";
 import { createTheme } from "@material-ui/core/styles";
 import { SignedInUserEmail } from "./signedInUserEmail";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
-import Divider from "@mui/material/Divider";
 import { Link, Menu } from "@mui/material";
 import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
 
@@ -226,20 +219,6 @@ export const ToolbarAndChips = () => {
         dark: "#242e36",
       },
     },
-    // typography: {
-    //   h1: {
-    //     fontFamily: "Nunito",
-    //     fontWeight: 700,
-    //     fontStyle: "bold",
-    //   },
-    // },
-    // overrides: {
-    //   MuiCssBaseline: {
-    //     "@global": {
-    //       "@font-face": [nunito],
-    //     },
-    //   },
-    // },
   });
 
   return (
@@ -329,7 +308,6 @@ export const ToolbarAndChips = () => {
                                 className={classes.linkButton}
                               >
                                 Feedback
-                                {/* </Link> */}
                               </Button>
 
                               <Menu

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  Collapse,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { Card, CardMedia } from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -26,10 +20,6 @@ import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 import { AccountBox } from "@material-ui/icons";
 import { PlusOneButton } from "./PlusOneButton";
-import { WithComments } from "./WithComments";
-import clsx from "clsx";
-
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -164,19 +154,10 @@ function chooseIcon(type?: string) {
   }
   return typeIcon;
 }
-function increment(rsvpListLength: number) {
-  let counter = rsvpListLength + 1;
-  return counter;
-}
 
 export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
 
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   return (
     // holding the cards in this div, using useStyles from up top
     <div className={classes.cardcomponent}>

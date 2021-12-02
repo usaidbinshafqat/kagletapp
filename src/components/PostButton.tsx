@@ -21,9 +21,9 @@ import { IconButton, InputAdornment } from "@material-ui/core";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
 
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+// import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import Icon from "@material-ui/core/Icon";
-import { useDebugValue } from "react";
+//import { useDebugValue } from "react";
 import { createTheme } from "@material-ui/core/styles";
 
 export interface EventDetails {
@@ -108,7 +108,6 @@ export const PostButton = () => {
   const [eventType, setEventType] = React.useState("");
   const [eventTime, setEventTime] = React.useState<Date | null>(new Date());
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const [textValid, setTextValid] = React.useState(false);
 
   function PushData() {
     const newPostKey = database.ref().child("events").push().key;
@@ -146,15 +145,6 @@ export const PostButton = () => {
     checkValidity();
   };
 
-  const handleEventNameInput1 = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    if (eventName == "") {
-      setEventName(event.target.value as string);
-      checkValidity();
-    }
-  };
-
   const handleEventLocationInput = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -183,9 +173,9 @@ export const PostButton = () => {
 
   function checkValidity() {
     if (
-      eventName != "" &&
-      eventLocation != "" &&
-      eventType != "" &&
+      eventName !== "" &&
+      eventLocation !== "" &&
+      eventType !== "" &&
       eventTime != null
     ) {
       setSubmitDisabled(false);
@@ -201,19 +191,6 @@ export const PostButton = () => {
   function postButton() {
     PushData();
     refreshPage();
-  }
-
-  function handleValidation(this: any) {
-    const { eventName, eventLocation, eventType, eventTime } = this.state;
-    let error = "";
-    let formIsValid = true;
-    if (!eventName || !eventLocation || !eventType || !eventTime) {
-      formIsValid = false;
-      error = "Input fields cannot be empty";
-    }
-
-    this.setState({ error: error });
-    return formIsValid;
   }
 
   return (
