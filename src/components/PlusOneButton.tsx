@@ -24,10 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1.1),
     marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(-1),
     borderRadius: 20,
-    padding: "0.25rem 2rem",
+    padding: "0.5rem 0.8rem",
+    textTransform: "none",
   },
   rsvpCount: {
     paddingBottom: 1,
@@ -162,7 +165,6 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <Button
-          variant="contained"
           disabled={submitDisabled}
           className={classes.button}
           size="small"
@@ -171,7 +173,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
             validity();
           }}
         >
-          RSVP
+          I'll join! 😁
         </Button>
       </ThemeProvider>
     </React.Fragment>

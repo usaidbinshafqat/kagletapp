@@ -240,7 +240,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
           ></PlusOneButton>
           &nbsp; &nbsp;
           <Grid item className={classes.rsvpCount}>
-            {props.rsvpList.length}
+            {props.rsvpList.length} attending
           </Grid>
           {/* <IconButton
               className={clsx(classes.expand, {

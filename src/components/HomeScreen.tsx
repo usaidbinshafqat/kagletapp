@@ -1,8 +1,6 @@
-import {
-  createTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+
 import Grid from "@material-ui/core/Grid";
 import { PostButton } from "./PostButton";
 import { Typography } from "@material-ui/core";
@@ -33,6 +31,8 @@ const theme = createTheme({
     },
   },
 });
+
+const darkTheme = createTheme({ palette: { mode: "dark" } });
 
 //homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
 export const HomeScreen = () => {
