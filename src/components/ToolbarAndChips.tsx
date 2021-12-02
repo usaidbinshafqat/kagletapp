@@ -6,6 +6,7 @@ import {
   Button,
   Avatar,
   MenuItem,
+  Paper,
 } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 
@@ -23,12 +24,18 @@ import { auth } from "../firebaseSetup";
 import { createTheme } from "@material-ui/core/styles";
 import { SignedInUserEmail } from "./signedInUserEmail";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
-import { Link, Menu } from "@mui/material";
-import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
+import { Link, Menu, styled } from "@mui/material";
+import {
+  BugReportRounded,
+  HelpOutlineRounded,
+  LocalBar,
+} from "@material-ui/icons";
+import Stack from "@mui/material/Stack";
 
-// import LocalBarIcon from "@material-ui/icons/LocalBar";
-// import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-// import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import LocalBarIcon from "@material-ui/icons/LocalBar";
+import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import Slide from "@mui/material/Slide";
 // import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   toolbar: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    backgroundColor: "#ffffff",
+  },
+  secondToolobar: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     backgroundColor: "#ffffff",
@@ -151,6 +163,24 @@ const useStyles = makeStyles((theme) => ({
   linkButton: {
     textTransform: "none",
   },
+  chips: {
+    maxWidth: "125rem",
+    maxHeight: "400rem",
+    minWidth: "10rem",
+    minHeight: "32rem",
+  },
+  buttonChips: {
+    textTransform: "none",
+    borderRadius: 60,
+    height: 160,
+  },
+}));
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
 }));
 
 export const ToolbarAndChips = () => {
@@ -200,12 +230,6 @@ export const ToolbarAndChips = () => {
   // const handleClickParty = () => {
   //   setFlag3(!flag3);
   // };
-  // const nunito = {
-  //   fontFamily: "Nunito",
-  //   fontStyle: "bold",
-  //   src: `
-  //   url(${font}) format('woff')`,
-  // };
   const theme = createTheme({
     palette: {
       primary: {
@@ -222,7 +246,11 @@ export const ToolbarAndChips = () => {
   });
 
   return (
-    <AppBar position="sticky" elevation={0}>
+    <AppBar
+      position="static"
+      elevation={0}
+      style={{ margin: 0, width: "100%" }}
+    >
       <Toolbar className={classes.toolbar}>
         <Grid
           container
@@ -379,9 +407,9 @@ export const ToolbarAndChips = () => {
         </Grid>
       </Toolbar>
 
-      {/* <Toolbar className={classes.toolbar}>
-        <Grid container spacing={1}>
-          <Grid item>
+      {/* <Toolbar className={classes.secondToolobar}> */}
+      {/* <Grid container spacing={1}> */}
+      {/* <Grid item>
             <Chip
               onClick={handleClickCampus}
               label="Campus Events"
@@ -389,6 +417,7 @@ export const ToolbarAndChips = () => {
               color="secondary"
               variant={flag1 ? "outlined" : "default"}
               icon={<SchoolRoundedIcon />}
+              className={classes.chips}
             />
           </Grid>
           <Grid item>
@@ -410,6 +439,52 @@ export const ToolbarAndChips = () => {
               color="secondary"
               icon={<LocalBarIcon />}
             />
+          </Grid> */}
+      {/* <Grid container spacing={3}>
+          <Grid item>
+            <Button variant="outlined" className={classes.buttonChips}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <BackpackRoundedIcon />
+                </Grid>
+                <Grid item>Study Seshes</Grid>
+              </Grid>
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" className={classes.buttonChips}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <LocalBarIcon />
+                </Grid>
+                <Grid item>House Parties</Grid>
+              </Grid>
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" className={classes.buttonChips}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <SchoolRoundedIcon />{" "}
+                </Grid>
+                <Grid item>Campus Events</Grid>
+              </Grid>
+            </Button>
           </Grid>
         </Grid>
       </Toolbar> */}
