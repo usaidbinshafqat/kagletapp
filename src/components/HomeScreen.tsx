@@ -111,9 +111,8 @@ export const HomeScreen = () => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           setLoggedInUserId(user.uid);
-          console.log(user.uid);
         } else {
-          setLoggedInUserId("as");
+          setLoggedInUserId("");
         }
       });
     };
