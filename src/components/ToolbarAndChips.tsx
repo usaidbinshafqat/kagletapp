@@ -39,9 +39,6 @@ import Slide from "@mui/material/Slide";
 // import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   button: {
     alignContent: "center",
     alignItems: "flex-start",
@@ -52,9 +49,6 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
   },
 
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   toolbar: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -64,38 +58,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     backgroundColor: "#ffffff",
-  },
-  title: {
-    flexGrow: 1,
-    color: "#000000",
-  },
-  subtitle: {
-    flexGrow: 1,
-    alignSelf: "flex-end",
-    color: "#000000",
-  },
-  textfield: {
-    width: 200,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(2),
-  },
-  cardcomponent: {
-    width: "90%",
-  },
-  cardTitle: {
-    flexGrow: 1,
-    color: "#000000",
-    paddingLeft: theme.spacing(7),
-  },
-  cardpositions: {
-    marginBottom: 12,
-  },
-  username: {
-    textAlign: "left",
-  },
-  rightAlignText: {
-    textAlign: "right",
   },
   accountIcon: {
     minHeight: 30,
@@ -118,36 +80,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 20,
     left: "auto",
     position: "fixed",
-  },
-  bottomNav: {
-    width: "100%",
-    position: "fixed",
-    bottom: 0,
-  },
-  popoverFab: {
-    padding: theme.spacing(2),
-  },
-  formControl: {
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  dateAndTime: {
-    marginLeft: theme.spacing(1),
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  locationField: {
-    minWidth: 150,
-    maxWidth: 450,
-  },
-  eventBox: {
-    minWidth: 200,
-    maxWidth: 500,
-  },
-  iconText: {
-    color: "#543B31",
-    fontSize: 25,
-    paddingLeft: 1,
   },
   logoButton: {
     maxHeight: 45,

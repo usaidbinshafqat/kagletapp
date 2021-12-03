@@ -32,8 +32,77 @@ const theme = createTheme({
   },
 });
 
-const darkTheme = createTheme({ palette: { mode: "dark" } });
+function LoggedInUI() {
+  const history = useHistory();
 
+  return (
+    <Grid container direction="column" justifyContent="center">
+      <Typography
+        component="div"
+        align="center"
+        ///still figuring out
+        style={{ height: "100vh" }}
+      >
+        {/* Toolbar component being imported from the other screen */}
+        <ToolbarAndChips />
+        &nbsp;
+        <Grid
+          container
+          spacing={2}
+          direction="column"
+          alignItems="center"
+          justify="center"
+        >
+          <Typography variant="h5">
+            Please log in to view awesome K events!
+          </Typography>
+          &nbsp;
+          <Typography variant="h6">
+            If you've logged in, try again in a non-private window.
+          </Typography>
+          &nbsp;
+          <ThemeProvider theme={theme}>
+            <Grid item>
+              <Button
+                size="large"
+                variant="outlined"
+                color="primary"
+                className="subheading"
+                style={{ borderRadius: 20, padding: "0.25rem 2rem" }}
+                onClick={() => history.push("/login")}
+              >
+                Login
+              </Button>
+            </Grid>
+          </ThemeProvider>
+        </Grid>
+      </Typography>
+    </Grid>
+  );
+}
+
+function LoggedOutUI() {
+  return (
+    <Grid container direction="column" justifyContent="center">
+      <Typography component="div" align="center" style={{ height: "100vh" }}>
+        <ToolbarAndChips />
+        &nbsp;
+        <Grid
+          container
+          spacing={2}
+          direction="column"
+          alignItems="center"
+          justify="center"
+        >
+          <EventCardContainer />
+        </Grid>
+        <Grid item>
+          <PostButton />
+        </Grid>
+      </Typography>
+    </Grid>
+  );
+}
 //homescreen function which is checking if the user is logged in or not. If user, then set user id etc etc.
 export const HomeScreen = () => {
   const [loggedInUserId, setLoggedInUserId] = useState("");
@@ -51,82 +120,18 @@ export const HomeScreen = () => {
     fetchIsLoggedIn();
   }, [loggedInUserId]);
   const classes = useStyles();
-  const history = useHistory();
   //return statement that contains the UI
   return (
     <div className={classes.root}>
       {/* only shows this if the user is logged in (it should contain something in the string if it exists) */}
       {loggedInUserId === "" && (
-        //Grid holding all elements in the homescreen UI
-        <Grid container direction="column" justifyContent="center">
-          <Typography
-            component="div"
-            align="center"
-            ///still figuring out
-            style={{ height: "100vh" }}
-          >
-            {/* Toolbar component being imported from the other screen */}
-            <ToolbarAndChips />
-            &nbsp;
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              alignItems="center"
-              justify="center"
-            >
-              <Typography variant="h5">
-                Please log in to view awesome K events!
-              </Typography>
-              &nbsp;
-              <Typography variant="h6">
-                If you've logged in, try again in a non-private window.
-              </Typography>
-              &nbsp;
-              <ThemeProvider theme={theme}>
-                <Grid item>
-                  <Button
-                    size="large"
-                    variant="outlined"
-                    color="primary"
-                    className="subheading"
-                    style={{ borderRadius: 20, padding: "0.25rem 2rem" }}
-                    onClick={() => history.push("/login")}
-                  >
-                    Login
-                  </Button>
-                </Grid>
-              </ThemeProvider>
-            </Grid>
-          </Typography>
-        </Grid>
+        <LoggedInUI />
+
+        //Grid holding all elements in the homescreen UI when logged in
       )}
 
       {/* otherwise, if it's not an empty string, it should print this. All tags are self-explantory (from Material UI) */}
-      {loggedInUserId !== "" && (
-        <Grid container direction="column" justifyContent="center">
-          <Typography
-            component="div"
-            align="center"
-            style={{ height: "100vh" }}
-          >
-            <ToolbarAndChips />
-            &nbsp;
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              alignItems="center"
-              justify="center"
-            >
-              <EventCardContainer />
-            </Grid>
-            <Grid item>
-              <PostButton />
-            </Grid>
-          </Typography>
-        </Grid>
-      )}
+      {loggedInUserId !== "" && <LoggedOutUI />}
     </div>
   );
 };
