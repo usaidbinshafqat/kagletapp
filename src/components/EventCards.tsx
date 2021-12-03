@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
   locationSubtitle: {
     paddingLeft: 10,
   },
+  rsvpCount: {
+    paddingBottom: 5,
+  },
 }));
 
 const theme = createTheme({
@@ -219,8 +222,9 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
             rsvpList={props.rsvpList}
           ></PlusOneButton>
           &nbsp; &nbsp;
-          {/* <ShowCount eventID={props.eventID} rsvpList={props.rsvpList} />{" "}*/}
-          {/* <IncreaseCount /> */}
+          <Grid item className={classes.rsvpCount}>
+            {props.rsvpList.length} attending
+          </Grid>
           {/* <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
