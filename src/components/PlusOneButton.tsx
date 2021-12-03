@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: "none",
   },
   rsvpCount: {
-    paddingBottom: 1,
+    paddingBottom: 7,
+    paddingLeft: 10,
   },
 }));
 
@@ -75,8 +76,8 @@ function UIDarray(eventID?: string, rsvpList?: any) {
   console.log(typeof rsvpList);
 
   if (user) {
-    if (!rsvpList.includes(user.uid)) {
-      rsvpList.push(user.uid);
+    if (!rsvpList.includes(user.email)) {
+      rsvpList.push(user.email);
       PushFirebase(rsvpList, eventID);
     } else {
       //setCheck(true);
