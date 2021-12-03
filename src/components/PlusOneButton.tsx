@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import firebase from "firebase";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import React from "react";
+import React, { useState } from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import {
   makeStyles,
@@ -10,14 +10,10 @@ import {
   createTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import { Grid } from "@mui/material";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // width: '100%',
-    // '& > * + *': {
-    //   marginTop: theme.spacing(2),
-    //   marginBottom: theme.spacing(2),
-    // },
     flexGrow: 1,
   },
   button: {
@@ -33,7 +29,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: "none",
   },
   rsvpCount: {
-    paddingBottom: 1,
+    paddingBottom: 7,
+    paddingLeft: 5,
   },
 }));
 
@@ -69,10 +66,8 @@ function Alert(props: AlertProps) {
 let check = false;
 
 function UIDarray(eventID?: string, rsvpList?: any) {
-  console.log(eventID);
   const auth = firebase.auth();
   const user = auth.currentUser;
-  console.log(typeof rsvpList);
 
   if (user) {
     if (!rsvpList.includes(user.uid)) {
@@ -150,11 +145,12 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
 
   function validity() {
     UIDarray(props.eventID, props.rsvpList);
-    console.log(check);
+    console.log("this is the list", props.rsvpList);
+    console.log("rsvp list length");
     if (check === false) {
       handleClick();
       handleDisable();
-      props.rsvpList.length = props.rsvpList.length + 1;
+      incrementCount();
     } else {
       handleClick1();
       handleDisable();
@@ -179,32 +175,34 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     </React.Fragment>
   );
 
+  const [count, setCount] = React.useState(props.rsvpList.length);
+
+  function incrementCount() {
+    setCount(count + 1);
+  }
+
   return (
     <div>
       <Typography component="div" align="center">
         <div>
-          {buttons}
-          <Snackbar
-            autoHideDuration={2000}
-            //anchorOrigin={{ vertical: "bottom", horizontal }}
-            open={open}
-            onClose={handleClose}
-            //message="Link successfully sent"
-            //key={vertical + horizontal}
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
           >
+            <Grid item>{buttons}</Grid>
+            <Grid item className={classes.rsvpCount}>
+              {count} attending
+            </Grid>
+          </Grid>
+          <Snackbar autoHideDuration={2000} open={open} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               You're on the list! 👍
             </Alert>
           </Snackbar>
 
-          <Snackbar
-            autoHideDuration={2000}
-            //anchorOrigin={{ vertical: "bottom", horizontal }}
-            open={open1}
-            onClose={handleClose}
-            //message="Link successfully sent"
-            //key={vertical + horizontal}
-          >
+          <Snackbar autoHideDuration={2000} open={open1} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
               You've already RSVP'd
             </Alert>
