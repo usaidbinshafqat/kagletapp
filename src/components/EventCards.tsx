@@ -22,18 +22,11 @@ import { AccountBox } from "@material-ui/icons";
 import { PlusOneButton } from "./PlusOneButton";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   cardcomponent: {
     width: "82%",
   },
   username: {
     textAlign: "left",
-  },
-  rightAlignText: {
-    textAlign: "right",
-    justifyContent: "center",
   },
   leftAlignText: {
     textAlign: "left",
@@ -59,16 +52,6 @@ const useStyles = makeStyles((theme) => ({
   },
   locationSubtitle: {
     paddingLeft: 10,
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
   },
   rsvpCount: {
     paddingBottom: 5,

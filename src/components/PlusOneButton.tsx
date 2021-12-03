@@ -181,38 +181,36 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Typography component="div" align="center">
-          <div>
-            {buttons}
-            <Snackbar
-              autoHideDuration={2000}
-              //anchorOrigin={{ vertical: "bottom", horizontal }}
-              open={open}
-              onClose={handleClose}
-              //message="Link successfully sent"
-              //key={vertical + horizontal}
-            >
-              <Alert onClose={handleClose} severity="success">
-                You're on the list! 👍
-              </Alert>
-            </Snackbar>
+      <Typography component="div" align="center">
+        <div>
+          {buttons}
+          <Snackbar
+            autoHideDuration={2000}
+            //anchorOrigin={{ vertical: "bottom", horizontal }}
+            open={open}
+            onClose={handleClose}
+            //message="Link successfully sent"
+            //key={vertical + horizontal}
+          >
+            <Alert onClose={handleClose} severity="success">
+              You're on the list! 👍
+            </Alert>
+          </Snackbar>
 
-            <Snackbar
-              autoHideDuration={2000}
-              //anchorOrigin={{ vertical: "bottom", horizontal }}
-              open={open1}
-              onClose={handleClose}
-              //message="Link successfully sent"
-              //key={vertical + horizontal}
-            >
-              <Alert onClose={handleClose} severity="error">
-                You've already RSVP'd
-              </Alert>
-            </Snackbar>
-          </div>
-        </Typography>
-      </ThemeProvider>
+          <Snackbar
+            autoHideDuration={2000}
+            //anchorOrigin={{ vertical: "bottom", horizontal }}
+            open={open1}
+            onClose={handleClose}
+            //message="Link successfully sent"
+            //key={vertical + horizontal}
+          >
+            <Alert onClose={handleClose} severity="error">
+              You've already RSVP'd
+            </Alert>
+          </Snackbar>
+        </div>
+      </Typography>
     </div>
   );
 };

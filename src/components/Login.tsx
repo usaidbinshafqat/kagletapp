@@ -39,28 +39,17 @@ const useStyles = makeStyles((theme) => ({
     justify: "center",
     alignItems: "flex-start",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   toolbar: {
     paddingTop: theme.spacing(0),
     paddingBottom: theme.spacing(0),
     backgroundColor: "#ffffff",
-  },
-  title: {
-    flexGrow: 1,
-    alignSelf: "flex-end",
-    color: "#000000",
   },
   form: {
     "& > *": {
       margin: theme.spacing(2),
     },
   },
-  appicon: {},
-  marginPassword: {
-    margin: theme.spacing(1),
-  },
+
   textfield: {
     width: 300,
   },
@@ -78,8 +67,7 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-//the actual function coming out of this class hence the export.
-
+//creating the primary and secondary theme with our colors
 const theme = createTheme({
   palette: {
     primary: {
@@ -95,6 +83,7 @@ const theme = createTheme({
   },
 });
 
+//export function that handles everything login, checks for validity, shows error/sucess and email refs etc
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
