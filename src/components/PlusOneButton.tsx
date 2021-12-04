@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import firebase from "firebase";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -13,11 +13,6 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // width: '100%',
-    // '& > * + *': {
-    //   marginTop: theme.spacing(2),
-    //   marginBottom: theme.spacing(2),
-    // },
     flexGrow: 1,
   },
   button: {
@@ -60,20 +55,14 @@ export interface RsvpDetails {
 
 const database = firebase.database();
 
-// export interface State extends SnackbarOrigin {
-//   open: boolean;
-// }
-
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 let check = false;
 
 function UIDarray(eventID?: string, rsvpList?: any) {
-  console.log(eventID);
   const auth = firebase.auth();
   const user = auth.currentUser;
-  console.log(typeof rsvpList);
 
   if (user) {
     if (!rsvpList.includes(user.email)) {
@@ -97,37 +86,34 @@ function PushFirebase(rsvpList?: any, eventID?: string) {
 export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   const classes = useStyles();
   const [submitDisabled, setSubmitDisabled] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
+  const [openSuccess, setOpenSuccess] = React.useState(false);
+  const [openError, setOpenError] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
+  const handleClickSuccess = () => {
+    setOpenSuccess(true);
   };
 
-  const handleClick1 = () => {
-    setOpen1(true);
-  };
-
-  // const [state, setState] = React.useState<State>({
-  //   open: false,
-  //   vertical: "bottom",
-  //   horizontal: "center",
-  // });
-
-  // const { vertical, horizontal } = state;
-
-  // const handleClose = () => {
-  //   setState({ ...state, open: false });
-  //   setOpen(false);
-  //   //setOpen1(false);
-  // };
-
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+  const handleCloseSuccess = (
+    event?: React.SyntheticEvent,
+    reason?: string
+  ) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setOpen(false);
+    setOpenSuccess(false);
+  };
+
+  const handleClickError = () => {
+    setOpenError(true);
+  };
+
+  const handleCloseError = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenError(false);
   };
 
   const theme = createTheme({
@@ -151,15 +137,20 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
 
   function validity() {
     UIDarray(props.eventID, props.rsvpList);
-    console.log(check);
     if (check === false) {
-      handleClick();
+      handleClickSuccess();
       handleDisable();
-      props.rsvpList.length = props.rsvpList.length + 1;
+      incrementCount();
     } else {
-      handleClick1();
+      handleClickError();
       handleDisable();
     }
+  }
+
+  const [count, setCount] = React.useState(props.rsvpList.length);
+
+  function incrementCount() {
+    setCount(count + 1);
   }
 
   const buttons = (
@@ -184,29 +175,33 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     <div>
       <Typography component="div" align="center">
         <div>
-          {buttons}
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Grid item>{buttons}</Grid>
+            <Grid item className={classes.rsvpCount}>
+              {count} attending
+            </Grid>
+          </Grid>
           <Snackbar
             autoHideDuration={2000}
-            //anchorOrigin={{ vertical: "bottom", horizontal }}
-            open={open}
-            onClose={handleClose}
-            //message="Link successfully sent"
-            //key={vertical + horizontal}
+            open={openSuccess}
+            onClose={handleCloseSuccess}
           >
-            <Alert onClose={handleClose} severity="success">
+            <Alert onClose={handleCloseSuccess} severity="success">
               You're on the list! 👍
             </Alert>
           </Snackbar>
 
           <Snackbar
             autoHideDuration={2000}
-            //anchorOrigin={{ vertical: "bottom", horizontal }}
-            open={open1}
-            onClose={handleClose}
-            //message="Link successfully sent"
-            //key={vertical + horizontal}
+            open={openError}
+            onClose={handleCloseError}
           >
-            <Alert onClose={handleClose} severity="error">
+            <Alert onClose={handleCloseError} severity="error">
               You've already RSVP'd
             </Alert>
           </Snackbar>

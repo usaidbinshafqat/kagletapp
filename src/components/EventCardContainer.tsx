@@ -24,8 +24,6 @@ export const EventCardContainer = () => {
 
       var timeTwoHoursAgoMS = dateToday.getTime();
 
-      console.log(dateToday);
-
       let allEvents = firebase
         .database()
         .ref("events")
@@ -44,8 +42,6 @@ export const EventCardContainer = () => {
     };
     fetchData();
   }, []);
-
-  console.log("eventsList", eventsList);
 
   function timeConverter(timeFromFirebase: string) {
     let dateString = timeFromFirebase;
