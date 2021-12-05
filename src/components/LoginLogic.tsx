@@ -17,6 +17,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import { width } from "@mui/system";
 
 //defining the styles
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +34,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.25rem 2rem",
   },
   logo: {
-    height: 300,
-    width: 300,
+    height: "15%",
+    width: "15%",
     alignContent: "center",
     justify: "center",
-    alignItems: "flex-start",
   },
   toolbar: {
     paddingTop: theme.spacing(0),
@@ -84,7 +84,7 @@ const theme = createTheme({
 });
 
 //export function that handles everything login, checks for validity, shows error/sucess and email refs etc
-export const Login = () => {
+export const LoginLogic = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -133,6 +133,30 @@ export const Login = () => {
     }
   }
 
+  function isMobile() {
+    var mobileCompsStyle = {
+      margin: "auto",
+      marginLeft: "auto",
+      marginRight: "auto",
+      maxWidth: "60%",
+      height: "auto",
+      width: "auto",
+    };
+
+    var screenCompsStyle = {
+      margin: "auto",
+      marginLeft: "auto",
+      marginRight: "auto",
+      maxWidth: "25%",
+      height: "auto",
+      width: "auto",
+    };
+    if (window.screen.width < 600) {
+      return mobileCompsStyle;
+    } else {
+      return screenCompsStyle;
+    }
+  }
   function checkValidity() {
     if (emailRef.current!.value !== "") {
       setSubmitDisabled(false);
@@ -140,22 +164,18 @@ export const Login = () => {
   }
 
   const buttons = (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <Button
-          size="large"
-          variant="outlined"
-          color="primary"
-          className={classes.button}
-          disabled={submitDisabled}
-          onClick={() => {
-            validity();
-          }}
-        >
-          Get Login Link
-        </Button>
-      </ThemeProvider>
-    </React.Fragment>
+    <Button
+      size="large"
+      variant="outlined"
+      color="primary"
+      className={classes.button}
+      disabled={submitDisabled}
+      onClick={() => {
+        validity();
+      }}
+    >
+      Get Login Link
+    </Button>
   );
 
   const handleToggle = () => {
@@ -228,53 +248,38 @@ export const Login = () => {
 
   return (
     <div className={classes.root}>
-      {/* grid containing all elements in the screen */}
-      <Grid container justifyContent="center" direction="column">
-        {/* app bar which has the back button */}
-        <AppBar position="sticky" elevation={0}>
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              aria-label="back"
-              onClick={() => history.push("/splashscreen")}
-            >
-              <ArrowBackRoundedIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-
-        {/* this holds the components after the app  */}
-        <Typography component="div" align="center" style={{ height: "100vh" }}>
+      <Typography component="div" align="center" style={{ height: "100vh" }}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Grid item>
-            <div className="col-centered">
-              <img alt="Logo" className={classes.logo} src={logo} />
-            </div>
+            <img alt="Logo" style={isMobile()} src={logo} />
           </Grid>
 
           <Grid item>
-            <form className={classes.form} noValidate autoComplete="on">
-              <Grid item xs={12}>
-                <ThemeProvider theme={theme}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Email"
-                    //helperText="Incorrect entry."
-                    error={submitDisabled}
-                    required
-                    color="secondary"
-                    variant="outlined"
-                    placeholder="@kzoo.edu"
-                    inputRef={emailRef}
-                    className={classes.textfield}
-                    helperText="Please use your @kzoo.edu school email."
-                    // onKeyPress={handleKeyPress}
-                    onChange={handleEmailInput}
-                  />
-                </ThemeProvider>
-              </Grid>
-            </form>
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              //helperText="Incorrect entry."
+              error={submitDisabled}
+              required
+              color="secondary"
+              variant="outlined"
+              placeholder="@kzoo.edu"
+              inputRef={emailRef}
+              className={classes.textfield}
+              helperText="Please use your @kzoo.edu school email."
+              // onKeyPress={handleKeyPress}
+              onChange={handleEmailInput}
+            />
           </Grid>
-          <div>
-            {buttons}
+          <Grid item>{buttons}</Grid>
+        </Grid>
+        <div>
+          <Grid item alignContent="center">
             <Snackbar
               //autoHideDuration={100000000}
               anchorOrigin={{ vertical: "top", horizontal }}
@@ -294,9 +299,10 @@ export const Login = () => {
             >
               <CircularProgress color="inherit" />
             </Backdrop>
-          </div>
-        </Typography>
-      </Grid>
+          </Grid>
+        </div>
+      </Typography>
+      {/* </Grid> */}
     </div>
   );
 };

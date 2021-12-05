@@ -15,7 +15,7 @@ import { Toolbar } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Grid from "@material-ui/core/Grid";
-import logo from "../logos/favicon.png";
+import logo from "../logos/justLogo.png";
 import logoText from "../logos/HomeHeader.png";
 import PopupState, { bindPopover } from "material-ui-popup-state";
 import { bindTrigger } from "material-ui-popup-state/hooks";
@@ -65,12 +65,12 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   appicon: {
-    height: "3%",
-    width: "3%",
-    minHeight: 28,
-    minWidth: 28,
-    maxHeight: 42,
-    maxWidth: 42,
+    height: "4%",
+    width: "4%",
+    minHeight: 36,
+    minWidth: 36,
+    maxHeight: 56,
+    maxWidth: 56,
     paddingBlock: 2,
   },
   fabicon: {
@@ -86,10 +86,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 45,
   },
   logoText: {
-    maxHeight: 40,
-    maxWidth: 90,
-    minHeight: 30,
-    minWidth: 66,
+    maxHeight: 43,
+    maxWidth: 95,
+    minHeight: 32,
+    minWidth: 71,
     paddingTop: 5,
   },
   linkButton: {

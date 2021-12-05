@@ -10,6 +10,7 @@ import firebase from "firebase";
 import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import background from "../back.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,7 @@ const theme = createTheme({
   },
 });
 
-function LoggedInUI() {
+function LoggedOutUI() {
   const history = useHistory();
 
   return (
@@ -81,7 +82,7 @@ function LoggedInUI() {
   );
 }
 
-function LoggedOutUI() {
+function LoggedInUI() {
   return (
     <Grid container direction="column" justifyContent="center">
       <Typography component="div" align="center" style={{ height: "100vh" }}>
@@ -112,7 +113,7 @@ export const HomeScreen = () => {
         if (user) {
           setLoggedInUserId(user.uid);
         } else {
-          setLoggedInUserId("as");
+          setLoggedInUserId("");
         }
       });
     };
@@ -130,7 +131,7 @@ export const HomeScreen = () => {
       )}
 
       {/* otherwise, if it's not an empty string, it should print this. All tags are self-explantory (from Material UI) */}
-      {loggedInUserId !== "" && <LoggedOutUI />}
+      {loggedInUserId !== "" && <LoggedInUI />}
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Login } from "./components/Login";
-import { SplashScreen } from "./components/SplashScreen";
+import { LoginLogic } from "./components/LoginLogic";
+// import { SplashScreen } from "./components/SplashScreen";
 import { HomeScreen } from "./components/HomeScreen";
+import { NewSplashScreen } from "./components/NewSplashScreen";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
@@ -28,16 +29,16 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <SplashScreen />{" "}
+            <NewSplashScreen />
           </Route>
           <Route exact path="/login">
-            <Login />{" "}
+            <LoginLogic />{" "}
           </Route>
           <Route exact path="/home">
             <HomeScreen />{" "}
           </Route>
           <Route exact path="/splashscreen">
-            <SplashScreen />
+            <NewSplashScreen />
           </Route>
         </Switch>
       </Router>
