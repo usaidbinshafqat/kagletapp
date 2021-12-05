@@ -155,7 +155,7 @@ export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
           <CardMedia
             className={classes.media}
             image={chooseImage(props.type)}
-            title="Test"
+            title="Event Type Media"
           />
         </MuiThemeProvider>
         {/* card content (the white part),  */}
