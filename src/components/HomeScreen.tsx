@@ -125,7 +125,7 @@ export const HomeScreen = () => {
     <div className={classes.root}>
       {/* only shows this if the user is logged in (it should contain something in the string if it exists) */}
       {loggedInUserId === "" && (
-        <LoggedInUI />
+        <LoggedOutUI />
 
         //Grid holding all elements in the homescreen UI when logged in
       )}
