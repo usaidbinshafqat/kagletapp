@@ -1,5 +1,13 @@
 import React from "react";
-import { Avatar, Box, Card, CardMedia, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  NoSsr,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -18,12 +26,41 @@ import partyImage3 from "../logos/partyImage3.png";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
 import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
-import { AccountBox } from "@material-ui/icons";
+import { Row, Item, Column } from "@mui-treasury/components/flex";
 import { PlusOneButton } from "./PlusOneButton";
+import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
+import { styles } from "@material-ui/pickers/views/Calendar/Calendar";
+import { useNewsInfoStyles } from "@mui-treasury/styles/info/news";
+import GoogleFontLoader from "react-google-font-loader";
 
 const useStyles = makeStyles((theme) => ({
   cardcomponent: {
-    width: "82%",
+    minWidth: 300,
+    position: "relative",
+    boxShadow: "0 8px 24px 0 rgba(0,0,0,0.12)",
+    overflow: "visible",
+    borderRadius: "1.5rem",
+    transition: "0.4s",
+    "&:hover": {
+      transform: "translateY(-10px)",
+      "& $shadow": {
+        bottom: "-1.5rem",
+      },
+      "& $shadow2": {
+        bottom: "-2.5rem",
+      },
+    },
+    "&:before": {
+      content: '""',
+      position: "absolute",
+      zIndex: 0,
+      display: "block",
+      width: "100%",
+      bottom: -1,
+      height: "100%",
+      borderRadius: "1.5rem",
+      backgroundColor: "rgba(0,0,0,0.08)",
+    },
   },
   username: {
     textAlign: "left",
@@ -45,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 5,
   },
   media: {
-    height: 170,
+    minHeight: 220,
   },
   titleIcon: {
     paddingTop: 7,
@@ -53,13 +90,19 @@ const useStyles = makeStyles((theme) => ({
   locationSubtitle: {
     paddingLeft: 10,
   },
-  rsvpCount: {
-    paddingBottom: 5,
+  join: {
+    background: "linear-gradient(to top, #638ef0, #82e7fe)",
+    "& > *": {
+      textTransform: "none !important",
+    },
   },
   main: {
+    textAlign: "left",
+    justifyContent: "center",
+    paddingLeft: "10",
     overflow: "hidden",
-    borderTopLeftRadius: "0.7rem",
-    borderTopRightRadius: "0.7rem",
+    borderTopLeftRadius: "1.5rem",
+    borderTopRightRadius: "1.5rem",
     "&:after": {
       content: '""',
       position: "absolute",
@@ -67,12 +110,14 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
       width: "100%",
       height: "100%",
+      background: "linear-gradient(to top, #543b31, rgba(0,0,0,0))",
     },
   },
   content: {
     position: "absolute",
     bottom: 0,
     width: "100%",
+    zIndex: 1,
     padding: "1.5rem 1.5rem 1rem",
   },
   tag: {
@@ -85,10 +130,29 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0.5rem",
   },
   title: {
-    fontFamily: "'Sen', 'sans-serif'",
-    fontSize: "2rem",
+    fontFamily: "'Nunito', 'sans-serif'",
+    fontSize: "1.3rem",
     fontWeight: 800,
     color: "#fff",
+  },
+  author: {
+    textAlign: "left",
+    position: "relative",
+    borderBottomLeftRadius: "1.5rem",
+    borderBottomRightRadius: "1.5rem",
+  },
+
+  avatar: {
+    width: 48,
+    height: 48,
+  },
+  timeText: {
+    fontFamily: "'Nunito', 'sans-serif'",
+    textAlign: "left",
+    fontSize: "1.3rem",
+  },
+  divDeets: {
+    width: "90%",
   },
 }));
 
@@ -154,7 +218,7 @@ function chooseImage(type?: string) {
       imageName = campusImage3;
     }
   }
-
+  console.log(imageName);
   return imageName;
 }
 
@@ -172,128 +236,53 @@ function chooseIcon(type?: string) {
   return typeIcon;
 }
 
-export const EventCards: React.FC<EventDetails> = (props: EventDetails) => {
+export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
 
   return (
     // holding the cards in this div, using useStyles from up top
-    <div className={classes.cardcomponent}>
-      {/* card component for each card */}
-      <Card variant="outlined" className={classes.cardLooks}>
-        {/* 
-        card header holds title (orange part) 
-        gets data from firebase where it says props.xxx 
-        "xxx" is defined in the interface before the export const EventCards
-        */}
-        <Box className={classes.main} minHeight={300} position={"relative"}>
+
+    <div className={classes.divDeets}>
+      <NoSsr>
+        <GoogleFontLoader fonts={[{ font: "Nunito", weights: [400, 800] }]} />
+      </NoSsr>
+      <Card className={classes.cardcomponent}>
+        <Box className={classes.main} minHeight={220} position={"relative"}>
           <CardMedia
             className={classes.media}
             image={chooseImage(props.type)}
-            title="Event Type Media"
           />
           <div className={classes.content}>
             <div className={classes.tag}>{props.type}</div>
-            <Typography variant={"h2"} className={classes.title}>
+            <Typography className={classes.title}>
               {props.name} @ {props.location}
             </Typography>
           </div>
         </Box>
-
-        {/* card content (the white part),  */}
-        <CardContent>
-          <Grid
-            container
-            direction="row-reverse"
-            justifyContent="flex-end"
-            alignItems="center"
-            wrap="nowrap"
+        <Column>
+          <Row
+            className={classes.author}
+            m={0}
+            p={1}
+            pt={2}
+            gap={2}
+            bgcolor={"common.white"}
           >
-            <Grid
-              container
-              direction="row-reverse"
-              justifyContent="flex-end"
-              alignItems="center"
-              wrap="nowrap"
-            ></Grid>
-            <Grid
-              container
-              direction="row-reverse"
-              justifyContent="flex-end"
-              alignItems="center"
-              wrap="nowrap"
-            >
-              <Grid item className={`${classes.cardSubtitle} ${"subheading"}`}>
-                {props.time}
-              </Grid>
-            </Grid>
-            <Grid item>Test</Grid>
-            <Grid item>
-              <Avatar style={{ height: 40, width: 40 }}>KK</Avatar>
-            </Grid>
-          </Grid>
-
-          {/* <span>&nbsp;</span> */}
-          {/* <Grid
-            container
-            direction="row-reverse"
-            justifyContent="flex-end"
-            alignItems="center"
-            wrap="nowrap"
-          >
-            <Grid
-              item
-              className={`${classes.locationSubtitle} ${"subheading"}`}
-            >
-              {props.location}
-            </Grid>
-            <LocationOnOutlinedIcon />
-          </Grid>
-          <Grid
-            container
-            direction="row-reverse"
-            justifyContent="flex-end"
-            alignItems="center"
-            wrap="nowrap"
-          >
-            <Grid item className={`${classes.cardSubtitle} ${"subheading"}`}>
-              {props.time}
-            </Grid>
-          </Grid>
-          &nbsp;
-          <Grid
-            container
-            direction="row-reverse"
-            justifyContent="flex-end"
-            alignItems="center"
-            wrap="nowrap"
-          >
-            <Grid item className={`${classes.leftAlignText} ${"subheading"}`}>
-              {props.email}
-            </Grid>
-            <AccountBox />
-          </Grid> */}
-        </CardContent>
-        {/* Card actions goes here */}
-        {/* <CardActions>
-          <PlusOneButton
-            eventID={props.eventID}
-            rsvpList={props.rsvpList}
-          ></PlusOneButton>
-          &nbsp; &nbsp;
-        </CardActions> */}
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-           <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-              heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-              browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-              pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-              saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography> 
-            <WithComments></WithComments>
-        </CardContent>
-      </Collapse> */}
+            <Info position={"left"} useStyles={useNewsInfoStyles}>
+              <InfoTitle className={classes.timeText}>{props.time}</InfoTitle>
+              <InfoSubtitle>Created by {props.email}</InfoSubtitle>
+            </Info>
+            <Item position={"middle-right"}>
+              <PlusOneButton
+                eventID={props.eventID}
+                rsvpList={props.rsvpList}
+              />
+            </Item>
+          </Row>
+        </Column>
+        {/* <Row gap={2} className={classes.joinRow} bgcolor={"common.white"}>
+          <PlusOneButton eventID={props.eventID} rsvpList={props.rsvpList} />
+        </Row> */}
       </Card>
       &nbsp;
     </div>

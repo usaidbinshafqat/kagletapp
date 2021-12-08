@@ -4,12 +4,8 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import React from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import {
-  makeStyles,
-  Theme,
-  createTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, Theme, createTheme } from "@material-ui/core/styles";
+import { Row, Item, Column } from "@mui-treasury/components/flex";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -154,38 +150,29 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   }
 
   const buttons = (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <Button
-          disabled={submitDisabled}
-          className={classes.button}
-          size="small"
-          color="primary"
-          onClick={() => {
-            validity();
-          }}
-        >
-          I'll join! 😁
-        </Button>
-      </ThemeProvider>
-    </React.Fragment>
+    <Button
+      disabled={submitDisabled}
+      size="small"
+      color="primary"
+      variant="contained"
+      onClick={() => {
+        validity();
+      }}
+    >
+      I'll join! 😁
+    </Button>
   );
 
   return (
     <div>
+      <Column>
+        <Row p={2} gap={2} position={"middle-right"}>
+          <Item>{buttons}</Item>
+        </Row>
+      </Column>
+
       <Typography component="div" align="center">
         <div>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            <Grid item>{buttons}</Grid>
-            <Grid item className={classes.rsvpCount}>
-              {count} attending
-            </Grid>
-          </Grid>
           <Snackbar
             autoHideDuration={2000}
             open={openSuccess}

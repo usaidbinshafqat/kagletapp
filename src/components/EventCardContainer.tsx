@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { EventCards } from "./EventCards";
 import moment from "moment";
+import { NewCardUI } from "./NewCardUI";
 
 export const GetEventCards = () => {};
 
@@ -52,7 +53,7 @@ export const EventCardContainer = () => {
   return (
     <>
       {Object.values(eventsList).map((event: any) => (
-        <EventCards
+        <NewCardUI
           name={event.eventName}
           time={timeConverter(event.eventTime)}
           location={event.eventLocation}

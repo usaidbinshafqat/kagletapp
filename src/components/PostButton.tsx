@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   popoverFab: {
     padding: theme.spacing(2),
+    zIndex: 2,
   },
   /*
   formControl: {
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     left: "auto",
     position: "fixed",
     borderRadius: 20,
+    zIndex: 2,
   },
   locationField: {
     minWidth: 150,
