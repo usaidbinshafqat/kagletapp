@@ -175,7 +175,7 @@ export const ToolbarAndChips = () => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       elevation={0}
       style={{ margin: 0, width: "100%" }}
     >
@@ -224,9 +224,10 @@ export const ToolbarAndChips = () => {
                       vertical: "top",
                       horizontal: "right",
                     }}
+                    style={{ borderRadius: "1.5rem" }}
                   >
-                    <Box p={2}>
-                      <Typography>
+                    <Box p={2} style={{ borderRadius: "1.5rem" }}>
+                      <Typography style={{ borderRadius: "1.5rem" }}>
                         <ThemeProvider theme={theme}>
                           {/* Here comes the first name extracted from the email */}
                           <SignedInUserEmail></SignedInUserEmail>
