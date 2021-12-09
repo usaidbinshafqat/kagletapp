@@ -1,15 +1,10 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import firebase from "firebase";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import React from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import {
-  makeStyles,
-  Theme,
-  createTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,12 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
-    marginTop: theme.spacing(1.1),
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(-1),
     borderRadius: 20,
-    padding: "0.5rem 0.8rem",
     textTransform: "none",
   },
   rsvpCount: {
@@ -116,20 +106,20 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     setOpenError(false);
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#EE6C4D",
-        light: "#ff9b79",
-        dark: "#b53a22",
-      },
-      secondary: {
-        main: "#4C5760",
-        light: "#78848d",
-        dark: "#242e36",
-      },
-    },
-  });
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: "#EE6C4D",
+  //       light: "#ff9b79",
+  //       dark: "#b53a22",
+  //     },
+  //     secondary: {
+  //       main: "#4C5760",
+  //       light: "#78848d",
+  //       dark: "#242e36",
+  //     },
+  //   },
+  // });
 
   function handleDisable() {
     setSubmitDisabled(true);
@@ -154,38 +144,30 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   }
 
   const buttons = (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <Button
-          disabled={submitDisabled}
-          className={classes.button}
-          size="small"
-          color="primary"
-          onClick={() => {
-            validity();
-          }}
-        >
-          I'll join! 😁
-        </Button>
-      </ThemeProvider>
-    </React.Fragment>
+    <Button
+      disabled={submitDisabled}
+      size="large"
+      color="primary"
+      variant="outlined"
+      className={classes.button}
+      onClick={() => {
+        validity();
+      }}
+    >
+      I'll join! 😁
+    </Button>
   );
 
   return (
     <div>
+      {/* <Column>
+        <Row p={2} gap={2} position={"middle-right"}>
+          <Item>{buttons}</Item>
+        </Row>
+      </Column> */}
+      {buttons}
       <Typography component="div" align="center">
         <div>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            <Grid item>{buttons}</Grid>
-            <Grid item className={classes.rsvpCount}>
-              {count} attending
-            </Grid>
-          </Grid>
           <Snackbar
             autoHideDuration={2000}
             open={openSuccess}
@@ -202,7 +184,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
             onClose={handleCloseError}
           >
             <Alert onClose={handleCloseError} severity="error">
-              You've already RSVP'd
+              You're already on the list! 😁
             </Alert>
           </Snackbar>
         </div>

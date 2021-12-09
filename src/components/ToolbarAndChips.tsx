@@ -25,18 +25,14 @@ import { createTheme } from "@material-ui/core/styles";
 import { SignedInUserEmail } from "./signedInUserEmail";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Link, Menu, styled } from "@mui/material";
-import {
-  BugReportRounded,
-  HelpOutlineRounded,
-  LocalBar,
-} from "@material-ui/icons";
-import Stack from "@mui/material/Stack";
+import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
+// import Stack from "@mui/material/Stack";
 
-import LocalBarIcon from "@material-ui/icons/LocalBar";
-import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
-import Slide from "@mui/material/Slide";
-// import { Chip } from "@material-ui/core";
+// import LocalBarIcon from "@material-ui/icons/LocalBar";
+// import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+// import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+// import Slide from "@mui/material/Slide";
+// // import { Chip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   button: {
