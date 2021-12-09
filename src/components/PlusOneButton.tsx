@@ -1,11 +1,10 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import firebase from "firebase";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import React from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { makeStyles, Theme, createTheme } from "@material-ui/core/styles";
-import { Row, Item, Column } from "@mui-treasury/components/flex";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -15,12 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: "center",
     alignItems: "flex-start",
     justify: "center",
-    marginTop: theme.spacing(1.1),
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(-1),
     borderRadius: 20,
-    padding: "0.5rem 0.8rem",
     textTransform: "none",
   },
   rsvpCount: {
@@ -112,20 +106,20 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     setOpenError(false);
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#EE6C4D",
-        light: "#ff9b79",
-        dark: "#b53a22",
-      },
-      secondary: {
-        main: "#4C5760",
-        light: "#78848d",
-        dark: "#242e36",
-      },
-    },
-  });
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: "#EE6C4D",
+  //       light: "#ff9b79",
+  //       dark: "#b53a22",
+  //     },
+  //     secondary: {
+  //       main: "#4C5760",
+  //       light: "#78848d",
+  //       dark: "#242e36",
+  //     },
+  //   },
+  // });
 
   function handleDisable() {
     setSubmitDisabled(true);
@@ -152,9 +146,10 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   const buttons = (
     <Button
       disabled={submitDisabled}
-      size="small"
+      size="large"
       color="primary"
-      variant="contained"
+      variant="outlined"
+      className={classes.button}
       onClick={() => {
         validity();
       }}
@@ -165,12 +160,12 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
 
   return (
     <div>
-      <Column>
+      {/* <Column>
         <Row p={2} gap={2} position={"middle-right"}>
           <Item>{buttons}</Item>
         </Row>
-      </Column>
-
+      </Column> */}
+      {buttons}
       <Typography component="div" align="center">
         <div>
           <Snackbar
@@ -189,7 +184,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
             onClose={handleCloseError}
           >
             <Alert onClose={handleCloseError} severity="error">
-              You've already RSVP'd
+              You're already on the list! 😁
             </Alert>
           </Snackbar>
         </div>

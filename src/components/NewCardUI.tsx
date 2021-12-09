@@ -1,19 +1,8 @@
 import React from "react";
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  NoSsr,
-  Typography,
-} from "@material-ui/core";
-import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
+import { Box, Card, CardMedia, NoSsr, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-import { createTheme } from "@material-ui/core/styles";
+// import { createTheme } from "@material-ui/core/styles";
 import partyImage1 from "../logos/partyImage1.png";
 import campusImage1 from "../logos/campusImage1.png";
 import studyImage1 from "../logos/studyImage1.png";
@@ -23,15 +12,19 @@ import campusImage2 from "../logos/campusImage2.png";
 import campusImage3 from "../logos/campusImage3.png";
 import partyImage2 from "../logos/partyImage2.png";
 import partyImage3 from "../logos/partyImage3.png";
-import LocalBarIcon from "@material-ui/icons/LocalBar";
-import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
-import { Row, Item, Column } from "@mui-treasury/components/flex";
+// import LocalBarIcon from "@material-ui/icons/LocalBar";
+// import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
+// import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
+import { Row } from "@mui-treasury/components/flex";
 import { PlusOneButton } from "./PlusOneButton";
 import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
-import { styles } from "@material-ui/pickers/views/Calendar/Calendar";
 import { useNewsInfoStyles } from "@mui-treasury/styles/info/news";
 import GoogleFontLoader from "react-google-font-loader";
+import { IconButton, IconButtonProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Collapse from "@mui/material/Collapse";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   cardcomponent: {
@@ -59,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: -1,
       height: "100%",
       borderRadius: "1.5rem",
-      backgroundColor: "rgba(0,0,0,0.08)",
+      backgroundColor: "rgba(0,0,0,0)",
     },
   },
   username: {
@@ -147,6 +140,7 @@ const useStyles = makeStyles((theme) => ({
     height: 48,
   },
   timeText: {
+    paddingLeft: 6,
     fontFamily: "'Nunito', 'sans-serif'",
     textAlign: "left",
     fontSize: "1.3rem",
@@ -156,20 +150,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#EE6C4D",
-      light: "#ff9b79",
-      dark: "#b53a22",
-    },
-    secondary: {
-      main: "#4C5760",
-      light: "#78848d",
-      dark: "#242e36",
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#EE6C4D",
+//       light: "#ff9b79",
+//       dark: "#b53a22",
+//     },
+//     secondary: {
+//       main: "#4C5760",
+//       light: "#78848d",
+//       dark: "#242e36",
+//     },
+//   },
+// });
 export interface EventDetails {
   name: string;
   type?: string;
@@ -222,22 +216,41 @@ function chooseImage(type?: string) {
   return imageName;
 }
 
-function chooseIcon(type?: string) {
-  let typeIcon: any = "";
-  if (type === "Study Sesh") {
-    typeIcon = <BackpackRoundedIcon />;
-  }
-  if (type === "House Party") {
-    typeIcon = <LocalBarIcon />;
-  }
-  if (type === "Campus Event") {
-    typeIcon = <SchoolRoundedIcon />;
-  }
-  return typeIcon;
+// function chooseIcon(type?: string) {
+//   let typeIcon: any = "";
+//   if (type === "Study Sesh") {
+//     typeIcon = <BackpackRoundedIcon />;
+//   }
+//   if (type === "House Party") {
+//     typeIcon = <LocalBarIcon />;
+//   }
+//   if (type === "Campus Event") {
+//     typeIcon = <SchoolRoundedIcon />;
+//   }
+//   return typeIcon;
+// }
+
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
 }
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
   const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     // holding the cards in this div, using useStyles from up top
@@ -259,30 +272,43 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
             </Typography>
           </div>
         </Box>
-        <Column>
-          <Row
-            className={classes.author}
-            m={0}
-            p={1}
-            pt={2}
-            gap={2}
-            bgcolor={"common.white"}
-          >
-            <Info position={"left"} useStyles={useNewsInfoStyles}>
-              <InfoTitle className={classes.timeText}>{props.time}</InfoTitle>
-              <InfoSubtitle>Created by {props.email}</InfoSubtitle>
-            </Info>
-            <Item position={"middle-right"}>
+        <Row
+          className={classes.author}
+          m={0}
+          p={1}
+          pt={2}
+          gap={2}
+          bgcolor={"common.white"}
+        >
+          <Info position={"left"} useStyles={useNewsInfoStyles}>
+            <InfoTitle className={classes.timeText}>{props.time}</InfoTitle>
+            <InfoSubtitle style={{ paddingTop: 10 }}>
               <PlusOneButton
                 eventID={props.eventID}
                 rsvpList={props.rsvpList}
               />
-            </Item>
-          </Row>
-        </Column>
-        {/* <Row gap={2} className={classes.joinRow} bgcolor={"common.white"}>
-          <PlusOneButton eventID={props.eventID} rsvpList={props.rsvpList} />
-        </Row> */}
+            </InfoSubtitle>
+          </Info>
+          <Info position="right">
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </Info>
+        </Row>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent style={{ textAlign: "left" }}>
+            <Info position={"left"} useStyles={useNewsInfoStyles}>
+              <InfoSubtitle style={{ paddingTop: 10, paddingLeft: 3 }}>
+                Created by {props.email}
+              </InfoSubtitle>
+            </Info>
+          </CardContent>
+        </Collapse>
       </Card>
       &nbsp;
     </div>

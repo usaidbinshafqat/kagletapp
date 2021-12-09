@@ -2,7 +2,6 @@ import firebase from "firebase";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { EventCards } from "./EventCards";
 import moment from "moment";
 import { NewCardUI } from "./NewCardUI";
 
