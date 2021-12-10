@@ -143,6 +143,39 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     setCount(count + 1);
   }
 
+  function randomGeneratortexts() {
+    const min = 0;
+    const max = 7;
+    const random = min + Math.random() * (max - min);
+  
+    return random;
+  }
+
+  function chooseText() {
+    let text = "";
+    let random = Math.round(randomGeneratortexts());
+    if (random === 0) {
+      text = "I'll attend!😁";
+    } else if (random === 1) {
+      text = "I'm coming!😁";
+    } else if (random === 2) {
+      text = "I will be coming!😁";
+    } else if (random === 3) {
+      text = "I'm down!";
+    } else if (random === 4) {
+      text = "Sign me up!";
+    } else if (random === 5) {
+      text = "I'm up for it!";
+    } else if (random === 6) {
+      text = "RSVP";
+    } else if (random === 7) {
+      text = "I'll be there!";
+    }
+    
+    console.log(text);
+    return text;
+  }
+
   const buttons = (
     <Button
       disabled={submitDisabled}
@@ -154,7 +187,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
         validity();
       }}
     >
-      I'll join! 😁
+      {chooseText()}
     </Button>
   );
 
