@@ -8,6 +8,7 @@ import {
 import { LoginLogic } from "./LoginLogic";
 import { Paper } from "@mui/material";
 import { Box } from "@mui/system";
+import background from "../back.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,7 +107,7 @@ const LoginUIBigScreen = () => {
         display="flex"
         flex="1"
         justifyContent="space-around"
-        style={{ height: "70vh" }}
+        style={{ height: "70vh", width: "100vw" }}
       >
         <Grid
           container
@@ -114,7 +115,19 @@ const LoginUIBigScreen = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item>
+          <Grid item xs={6}>
+            <img
+              src={background}
+              alt="doodle"
+              style={{
+                minHeight: "40vh",
+                maxHeight: "100vh",
+                maxWidth: "50vw",
+                backgroundSize: "contain",
+              }}
+            ></img>
+          </Grid>
+          <Grid item xs={6}>
             <LoginLogic />
           </Grid>
         </Grid>

@@ -266,7 +266,7 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
             image={chooseImage(props.type)}
           />
           <div className={classes.content}>
-            <div className={classes.tag}>{props.type}</div>
+            <div className={classes.tag}>{props.time}</div>
             <Typography className={classes.title}>
               {props.name} @ {props.location}
             </Typography>
@@ -281,13 +281,12 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
           bgcolor={"common.white"}
         >
           <Info position={"left"} useStyles={useNewsInfoStyles}>
-            <InfoTitle className={classes.timeText}>{props.time}</InfoTitle>
-            <InfoSubtitle style={{ paddingTop: 10 }}>
+            <InfoTitle className={classes.timeText}>
               <PlusOneButton
                 eventID={props.eventID}
                 rsvpList={props.rsvpList}
               />
-            </InfoSubtitle>
+            </InfoTitle>
           </Info>
           <Info position="right">
             <ExpandMore
