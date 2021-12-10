@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardMedia, NoSsr, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardMedia, NoSsr, Typography} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
 // import { createTheme } from "@material-ui/core/styles";
@@ -25,6 +25,10 @@ import { styled } from "@mui/material/styles";
 import Collapse from "@mui/material/Collapse";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MailIcon from '@mui/icons-material/Mail';
+import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
+import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
+import AddToCalendar from 'react-add-to-calendar';
 
 const useStyles = makeStyles((theme) => ({
   cardcomponent: {
@@ -182,6 +186,7 @@ function randomGenerator() {
   return random;
 }
 
+
 function chooseImage(type?: string) {
   let imageName = "";
   let random = Math.round(randomGenerator());
@@ -216,6 +221,8 @@ function chooseImage(type?: string) {
   return imageName;
 }
 
+
+
 // function chooseIcon(type?: string) {
 //   let typeIcon: any = "";
 //   if (type === "Study Sesh") {
@@ -234,6 +241,7 @@ interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
+
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -251,6 +259,25 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const openInNewTab = () => {
+    const mainUrl = "https://teams.microsoft.com/l/chat/0/0?users=" 
+    let emailUrl:any = props.email
+    //let emailUrl2:string = 'usaidbin.shafqat19@kzoo.edu'
+    let fullUrl:string  = mainUrl.concat(emailUrl);  
+    const newWindow = window.open(fullUrl, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+  const addToCalendar = () => {
+    let eventCal = {
+      title: props.name,
+      description: 'This is the sample event provided as an example only',
+      location: props.location,
+      startTime: props.time,
+      endTime: '2016-09-16T21:45:00-04:00'
+    }
+    {<AddToCalendar event={eventCal} />}
+  }
+  
 
   return (
     // holding the cards in this div, using useStyles from up top
@@ -266,7 +293,7 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
             image={chooseImage(props.type)}
           />
           <div className={classes.content}>
-            <div className={classes.tag}>{props.type}</div>
+            <div className={classes.tag}>{props.time}</div>
             <Typography className={classes.title}>
               {props.name} @ {props.location}
             </Typography>
@@ -281,15 +308,15 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
           bgcolor={"common.white"}
         >
           <Info position={"left"} useStyles={useNewsInfoStyles}>
-            <InfoTitle className={classes.timeText}>{props.time}</InfoTitle>
-            <InfoSubtitle style={{ paddingTop: 10 }}>
-              <PlusOneButton
+            <InfoTitle className={classes.timeText}><PlusOneButton
                 eventID={props.eventID}
                 rsvpList={props.rsvpList}
-              />
-            </InfoSubtitle>
+              /></InfoTitle>
+
           </Info>
-          <Info position="right">
+          <Info position={"right"} useStyles={useNewsInfoStyles}>
+          
+
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -302,11 +329,38 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
         </Row>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ textAlign: "left" }}>
+          <Row
+            className={classes.author}
+            m={0}
+            p={1}
+            pt={2}
+            gap={2}
+            bgcolor={"common.white"}
+          >
             <Info position={"left"} useStyles={useNewsInfoStyles}>
               <InfoSubtitle style={{ paddingTop: 10, paddingLeft: 3 }}>
-                Created by {props.email}
+              {props.type} created by {props.email}
               </InfoSubtitle>
             </Info>
+
+            <Info position={"right"} useStyles={useNewsInfoStyles}>
+              <IconButton size="small"
+                color="primary"
+                onClick = {
+                  () => openInNewTab()
+                }>
+                <EmailTwoToneIcon />
+              </IconButton>
+              {/* <IconButton size="small"
+                color="primary"
+                onClick = {
+                  () => addToCalendar()
+                }>
+                <CalendarTodayTwoToneIcon />
+              </IconButton> */}
+            </Info>
+            
+            </Row>
           </CardContent>
         </Collapse>
       </Card>
