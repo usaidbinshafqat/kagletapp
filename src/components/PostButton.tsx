@@ -20,6 +20,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import { IconButton, InputAdornment } from "@material-ui/core";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
+import GoogleFontLoader from "react-google-font-loader";
+import { NoSsr } from "@material-ui/core";
 
 // import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import Icon from "@material-ui/core/Icon";
@@ -71,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     borderRadius: 20,
     zIndex: 2,
+    fontFamily: "'Sen', sans-serif",
   },
   locationField: {
     minWidth: 150,
@@ -82,6 +85,15 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     width: 200,
+  },
+  postEventText: {
+    fontFamily: "'Sen', sans-serif",
+    textTransform: "none",
+  },
+  postButton: {
+    borderRadius: 20,
+    textTransform: "none",
+    fontFamily: "'Sen', sans-serif",
   },
 }));
 
@@ -199,6 +211,11 @@ export const PostButton = () => {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
+          <NoSsr>
+            <GoogleFontLoader
+              fonts={[{ font: "Nunito", weights: [400, 800] }]}
+            />
+          </NoSsr>
           {/* Floating action button in the bottom right corner, the styles are defined in useStyles */}
           <ThemeProvider theme={theme}>
             <Fab
@@ -209,7 +226,9 @@ export const PostButton = () => {
               {...bindTrigger(popupState)}
             >
               <AddIcon />
-              New Event
+              <Typography className={classes.postEventText}>
+                New Event
+              </Typography>
             </Fab>
           </ThemeProvider>
           {/* Opens popover, the rest inside is self explanatory */}
@@ -326,6 +345,7 @@ export const PostButton = () => {
                         variant="contained"
                         endIcon={<Icon>send</Icon>}
                         disabled={submitDisabled}
+                        className={classes.postButton}
                       >
                         Post
                       </Button>
