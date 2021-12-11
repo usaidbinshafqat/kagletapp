@@ -4,7 +4,17 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import React from "react";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import Alert from "@mui/material/Alert";
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Grid from "@mui/material/Grid";
+import avatar1 from "../avatars/1.png";
+import avatar2 from "../avatars/2.png";
+import avatar3 from "../avatars/3.png";
+import avatar4 from "../avatars/4.png";
+import avatar5 from "../avatars/5.png";
+import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,6 +30,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   rsvpCount: {
     paddingBottom: 7,
     paddingLeft: 10,
+  },
+  attending: {
+    paddingLeft: 6,
+    fontFamily: "'Nunito', 'sans-serif'",
+    textAlign: "left",
+    fontSize: "1.3rem",
   },
 }));
 
@@ -45,9 +61,6 @@ export interface RsvpDetails {
 
 const database = firebase.database();
 
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 let check = false;
 
 function UIDarray(eventID?: string, rsvpList?: any) {
@@ -71,6 +84,67 @@ function PushFirebase(rsvpList?: any, eventID?: string) {
   database.ref("events/" + eventID + "/").update({
     rsvpList: rsvpList,
   });
+}
+
+function randomGeneratortexts() {
+  const min = 0;
+  const max = 7;
+  const random = min + Math.random() * (max - min);
+
+  return random;
+}
+
+function chooseText() {
+  let text = "";
+  let random = Math.round(randomGeneratortexts());
+  if (random === 0) {
+    text = "I'll attend! 😁";
+  } else if (random === 1) {
+    text = "I'm coming! 😁";
+  } else if (random === 2) {
+    text = "I will be coming! 😁";
+  } else if (random === 3) {
+    text = "I'm down!";
+  } else if (random === 4) {
+    text = "Sign me up!";
+  } else if (random === 5) {
+    text = "I'm up for it!";
+  } else if (random === 6) {
+    text = "RSVP";
+  } else if (random === 7) {
+    text = "I'll be there!";
+  }
+
+  console.log(text);
+  return text;
+}
+
+function randomAvatarPicker() {
+  const min = 0;
+  const max = 7;
+  const random = Math.round(randomGenerator());
+  let imageName = "";
+
+  if (random === 0) {
+    imageName = avatar1;
+  } else if (random === 1) {
+    imageName = avatar2;
+  } else if (random === 2) {
+    imageName = avatar3;
+  } else if (random === 3) {
+    imageName = avatar4;
+  } else {
+    imageName = avatar5;
+  }
+  return imageName;
+}
+
+function randomGenerator() {
+  const min = 0;
+  const max = 4;
+  const random = min + Math.random() * (max - min);
+
+  return random;
 }
 
 export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
@@ -137,46 +211,11 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     }
   }
 
-  const [count, setCount] = React.useState(props.rsvpList.length);
-
   function incrementCount() {
     setCount(count + 1);
   }
 
-  function randomGeneratortexts() {
-    const min = 0;
-    const max = 7;
-    const random = min + Math.random() * (max - min);
-  
-    return random;
-  }
-
-  function chooseText() {
-    let text = "";
-    let random = Math.round(randomGeneratortexts());
-    if (random === 0) {
-      text = "I'll attend!😁";
-    } else if (random === 1) {
-      text = "I'm coming!😁";
-    } else if (random === 2) {
-      text = "I will be coming!😁";
-    } else if (random === 3) {
-      text = "I'm down!";
-    } else if (random === 4) {
-      text = "Sign me up!";
-    } else if (random === 5) {
-      text = "I'm up for it!";
-    } else if (random === 6) {
-      text = "RSVP";
-    } else if (random === 7) {
-      text = "I'll be there!";
-    }
-    
-    console.log(text);
-    return text;
-  }
-
-  const buttons = (
+  const renderButtons = (
     <Button
       disabled={submitDisabled}
       size="large"
@@ -191,14 +230,47 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
     </Button>
   );
 
+  const [count, setCount] = React.useState(props.rsvpList.length);
+  const AvatarList = () => (
+    <div>
+      <Avatar src={randomAvatarPicker()} />
+    </div>
+  );
+
   return (
     <div>
-      {/* <Column>
-        <Row p={2} gap={2} position={"middle-right"}>
-          <Item>{buttons}</Item>
-        </Row>
-      </Column> */}
-      {buttons}
+      <Grid
+        container
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+      >
+        <Grid item>{renderButtons}</Grid>
+
+        <Grid item style={{ paddingTop: 10 }}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Grid item>
+              <AvatarGroup
+                max={3}
+                spacing={"medium"}
+                style={{ justifyContent: "left", display: "flex" }}
+              >
+                {[...Array(count)].map((value: undefined, index: number) => (
+                  <AvatarList />
+                ))}
+              </AvatarGroup>
+            </Grid>
+            <Grid item className={classes.attending}>
+              <InfoSubtitle>attending</InfoSubtitle>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
       <Typography component="div" align="center">
         <div>
           <Snackbar
