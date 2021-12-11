@@ -26,6 +26,8 @@ import { SignedInUserEmail } from "./signedInUserEmail";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Link, Menu, styled } from "@mui/material";
 import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
+import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
+
 // import Stack from "@mui/material/Stack";
 
 // import LocalBarIcon from "@material-ui/icons/LocalBar";
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "#becddc",
     alignSelf: "center",
     textTransform: "none",
+    fontFamily: "'Sen', sans-serif",
   },
 
   toolbar: {
@@ -90,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
   linkButton: {
     textTransform: "none",
+    fontFamily: "'Sen', sans-serif",
   },
   chips: {
     maxWidth: "125rem",
@@ -224,14 +228,20 @@ export const ToolbarAndChips = () => {
                       vertical: "top",
                       horizontal: "right",
                     }}
-                    style={{ borderRadius: "1.5rem" }}
+                    style={{ borderRadius: "5rem" }}
                   >
-                    <Box p={2} style={{ borderRadius: "1.5rem" }}>
+                    <Box p={1} style={{ borderRadius: "1.5rem" }}>
                       <Typography style={{ borderRadius: "1.5rem" }}>
                         <ThemeProvider theme={theme}>
                           {/* Here comes the first name extracted from the email */}
-                          <SignedInUserEmail></SignedInUserEmail>
-                          <Box m={6} pt={1}></Box>
+                          <InfoSubtitle>
+                            <SignedInUserEmail></SignedInUserEmail>
+                          </InfoSubtitle>
+                          <Box
+                            m={6}
+                            style={{ borderRadius: "1.5rem" }}
+                            pt={1}
+                          ></Box>
                           <Grid
                             container
                             direction="column"
@@ -335,88 +345,6 @@ export const ToolbarAndChips = () => {
           </Grid>
         </Grid>
       </Toolbar>
-
-      {/* <Toolbar className={classes.secondToolobar}> */}
-      {/* <Grid container spacing={1}> */}
-      {/* <Grid item>
-            <Chip
-              onClick={handleClickCampus}
-              label="Campus Events"
-              clickable
-              color="secondary"
-              variant={flag1 ? "outlined" : "default"}
-              icon={<SchoolRoundedIcon />}
-              className={classes.chips}
-            />
-          </Grid>
-          <Grid item>
-            <Chip
-              onClick={handleClickStudy}
-              variant={flag2 ? "outlined" : "default"}
-              label="Study Seshes"
-              clickable
-              color="secondary"
-              icon={<BackpackRoundedIcon />}
-            />
-          </Grid>
-          <Grid item>
-            <Chip
-              onClick={handleClickParty}
-              variant={flag3 ? "outlined" : "default"}
-              label="House Parties"
-              clickable
-              color="secondary"
-              icon={<LocalBarIcon />}
-            />
-          </Grid> */}
-      {/* <Grid container spacing={3}>
-          <Grid item>
-            <Button variant="outlined" className={classes.buttonChips}>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item>
-                  <BackpackRoundedIcon />
-                </Grid>
-                <Grid item>Study Seshes</Grid>
-              </Grid>
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="outlined" className={classes.buttonChips}>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item>
-                  <LocalBarIcon />
-                </Grid>
-                <Grid item>House Parties</Grid>
-              </Grid>
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="outlined" className={classes.buttonChips}>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item>
-                  <SchoolRoundedIcon />{" "}
-                </Grid>
-                <Grid item>Campus Events</Grid>
-              </Grid>
-            </Button>
-          </Grid>
-        </Grid>
-      </Toolbar> */}
     </AppBar>
   );
 };
