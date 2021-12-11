@@ -2,6 +2,7 @@ import { Grid, Typography } from "@material-ui/core";
 import firebase from "firebase";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@mui/material/Avatar";
+import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
 
 // function GetUserEmail() {
 //   const auth = firebase.auth();
@@ -66,7 +67,7 @@ export const SignedInUserEmail = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Typography className={classes.userEmail}>{email}</Typography>
+        <InfoSubtitle>{email}</InfoSubtitle>
       </Grid>
     </Grid>
   );

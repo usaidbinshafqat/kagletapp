@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     justify: "center",
     borderRadius: 20,
     textTransform: "none",
+    display: "inline-block",
+    fontFamily: "'Sen', sans-serif",
   },
   rsvpCount: {
     paddingBottom: 7,
@@ -88,7 +90,7 @@ function PushFirebase(rsvpList?: any, eventID?: string) {
 
 function randomGeneratortexts() {
   const min = 0;
-  const max = 7;
+  const max = 10;
   const random = min + Math.random() * (max - min);
 
   return random;
@@ -98,21 +100,27 @@ function chooseText() {
   let text = "";
   let random = Math.round(randomGeneratortexts());
   if (random === 0) {
-    text = "I'll attend! 😁";
+    text = "I'll attend 😁";
   } else if (random === 1) {
-    text = "I'm coming! 😁";
+    text = "I'm coming 😉";
   } else if (random === 2) {
-    text = "I will be coming! 😁";
+    text = "I will be coming 😁";
   } else if (random === 3) {
-    text = "I'm down!";
+    text = "I'm down 🥳";
   } else if (random === 4) {
-    text = "Sign me up!";
+    text = "Sign me up 😋";
   } else if (random === 5) {
-    text = "I'm up for it!";
+    text = "I'm up for it 😁";
   } else if (random === 6) {
-    text = "RSVP";
+    text = "RSVP 👔";
   } else if (random === 7) {
-    text = "I'll be there!";
+    text = "I'll be there 😏";
+  } else if (random === 8) {
+    text = "I'll drop in 😎";
+  } else if (random === 9) {
+    text = "I'll join 🙃";
+  } else if (random === 10) {
+    text = "I'll pop by 🐣";
   }
 
   console.log(text);
