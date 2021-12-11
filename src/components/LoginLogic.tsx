@@ -16,7 +16,8 @@ import {
   createTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import Alert from "@mui/material/Alert";
+
 import { width } from "@mui/system";
 
 //defining the styles
@@ -61,10 +62,6 @@ const useStyles = makeStyles((theme) => ({
 
 export interface State extends SnackbarOrigin {
   open: boolean;
-}
-
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 //creating the primary and secondary theme with our colors
