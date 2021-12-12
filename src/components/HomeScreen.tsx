@@ -20,11 +20,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontFamily: "'Nunito', 'sans-serif'",
     fontSize: "1.8rem",
+    padding: "2px 0.5rem",
+    margin: 3,
   },
   subtitle: {
     display: "inline-block",
     fontFamily: "'Sen', sans-serif",
     fontSize: "1.3rem",
+    padding: "2px 0.5rem",
+    margin: 3,
   },
 }));
 
