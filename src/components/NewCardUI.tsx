@@ -402,13 +402,13 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
                 >
                   <MessageTwoToneIcon className={classes.textIcon} />
                 </IconButton>
-                <IconButton size="small"
+                {/* <IconButton size="small"
                 color="primary"
                 onClick = {
                   () => addToCalendar()
                 }>
                 <CalendarTodayTwoToneIcon />
-              </IconButton>
+              </IconButton> */}
               </Info>
             </Row>
           </CardContent>

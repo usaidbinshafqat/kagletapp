@@ -268,8 +268,8 @@ export const ToolbarAndChips = () => {
                         <ThemeProvider theme={theme}>
                           {/* Here comes the first name extracted from the email */}
                           <InfoSubtitle>
-                            {/* <SignedInUserEmail></SignedInUserEmail> */}
-                            {nameExtract()}
+                            <SignedInUserEmail></SignedInUserEmail>
+                            {/* {nameExtract()} */}
                           </InfoSubtitle>
                           <Box
                             m={6}
