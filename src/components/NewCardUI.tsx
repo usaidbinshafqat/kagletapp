@@ -36,6 +36,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 import CalendarTodayTwoToneIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import AddToCalendar from "react-add-to-calendar";
+import { google, outlook, office365, yahoo, ics } from "calendar-link";
+import moment from "moment";
 import MessageTwoToneIcon from "@mui/icons-material/MessageTwoTone";
 
 const useStyles = makeStyles((theme) => ({
@@ -274,22 +276,63 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
     const newWindow = window.open(fullUrl, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
   };
-  const addToCalendar = () => {
-    let eventCal = {
-      title: props.name,
-      description: "This is the sample event provided as an example only",
-      location: props.location,
-      startTime: props.time,
-      endTime: "2016-09-16T21:45:00-04:00",
-    };
-    {
-      <AddToCalendar event={eventCal} />;
+  const timeExtract = () => {
+    let timeofEvent:any = props.time;
+    timeofEvent.toString();
+    let Time:any = ''
+    let marker:boolean = false
+    for (let i = 0; i < timeofEvent.length; i++) {
+      if(marker == true){Time = Time + (timeofEvent[i]);}
+      if(timeofEvent[i] == ','){marker = true}
     }
+    return (Time)
+  }
+  const { google, outlook, office365, yahoo, ics } = require("calendar-link");
+  const addToCalendar = () => {
+    const eventCal = {
+      title: props.name,
+      //description: props.description,
+      location: props.location,
+      start: props.time,
+      //start: moment(props.time).format(),
+      duration: [1, "hour"],
+    };
+    const newWindow = window.open(google(eventCal), "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+    console.log((google(eventCal)))
+    console.log(props.time)
+    console.log(moment(props.time).format())
+    
   };
+
+  const nameExtract = () => {
+    let nameOfPerson:any = props.email;
+    nameOfPerson.toString();
+    let Name:any = ''
+    let fName:any = ''
+    let lName:any = ''
+    let point:any = 0;
+
+    for (let i = 0; i < nameOfPerson.length; i++) {
+      if(nameOfPerson[i] == '.'){break}
+      fName = fName + (nameOfPerson[i]);
+      point++;
+    }
+    fName = fName[0].toUpperCase() + fName.substring(1)
+    Name = fName + (' ')
+    for (let i = (point+1); i < nameOfPerson.length; i++) {
+      if(nameOfPerson[i] == '@'){break}
+      if (Number(nameOfPerson[i]) == 1){break}
+      if (Number(nameOfPerson[i]) == 2){break}
+      lName = lName + (nameOfPerson[i]);
+    }
+    lName = lName.charAt(0).toUpperCase() + lName.substring(1)
+    Name = Name + lName
+    return (fName);
+  }
 
   return (
     // holding the cards in this div, using useStyles from up top
-
     <div className={classes.divDeets}>
       <NoSsr>
         <GoogleFontLoader fonts={[{ font: "Nunito", weights: [400, 800] }]} />
@@ -346,7 +389,8 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
             >
               <Info position={"left"} useStyles={useNewsInfoStyles}>
                 <InfoSubtitle style={{ paddingTop: 10, paddingLeft: 3 }}>
-                  {props.type} created by {props.email}
+                  {/* {props.type} created by {props.email} */}
+                  {props.type} created by {nameExtract()}
                 </InfoSubtitle>
               </Info>
 
@@ -358,13 +402,13 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
                 >
                   <MessageTwoToneIcon className={classes.textIcon} />
                 </IconButton>
-                {/* <IconButton size="small"
+                <IconButton size="small"
                 color="primary"
                 onClick = {
                   () => addToCalendar()
                 }>
                 <CalendarTodayTwoToneIcon />
-              </IconButton> */}
+              </IconButton>
               </Info>
             </Row>
           </CardContent>

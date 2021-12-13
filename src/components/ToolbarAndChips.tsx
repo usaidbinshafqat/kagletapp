@@ -27,6 +27,7 @@ import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Link, Menu, styled } from "@mui/material";
 import { BugReportRounded, HelpOutlineRounded } from "@material-ui/icons";
 import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
+import firebase from "firebase";
 
 // import Stack from "@mui/material/Stack";
 
@@ -116,6 +117,37 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const ToolbarAndChips = () => {
+  const auth = firebase.auth();
+  const user = auth.currentUser;
+  const nameExtract = () => {
+    let nameOfPerson:any = ' '
+    if (user) {
+      let nameOfPerson:any = user.email;}
+    nameOfPerson.toString();
+    let Name:any = ''
+    let fName:any = ''
+    let lName:any = ''
+    let point:any = 0;
+    let seclet:any = 1;
+    for (let i = 0; i < nameOfPerson.length; i++) {
+      if(nameOfPerson[i] == '.'){break}
+      fName = fName + (nameOfPerson[i]);
+      point++;
+      seclet = point
+    }
+    fName = fName[0].toUpperCase() + fName.substring(1)
+    Name = fName + (' ')
+    for (let i = (point+1); i < nameOfPerson.length; i++) {
+      if(nameOfPerson[i] == '@'){break}
+      if (Number(nameOfPerson[i]) == 1){break}
+      if (Number(nameOfPerson[i]) == 2){break}
+      lName = lName + (nameOfPerson[i]);
+    }
+    lName = lName.charAt(0).toUpperCase() + lName.substring(1)
+    Name = Name + lName
+    return (Name);
+  }
+
   const classes = useStyles();
   //this will be called later.
 
@@ -128,6 +160,7 @@ export const ToolbarAndChips = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
   //end dropdown code
 
@@ -235,7 +268,8 @@ export const ToolbarAndChips = () => {
                         <ThemeProvider theme={theme}>
                           {/* Here comes the first name extracted from the email */}
                           <InfoSubtitle>
-                            <SignedInUserEmail></SignedInUserEmail>
+                            {/* <SignedInUserEmail></SignedInUserEmail> */}
+                            {nameExtract()}
                           </InfoSubtitle>
                           <Box
                             m={6}
