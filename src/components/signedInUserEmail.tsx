@@ -41,12 +41,10 @@ export const SignedInUserEmail = () => {
     let fName:any = ''
     let lName:any = ''
     let point:any = 0;
-    let seclet:any = 1;
     for (let i = 0; i < nameOfPerson.length; i++) {
       if(nameOfPerson[i] == '.'){break}
       fName = fName + (nameOfPerson[i]);
       point++;
-      seclet = point
     }
     fName = fName[0].toUpperCase() + fName.substring(1)
     Name = fName + (' ')
@@ -111,7 +109,6 @@ export const SignedInUserEmail = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {/* <InfoSubtitle>{email}</InfoSubtitle> */}
         <InfoSubtitle>{nameExtract()}</InfoSubtitle>
       </Grid>
     </Grid>
