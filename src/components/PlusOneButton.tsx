@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: "left",
     fontSize: "1.3rem",
   },
+  typography: {
+    fontSize: 35,
+  },
 }));
 
 // const theme = createTheme({
@@ -64,15 +67,17 @@ export interface RsvpDetails {
 const database = firebase.database();
 
 let check = false;
+//var email:any = 'hanis.sommerville@kzoo.edu'
 
 function UIDarray(eventID?: string, rsvpList?: any) {
   const auth = firebase.auth();
   const user = auth.currentUser;
-
+  
   if (user) {
     if (!rsvpList.includes(user.email)) {
       rsvpList.push(user.email);
       PushFirebase(rsvpList, eventID);
+      //email = user.email;
     } else {
       //setCheck(true);
       check = true;
@@ -127,25 +132,78 @@ function chooseText() {
   return text;
 }
 
-function randomAvatarPicker() {
-  const min = 0;
-  const max = 7;
-  const random = Math.round(randomGenerator());
-  let imageName = "";
+// function AvatarPicker() {
+//   // const min = 0;
+//   // const max = 7;
+//   // const random = Math.round(randomGenerator());
+//   // let imageName = "";
 
-  if (random === 0) {
-    imageName = avatar1;
-  } else if (random === 1) {
-    imageName = avatar2;
-  } else if (random === 2) {
-    imageName = avatar3;
-  } else if (random === 3) {
-    imageName = avatar4;
-  } else {
-    imageName = avatar5;
-  }
-  return imageName;
-}
+//   // if (random === 0) {
+//   //   imageName = avatar1;
+//   // } else if (random === 1) {
+//   //   imageName = avatar2;
+//   // } else if (random === 2) {
+//   //   imageName = avatar3;
+//   // } else if (random === 3) {
+//   //   imageName = avatar4;
+//   // } else {
+//   //   imageName = avatar5;
+//   // }
+//   // if (user) {
+//     //   //console.log(user.email);
+//     //   var email: any;
+//     //   email = user.email;
+//     // } else {
+//     //   email = "Not Logged In";
+//     //   console.log(email);
+//     // }
+//     let nameOfPerson:any = props.rsvplist[0] 
+//     //let nameOfPerson:any = props.rsvpList.email
+//     nameOfPerson.toString();
+//     let Name:any = ''
+//     let fName:any = ''
+//     let lName:any = ''
+//     let point:any = 0;
+//     for (let i = 0; i < nameOfPerson.length; i++) {
+//       if(nameOfPerson[i] == '.'){break}
+//       fName = fName + (nameOfPerson[i]);
+//       point++;
+//     }
+//     fName = fName[0].toUpperCase() + fName.substring(1)
+//     Name = fName + (' ')
+//     for (let i = (point+1); i < nameOfPerson.length; i++) {
+//       if(nameOfPerson[i] == '@'){break}
+//       if (Number(nameOfPerson[i]) == 1){break}
+//       if (Number(nameOfPerson[i]) == 2){break}
+//       lName = lName + (nameOfPerson[i]);
+//     }
+//     lName = lName.charAt(0).toUpperCase() + lName.substring(1)
+//     Name = Name + lName
+
+
+//     let initialOfPerson:any = Name
+//     let Initial:any = ''
+//     let fInitial:any = initialOfPerson[0]
+//     let lInitial:any = ''
+//     let spaceChecker:boolean = false
+//     for (let i = 0; i < initialOfPerson.length; i++) {
+//       if(spaceChecker == true){
+//         lInitial = initialOfPerson[i]
+//         break}
+//         if (initialOfPerson[i] == ' '){spaceChecker = true}
+//     }
+//     Initial = fInitial + lInitial
+
+//   return(
+//     <Avatar>
+//       {/* <Typography className={classes.typography}>{Initial}</Typography> */}
+//       <Typography>{Initial}</Typography>
+//     </Avatar>
+//   );
+
+  
+
+// }
 
 function randomGenerator() {
   const min = 0;
@@ -160,7 +218,7 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   const [submitDisabled, setSubmitDisabled] = React.useState(false);
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
-
+  var x:number = (props.rsvpList.length - 1);
   const handleClickSuccess = () => {
     setOpenSuccess(true);
   };
@@ -239,9 +297,86 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
   );
 
   const [count, setCount] = React.useState(props.rsvpList.length);
+  
+  function stringToColor(string: string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name: string) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+  }}
+
+  var rsvpArray:any[] = props.rsvpList;
+  function AvatarPicker() {
+      
+      
+      let nameOfPerson:any = rsvpArray[x]
+      x--;
+      let Name:any = ''
+      let fName:any = ''
+      let lName:any = ''
+      let point:any = 0;
+      console.log(rsvpArray)
+
+      for (let i = 0; i < nameOfPerson.length; i++) {
+        if(nameOfPerson[i] == '.'){break}
+        fName = fName + (nameOfPerson[i]);
+        point++;
+      }
+      fName = fName[0].toUpperCase() + fName.substring(1)
+      Name = fName + (' ')
+      for (let i = (point+1); i < nameOfPerson.length; i++) {
+        if(nameOfPerson[i] == '@'){break}
+        if (Number(nameOfPerson[i]) == 1){break}
+        if (Number(nameOfPerson[i]) == 2){break}
+        lName = lName + (nameOfPerson[i]);
+      }
+      lName = lName.charAt(0).toUpperCase() + lName.substring(1)
+      Name = Name + lName
+  
+  
+      let initialOfPerson:any = Name
+      let Initial:any = ''
+      let fInitial:any = initialOfPerson[0]
+      let lInitial:any = ''
+      let spaceChecker:boolean = false
+      for (let i = 0; i < initialOfPerson.length; i++) {
+        if(spaceChecker == true){
+          lInitial = initialOfPerson[i]
+          break}
+          if (initialOfPerson[i] == ' '){spaceChecker = true}
+      }
+      Initial = fInitial + lInitial
+  
+    return(
+      <Avatar {...stringAvatar(Initial)}>
+        {/* <Typography className={classes.typography}>{Initial}</Typography> */}
+        <Typography>{Initial}</Typography>
+      </Avatar>
+    );
+  }
   const AvatarList = () => (
     <div>
-      <Avatar src={randomAvatarPicker()} />
+      {AvatarPicker()}
     </div>
   );
 
@@ -269,8 +404,10 @@ export const PlusOneButton: React.FC<RsvpDetails> = (props: RsvpDetails) => {
                 style={{ justifyContent: "left", display: "flex" }}
               >
                 {[...Array(count)].map((value: undefined, index: number) => (
-                  <AvatarList />
+                  // <AvatarList />
+                AvatarPicker()
                 ))}
+
               </AvatarGroup>
             </Grid>
             <Grid item className={classes.attending}>
