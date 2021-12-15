@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardMedia,
+  List,
   NoSsr,
   Typography,
 } from "@material-ui/core";
@@ -24,6 +25,7 @@ import partyImage3 from "../logos/partyImage3.png";
 // import BackpackRoundedIcon from "@material-ui/icons/BackpackRounded";
 import { Row } from "@mui-treasury/components/flex";
 import { PlusOneButton } from "./PlusOneButton";
+import { RsvpListComp } from "./RsvpListComp";
 import { Info, InfoSubtitle, InfoTitle } from "@mui-treasury/components/info";
 import { useNewsInfoStyles } from "@mui-treasury/styles/info/news";
 import GoogleFontLoader from "react-google-font-loader";
@@ -379,6 +381,13 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
         </Row>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ textAlign: "left" }}>
+
+                {/* <RsvpListComp
+                  eventID={props.eventID}
+                  rsvpList={props.rsvpList}
+                  email = {props.email}
+                  /> */}
+
             <Row
               className={classes.author}
               m={0}
@@ -388,8 +397,7 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
               bgcolor={"common.white"}
             >
               <Info position={"left"} useStyles={useNewsInfoStyles}>
-                <InfoSubtitle style={{ paddingTop: 10, paddingLeft: 3 }}>
-                  {/* {props.type} created by {props.email} */}
+                <InfoSubtitle style={{ paddingTop: 2, paddingLeft: 3 }}>
                   {props.type} created by {nameExtract()}
                 </InfoSubtitle>
               </Info>
