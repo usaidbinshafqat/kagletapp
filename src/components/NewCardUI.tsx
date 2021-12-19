@@ -279,59 +279,82 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
     if (newWindow) newWindow.opener = null;
   };
   const timeExtract = () => {
-    let timeofEvent:any = props.time;
+    let timeofEvent: any = props.time;
     timeofEvent.toString();
-    let Time:any = ''
-    let marker:boolean = false
+    let Time: any = "";
+    let marker: boolean = false;
     for (let i = 0; i < timeofEvent.length; i++) {
-      if(marker == true){Time = Time + (timeofEvent[i]);}
-      if(timeofEvent[i] == ','){marker = true}
+      if (marker == true) {
+        Time = Time + timeofEvent[i];
+      }
+      if (timeofEvent[i] == ",") {
+        marker = true;
+      }
     }
-    return (Time)
-  }
+    return Time;
+  };
   const { google, outlook, office365, yahoo, ics } = require("calendar-link");
   const addToCalendar = () => {
+    const formattedTime = timeConverter(props.time);
     const eventCal = {
       title: props.name,
       //description: props.description,
       location: props.location,
-      start: props.time,
+      start: formattedTime,
       //start: moment(props.time).format(),
       duration: [1, "hour"],
     };
-    const newWindow = window.open(google(eventCal), "_blank", "noopener,noreferrer");
+    const newWindow = window.open(
+      google(eventCal),
+      "_blank",
+      "noopener,noreferrer"
+    );
     if (newWindow) newWindow.opener = null;
-    console.log((google(eventCal)))
-    console.log(props.time)
-    console.log(moment(props.time).format())
-    
+    console.log(google(eventCal));
+    console.log("formatted time", formattedTime);
   };
 
+  function timeConverter(timeFromFirebase: any) {
+    console.log("time from firebase", timeFromFirebase);
+    let dateString = moment(timeFromFirebase, "MMMM Do, h:mm a").format();
+    console.log("moment date", dateString);
+    // let dateString = timeFromFirebase;
+    return dateString;
+  }
+
   const nameExtract = () => {
-    let nameOfPerson:any = props.email;
+    let nameOfPerson: any = props.email;
     nameOfPerson.toString();
-    let Name:any = ''
-    let fName:any = ''
-    let lName:any = ''
-    let point:any = 0;
+    let Name: any = "";
+    let fName: any = "";
+    let lName: any = "";
+    let point: any = 0;
 
     for (let i = 0; i < nameOfPerson.length; i++) {
-      if(nameOfPerson[i] == '.'){break}
-      fName = fName + (nameOfPerson[i]);
+      if (nameOfPerson[i] == ".") {
+        break;
+      }
+      fName = fName + nameOfPerson[i];
       point++;
     }
-    fName = fName[0].toUpperCase() + fName.substring(1)
-    Name = fName + (' ')
-    for (let i = (point+1); i < nameOfPerson.length; i++) {
-      if(nameOfPerson[i] == '@'){break}
-      if (Number(nameOfPerson[i]) == 1){break}
-      if (Number(nameOfPerson[i]) == 2){break}
-      lName = lName + (nameOfPerson[i]);
+    fName = fName[0].toUpperCase() + fName.substring(1);
+    Name = fName + " ";
+    for (let i = point + 1; i < nameOfPerson.length; i++) {
+      if (nameOfPerson[i] == "@") {
+        break;
+      }
+      if (Number(nameOfPerson[i]) == 1) {
+        break;
+      }
+      if (Number(nameOfPerson[i]) == 2) {
+        break;
+      }
+      lName = lName + nameOfPerson[i];
     }
-    lName = lName.charAt(0).toUpperCase() + lName.substring(1)
-    Name = Name + lName
-    return (fName);
-  }
+    lName = lName.charAt(0).toUpperCase() + lName.substring(1);
+    Name = Name + lName;
+    return fName;
+  };
 
   return (
     // holding the cards in this div, using useStyles from up top
@@ -381,8 +404,7 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
         </Row>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ textAlign: "left" }}>
-
-                {/* <RsvpListComp
+            {/* <RsvpListComp
                   eventID={props.eventID}
                   rsvpList={props.rsvpList}
                   email = {props.email}
@@ -410,13 +432,13 @@ export const NewCardUI: React.FC<EventDetails> = (props: EventDetails) => {
                 >
                   <MessageTwoToneIcon className={classes.textIcon} />
                 </IconButton>
-                {/* <IconButton size="small"
-                color="primary"
-                onClick = {
-                  () => addToCalendar()
-                }>
-                <CalendarTodayTwoToneIcon />
-              </IconButton> */}
+                <IconButton
+                  size="small"
+                  color="primary"
+                  onClick={() => addToCalendar()}
+                >
+                  <CalendarTodayTwoToneIcon />
+                </IconButton>
               </Info>
             </Row>
           </CardContent>
